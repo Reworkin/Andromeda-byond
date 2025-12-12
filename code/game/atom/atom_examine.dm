@@ -1,16 +1,16 @@
 /atom
-	/// If non-null, overrides a/an/some in all cases
+	/// Если не null, переопределяет артикль (a/an/some) во всех случаях
 	var/article
-	/// Text that appears preceding the name in [/atom/proc/examine_title]
-	var/examine_thats = "That's"
+	/// Текст, появляющийся перед названием в [/atom/proc/examine_title]
+	var/examine_thats = "Это"
 
 /**
- * Called when a mob examines this atom: [/mob/verb/examinate]
+ * Вызывается, когда моб осматривает этот атом: [/mob/verb/examinate]
  *
- * Default behaviour is to get the name and icon of the object and its reagents where
- * the [TRANSPARENT] flag is set on the reagents holder
+ * Поведение по умолчанию: получить название и иконку объекта, а также его реагенты,
+ * если на контейнере реагентов установлен флаг [TRANSPARENT]
  *
- * Produces a signal [COMSIG_ATOM_EXAMINE], for modifying the list returned from this proc
+ * Генерирует сигнал [COMSIG_ATOM_EXAMINE] для модификации списка, возвращаемого этой процедурой
  */
 /atom/proc/examine(mob/user)
 	. = list()
@@ -25,11 +25,11 @@
 		var/tag_string = list()
 		for (var/atom_tag in tags_list)
 			tag_string += (isnull(tags_list[atom_tag]) ? atom_tag : span_tooltip(tags_list[atom_tag], atom_tag))
-		// some regex to ensure that we don't add another "and" if the final element's main text (not tooltip) has one
-		tag_string = english_list(tag_string, and_text = (findtext(tag_string[length(tag_string)], regex(@">.*?and .*?<"))) ? " " : " and ")
-		. += "[p_They()] [p_are()] a [tag_string] [examine_descriptor(user)][post_desc_string]."
+		// Регулярное выражение для предотвращения добавления лишнего "и", если последний элемент уже содержит его (не в подсказке)
+		tag_string = english_list(tag_string, and_text = (findtext(tag_string[length(tag_string)], regex(@">.*?и .*?<"))) ? " " : " и ")
+		. += "Это [tag_string] [examine_descriptor(user)][post_desc_string]."
 	else if(post_desc_string)
-		. += "[p_They()] [p_are()] a [examine_descriptor(user)][post_desc_string]."
+		. += "Это [examine_descriptor(user)][post_desc_string]."
 
 	if(reagents)
 		var/user_sees_reagents = user.can_see_reagents()
@@ -37,77 +37,78 @@
 		if(!(reagent_sigreturn & STOP_GENERIC_REAGENT_EXAMINE))
 			if(reagents.flags & TRANSPARENT)
 				if(reagents.total_volume)
-					. += "It contains <b>[reagents.total_volume]</b> units of various reagents[user_sees_reagents ? ":" : "."]"
-					if(user_sees_reagents || (reagent_sigreturn & ALLOW_GENERIC_REAGENT_EXAMINE)) //Show each individual reagent for detailed examination
+					. += "Имеется  <b>[reagents.total_volume]</b> единиц различных химикатов[user_sees_reagents ? ":" : "."]"
+					if(user_sees_reagents || (reagent_sigreturn & ALLOW_GENERIC_REAGENT_EXAMINE)) // Показывать каждый отдельный реагент для детального осмотра
 						for(var/datum/reagent/current_reagent as anything in reagents.reagent_list)
-							. += "&bull; [round(current_reagent.volume, CHEMICAL_VOLUME_ROUNDING)] units of [current_reagent.name]"
+							. += "&bull; [round(current_reagent.volume, CHEMICAL_VOLUME_ROUNDING)] единиц [current_reagent.name]"
 						if(reagents.is_reacting)
-							. += span_warning("It is currently reacting!")
-						. += span_notice("The solution's pH is [round(reagents.ph, 0.01)] and has a temperature of [reagents.chem_temp]K.")
+							. += span_warning("Оно сейчас вступает в реакцию!")
+						. += span_notice("pH раствора равен [round(reagents.ph, 0.01)] и имеет температуру в [reagents.chem_temp]K.")
 
 				else
-					. += "It contains:<br>Nothing."
+					. += "Содержит:<br>Ничего."
 			else if(reagents.flags & AMOUNT_VISIBLE)
 				if(reagents.total_volume)
-					. += span_notice("It has [reagents.total_volume] unit\s left.")
+					. += span_notice("Имеется [reagents.total_volume] единиц.")
 				else
-					. += span_danger("It's empty.")
+					. += span_danger("Пусто.")
 
 	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)
 
 /**
- * A list of "tags" displayed after atom's description in examine.
- * This should return an assoc list of tags -> tooltips for them. If item is null, then no tooltip is assigned.
+ * Список "тегов", отображаемых после описания атома при осмотре.
+ * Должен возвращать ассоциативный список тегов -> всплывающие подсказки для них.
+ * Если значение равно null, то подсказка не назначается.
  *
- * * TGUI tooltips (not the main text) in chat cannot use HTML stuff at all, so
- * trying something like `<b><big>ffff</big></b>` will not work for tooltips.
+ * * Всплывающие подсказки TGUI (не основной текст) в чате НЕ МОГУТ использовать HTML,
+ *   поэтому попытки вроде `<b><big>ffff</big></b>` не будут работать для подсказок.
  *
- * For example:
+ * Например:
  * ```byond
  * . = list()
- * .["small"] = "It is a small item."
- * .["fireproof"] = "It is made of fire-retardant materials."
- * .["and conductive"] = "It's made of conductive materials and whatnot. Blah blah blah." // having "and " in the end tag's main text/key works too!
+ * .["маленький"] = "Это маленький предмет."
+ * .["огнестойкий"] = "Сделан из огнеупорных материалов."
+ * .["и проводящий"] = "Сделан из проводящих материалов и тому подобного. Бла-бла-бла." // наличие "и " в ключе тега тоже работает!
  * ```
- * will result in
+ * даст результат:
  *
- * It is a *small*, *fireproof* *and conductive* item.
+ * Это *маленький*, *огнестойкий* *и проводящий* объект.
  *
- * where "item" is pulled from [/atom/proc/examine_descriptor]
+ * где "объект" берётся из [/atom/proc/examine_descriptor]
  */
 /atom/proc/examine_tags(mob/user)
 	. = list()
 	if(abstract_type == type)
-		.[span_hypnophrase("abstract")] = "This is an abstract concept, you should report this to a strange entity called GITHUB!"
+		.[span_hypnophrase("abstract")] = "Это абстрактный тип, вы должны сообщить об этом говнокодерам, что сломали это!"
 
 	if(resistance_flags & INDESTRUCTIBLE)
-		.["indestructible"] = "It is extremely robust! It'll probably withstand anything that could happen to it!"
+		.["неразрушаемый"] = "Предмет очень прочный! Он выдержит всё, что с ним может случиться!"
 	else
 		if(resistance_flags & LAVA_PROOF)
-			.["lava-proof"] = "It is made of an extremely heat-resistant material, it'd probably be able to withstand lava!"
+			.["лавастойкий"] = "Предмет сделан из чрезвычайно жаропрочного материала, и, вероятно, сможет выдержать даже лаву!"
 		if(resistance_flags & (ACID_PROOF | UNACIDABLE))
-			.["acid-proof"] = "It looks pretty robust! It'd probably be able to withstand acid!"
+			.["кислотостойкий"] = "Предмет выглядит довольно прочным! Возможно, он выдержит воздействие кислоты!"
 		if(resistance_flags & FREEZE_PROOF)
-			.["freeze-proof"] = "It is made of cold-resistant materials."
+			.["морозостойкий"] = "Предмет изготовлен из моростойких материалов."
 		if(resistance_flags & FIRE_PROOF)
-			.["fire-proof"] = "It is made of fire-retardant materials."
+			.["огнестойкий"] = "Предмет изготовлен из огнестойких материалов."
 		if(resistance_flags & SHUTTLE_CRUSH_PROOF)
-			.["crush-proof"] = "It is extremely solid. It should be able to withstand being run over by a shuttle!"
+			.["очень прочный"] = "Предмет невероятно прочный. Должен выдержать даже наезд шаттла!"
 		if(resistance_flags & BOMB_PROOF)
-			.["bomb-proof"] = "It looks like it could survive an explosion!"
+			.["взрывоустойчивый"] = "Предмет способен пережить взрыв!"
 		if(resistance_flags & FLAMMABLE)
-			.["flammable"] = "It looks like it could easily catch on fire."
+			.["легковоспламеняющийся"] = "Предмет может легко загореться."
 
 	if(flags_1 & HOLOGRAM_1)
-		.["holographic"] = "It looks like a hologram."
+		.["голографический"] = "Похоже на голограмму."
 
 	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE_TAGS, user, .)
 
-/// What this atom should be called in examine tags
+/// Как этот атом должен называться в тегах осмотра
 /atom/proc/examine_descriptor(mob/user)
-	return "object"
+	return "объект"
 
-/// Returns a list of strings to be displayed after the descriptor
+/// Возвращает список строк для отображения после описатения
 /atom/proc/examine_post_descriptor(mob/user)
 	. = list()
 	if(!custom_materials)
@@ -115,16 +116,16 @@
 	var/mats_list = list()
 	for(var/custom_material in custom_materials)
 		var/datum/material/current_material = GET_MATERIAL_REF(custom_material)
-		mats_list += span_tooltip("It is made out of [current_material.name].", current_material.name)
-	. += "made of [english_list(mats_list)]"
+		mats_list += span_tooltip("Объект сделан из [current_material.declent_ru(GENITIVE)].", current_material.declent_ru(GENITIVE))
+	. += "из [english_list(mats_list)]"
 
 /**
- * Called when a mob examines (shift click or verb) this atom twice (or more) within EXAMINE_MORE_WINDOW (default 1 second)
+ * Вызывается, когда моб осматривает (Shift+клик или команда) этот атом дважды (или более) в течение EXAMINE_MORE_WINDOW (по умолчанию 1 секунда)
  *
- * This is where you can put extra information on something that may be superfluous or not important in critical gameplay
- * moments, while allowing people to manually double-examine to take a closer look
+ * Здесь можно разместить дополнительную информацию, которая может быть избыточной или неважной в критических игровых моментах,
+ * позволяя игрокам вручную двойным осмотром присмотреться внимательнее
  *
- * Produces a signal [COMSIG_ATOM_EXAMINE_MORE]
+ * Генерирует сигнал [COMSIG_ATOM_EXAMINE_MORE]
  */
 /atom/proc/examine_more(mob/user)
 	SHOULD_CALL_PARENT(TRUE)
@@ -135,22 +136,22 @@
 	SEND_SIGNAL(user, COMSIG_MOB_EXAMINING_MORE, src, .)
 
 /**
- * Get the name of this object for examine
+ * Получить название этого объекта для осмотра
  *
- * You can override what is returned from this proc by registering to listen for the
- * [COMSIG_ATOM_GET_EXAMINE_NAME] signal
+ * Вы можете переопределить возвращаемое значение этой процедуры, подписавшись на сигнал
+ * [COMSIG_ATOM_GET_EXAMINE_NAME]
  */
-/atom/proc/get_examine_name(mob/user)
-	var/list/override = list(article, null, "<em>[get_visible_name()]</em>")
+/atom/proc/get_examine_name(mob/user, declent = NOMINATIVE)
+	var/list/override = list(article, null, "<em>[get_visible_name(declent = declent)]</em>")
 	SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override)
 
 	if(!isnull(override[EXAMINE_POSITION_ARTICLE]))
-		override -= null // IF there is no "before", don't try to join it
+		override -= null // Если нет "before", не пытаться объединить
 		return jointext(override, " ")
 	if(!isnull(override[EXAMINE_POSITION_BEFORE]))
-		override -= null // There is no article, don't try to join it
-		return "\a [jointext(override, " ")]"
-	return "\a [src]"
+		override -= null // Нет артикля, не пытаться объединить
+		return "[jointext(override, " ")]"
+	return "[declent_ru(declent)]"
 
 /mob/living/get_examine_name(mob/user)
 	var/visible_name = get_visible_name()
@@ -159,39 +160,39 @@
 		return name_override[1]
 	return visible_name
 
-/// Icon displayed in examine
+/// Иконка, отображаемая при осмотре
 /atom/proc/get_examine_icon(mob/user)
 	return icon2html(src, user)
 
 /**
- * Formats the atom's name into a string for use in examine (as the "title" of the atom)
+ * Форматирует название атома в строку для использования при осмотре (как "заголовок" атома)
  *
- * * user - the mob examining the atom
- * * thats - whether to include "That's", or similar (mobs use "This is") before the name
+ * * user - моб, осматривающий атом
+ * * thats - включать ли "Это" или подобное (мобы используют "Это") перед названием
  */
-/atom/proc/examine_title(mob/user, thats = FALSE)
+/atom/proc/examine_title(mob/user, thats = FALSE, declent = NOMINATIVE)
 	var/examine_icon = get_examine_icon(user)
-	return "[examine_icon ? "[examine_icon] " : ""][thats ? "[examine_thats] ":""]<em>[get_examine_name(user)]</em>"
+	return "[examine_icon ? "[examine_icon] " : ""][thats ? "[examine_thats] ":""]<em>[get_examine_name(user, declent)]</em>"
 
 /**
- * Returns an extended list of examine strings for any contained ID cards.
+ * Возвращает расширенный список строк осмотра для любых содержащихся ID-карт.
  *
- * Arguments:
- * * user - The user who is doing the examining.
+ * Аргументы:
+ * * user - Пользователь, который проводит осмотр.
  */
 /atom/proc/get_id_examine_strings(mob/user)
 	. = list()
 
-///Used to insert text after the name but before the description in examine()
+/// Используется для вставки текста после названия, но перед описанием в examine()
 /atom/proc/get_name_chaser(mob/user, list/name_chaser = list())
 	return name_chaser
 
 /**
- * Used by mobs to determine the name for someone wearing a mask, or with a disfigured or missing face.
- * By default just returns the atom's name.
+ * Используется мобами для определения имени того, кто носит маску, имеет обезображенное или отсутствующее лицо.
+ * По умолчанию просто возвращает название атома.
  *
- * * add_id_name - If TRUE, ID information such as honorifics or name (if mismatched) are appended
- * * force_real_name - If TRUE, will always return real_name and add (as face_name/id_name) if it doesn't match their appearance
+ * * add_id_name - Если TRUE, добавляется информация с ID, такая как обращения или имя (если не совпадает)
+ * * force_real_name - Если TRUE, всегда возвращает real_name и добавляет (как face_name/id_name), если оно не соответствует внешности
  */
-/atom/proc/get_visible_name(add_id_name = TRUE, force_real_name = FALSE)
-	return name
+/atom/proc/get_visible_name(add_id_name = TRUE, force_real_name = FALSE, declent = NOMINATIVE)
+	return declent_ru(declent)

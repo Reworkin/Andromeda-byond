@@ -40,7 +40,7 @@
 	name = get_visible_name()
 
 /// Combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a separate proc as it'll be useful elsewhere
-/mob/living/carbon/human/get_visible_name(add_id_name = TRUE, force_real_name = FALSE)
+/mob/living/carbon/human/get_visible_name(add_id_name = TRUE, force_real_name = FALSE, declent)
 	var/list/identity = list(null, null, null)
 	SEND_SIGNAL(src, COMSIG_HUMAN_GET_VISIBLE_NAME, identity)
 	var/signal_face = LAZYACCESS(identity, VISIBLE_NAME_FACE)

@@ -200,25 +200,26 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 /// Trait source for stuff movetypes applies
 #define SOURCE_MOVETYPES "movetypes"
 
-//Fire and Acid stuff, for resistance_flags
+// Флаги устойчивости к огню и кислоте для resistance_flags
+/// 100% защита от лавы
 #define LAVA_PROOF (1<<0)
-/// 100% immune to fire damage (but not necessarily to lava or heat)
+/// 100% иммунитет к урону от огня (но не обязательно к лаве или высокой температуре).
 #define FIRE_PROOF (1<<1)
-/// atom is flammable and can have the burning component
+/// Объект горюч и может иметь компонент горения.
 #define FLAMMABLE (1<<2)
-/// currently burning
+/// В данный момент горит.
 #define ON_FIRE (1<<3)
-/// acid can't even appear on it, let alone melt it.
+/// Кислота не может даже появиться на нём, не говоря уже о растворении.
 #define UNACIDABLE (1<<4)
-/// acid stuck on it doesn't melt it.
+/// Кислота, попавшая на объект, не растворяет его.
 #define ACID_PROOF (1<<5)
-/// doesn't take damage
+/// Не получает урон.
 #define INDESTRUCTIBLE (1<<6)
-/// can't be frozen
+/// Не может быть заморожен.
 #define FREEZE_PROOF (1<<7)
-/// can't be shuttle crushed.
+/// Не может быть раздавлен шаттлом.
 #define SHUTTLE_CRUSH_PROOF (1<<8)
-/// can't be destroyed by bombs
+/// Не может быть уничтожен взрывами.
 #define BOMB_PROOF (1<<9)
 
 //tesla_zap

@@ -1,7 +1,7 @@
 ///Has no special properties.
 /datum/material/iron
 	name = "iron"
-	desc = "Common iron ore often found in sedimentary and igneous layers of the crust."
+	desc = "Обычная железная руда часто встречается в осадочных и магматических слоях земной коры."
 	color = "#B6BEC2"
 	categories = list(
 		MAT_CATEGORY_SILO = TRUE,
@@ -22,6 +22,16 @@
 	fish_weight_modifier = 1.3
 	fishing_gravity_mult = 1.1
 
+/datum/material/iron/get_ru_names()
+	return list(
+		NOMINATIVE = "железо",
+		GENITIVE = "железа",
+		DATIVE = "железу",
+		ACCUSATIVE = "железо",
+		INSTRUMENTAL = "железом",
+		PREPOSITIONAL = "железе"
+	)
+
 /datum/material/iron/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	if(!HAS_TRAIT(victim, TRAIT_ROCK_EATER))
 		victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD, wound_bonus = 5)
@@ -30,7 +40,7 @@
 ///Breaks extremely easily but is transparent.
 /datum/material/glass
 	name = "glass"
-	desc = "Glass forged by melting sand."
+	desc = "Стекло, сделано из обычного расплавленного песка."
 	color = "#6292AF"
 	alpha = 150
 	categories = list(
@@ -62,6 +72,16 @@
 	fishing_bounciness_mult = 0.5
 	fishing_gravity_mult = 0.9
 
+/datum/material/glass/get_ru_names()
+	return list(
+		NOMINATIVE = "стекло",
+		GENITIVE = "стекла",
+		DATIVE = "стеклу",
+		ACCUSATIVE = "стекло",
+		INSTRUMENTAL = "стеклом",
+		PREPOSITIONAL = "стекле"
+	)
+
 /datum/material/glass/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	if(!HAS_TRAIT(victim, TRAIT_ROCK_EATER))
 		victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD, wound_bonus = 5, sharpness = TRUE) //cronch
@@ -85,7 +105,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 ///Has no special properties. Could be good against vampires in the future perhaps.
 /datum/material/silver
 	name = "silver"
-	desc = "Silver"
+	desc = "Красивый блестящий металл. Ходят слухи, что вампиры его боятся."
 	color = "#B5BCBB"
 	categories = list(
 		MAT_CATEGORY_SILO = TRUE,
@@ -111,6 +131,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 0.9
 	fishing_gravity_mult = 1.1
 
+/datum/material/silver/get_ru_names()
+	return list(
+		NOMINATIVE = "серебро",
+		GENITIVE = "серебра",
+		DATIVE = "серебру",
+		ACCUSATIVE = "серебро",
+		INSTRUMENTAL = "серебром",
+		PREPOSITIONAL = "серебре"
+	)
+
 /datum/material/silver/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	if(!HAS_TRAIT(victim, TRAIT_ROCK_EATER))
 		victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD, wound_bonus = 5)
@@ -119,7 +149,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 ///Slight force increase
 /datum/material/gold
 	name = "gold"
-	desc = "Gold"
+	desc = "Это мягкий и дорогой металл. Испокон веков, этот металл показатель статуса."
 	color = "#E6BB45"
 	strength_modifier = 1.2
 	categories = list(
@@ -149,6 +179,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 0.8
 	fishing_gravity_mult = 1.2
 
+/datum/material/gold/get_ru_names()
+	return list(
+		NOMINATIVE = "золото",
+		GENITIVE = "золота",
+		DATIVE = "золоту",
+		ACCUSATIVE = "золото",
+		INSTRUMENTAL = "золотом",
+		PREPOSITIONAL = "золоте"
+	)
+
 /datum/material/gold/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD, wound_bonus = 5)
 	return TRUE
@@ -156,7 +196,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 ///Has no special properties
 /datum/material/diamond
 	name = "diamond"
-	desc = "Highly pressurized carbon"
+	desc = "Углерод под высоким давлением."
 	color = "#C9D8F2"
 	categories = list(
 		MAT_CATEGORY_SILO = TRUE,
@@ -188,6 +228,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 0.8
 	fishing_gravity_mult = 1.1
 
+/datum/material/diamond/get_ru_names() // https://www.youtube.com/watch?v=8l9ialJWAHs
+	return list(
+		NOMINATIVE = "алмаз",
+		GENITIVE = "алмаза",
+		DATIVE = "алмазу",
+		ACCUSATIVE = "алмаз",
+		INSTRUMENTAL = "алмазом",
+		PREPOSITIONAL = "алмазе"
+	)
+
 /datum/material/diamond/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	if(!HAS_TRAIT(victim, TRAIT_ROCK_EATER))
 		victim.apply_damage(15, BRUTE, BODY_ZONE_HEAD, wound_bonus = 7)
@@ -196,7 +246,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 ///Is slightly radioactive
 /datum/material/uranium
 	name = "uranium"
-	desc = "Uranium"
+	desc = "Оно немного фонит. Говорят, что он очень сытный, но не стоит это проверять."
 	color = "#2C992C"
 	categories = list(
 		MAT_CATEGORY_SILO = TRUE,
@@ -220,6 +270,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_deceleration_mult = 1.4
 	fishing_bounciness_mult = 0.6
 	fishing_gravity_mult = 1.4
+
+/datum/material/diamond/get_ru_names() // https://www.youtube.com/watch?v=htHmpxjoJgQ
+	return list(
+		NOMINATIVE = "уран",
+		GENITIVE = "урана",
+		DATIVE = "урану",
+		ACCUSATIVE = "уран",
+		INSTRUMENTAL = "ураном",
+		PREPOSITIONAL = "уране"
+	)
 
 /datum/material/uranium/on_applied(atom/source, mat_amount, multiplier)
 	. = ..()
@@ -247,7 +307,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 ///Adds firestacks on hit (Still needs support to turn into gas on destruction)
 /datum/material/plasma
 	name = "plasma"
-	desc = "Isn't plasma a state of matter? Oh whatever."
+	desc = "Разве плазма — это не состояние материи? Это самый главный секрет корпарации НТ."
 	color = "#BA3692"
 	categories = list(
 		MAT_CATEGORY_SILO = TRUE,
@@ -266,6 +326,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fish_weight_modifier = 1.3
 	fishing_deceleration_mult = 1.3
 	fishing_bounciness_mult = 0.6
+
+/datum/material/plasma/get_ru_names()
+	return list(
+		NOMINATIVE = "плазма",
+		GENITIVE = "плазмы",
+		DATIVE = "плазме",
+		ACCUSATIVE = "плазму",
+		INSTRUMENTAL = "плазмой",
+		PREPOSITIONAL = "плазме"
+	)
 
 /datum/material/plasma/on_applied(atom/source, mat_amount, multiplier)
 	. = ..()
@@ -291,7 +361,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 ///Can cause bluespace effects on use. (Teleportation) (Not yet implemented)
 /datum/material/bluespace
 	name = "bluespace crystal"
-	desc = "Crystals with bluespace properties"
+	desc = "Кристаллы со свойствами синего пространства. Активно изучается корпорацией НТ."
 	color = "#2E50B7"
 	alpha = 200
 	starlight_color = COLOR_BLUE
@@ -319,6 +389,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bait_speed_mult = 1.1
 	fishing_deceleration_mult = 0.9
 	fishing_bounciness_mult = 1.1
+
+/datum/material/bluespace/get_ru_names()
+	return list(
+		NOMINATIVE = "блюспейс поликристал",
+		GENITIVE = "блюспейс поликристала",
+		DATIVE = "блюспейс поликристалу",
+		ACCUSATIVE = "блюспейс поликристал",
+		INSTRUMENTAL = "блюспейс поликристалом",
+		PREPOSITIONAL = "блюспейс поликристале"
+	)
 
 /datum/material/bluespace/on_main_applied(atom/source, mat_amount, multiplier)
 	. = ..()
@@ -349,7 +429,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 ///Honks and slips
 /datum/material/bananium
 	name = "bananium"
-	desc = "Material with hilarious properties"
+	desc = "Материал с забавными свойствами. Крайне мало изучен. Клоуны строят культы вокруг него, веря, что это дары Хонкматери."
 	color = list(460/255, 464/255, 0, 0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 0,0,0,0) //obnoxiously bright yellow //It's literally perfect I can't change it
 	greyscale_color = "#FFF269"
 	categories = list(
@@ -373,6 +453,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bait_speed_mult = 1.5
 	fishing_deceleration_mult = 0.5
 	fishing_bounciness_mult = 2
+
+/datum/material/bananium/get_ru_names()
+	return list(
+		NOMINATIVE = "бананиум",
+		GENITIVE = "бананиума",
+		DATIVE = "бананиуму",
+		ACCUSATIVE = "бананиум",
+		INSTRUMENTAL = "бананиумом",
+		PREPOSITIONAL = "бананиуме"
+	)
 
 /datum/material/bananium/on_applied(atom/source, mat_amount, multiplier)
 	. = ..()
@@ -418,7 +508,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 ///Mediocre force increase
 /datum/material/titanium
 	name = "titanium"
-	desc = "Titanium"
+	desc = "Прочность и лёгкость, устойчивость, биокомпатибельность, термостойкость. Это всё про один только титан."
 	color = "#EFEFEF"
 	strength_modifier = 1.3
 	categories = list(
@@ -447,6 +537,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 0.75
 	fishing_gravity_mult = 1.1
 
+/datum/material/titanium/get_ru_names()
+	return list(
+		NOMINATIVE = "титан",
+		GENITIVE = "титана",
+		DATIVE = "титану",
+		ACCUSATIVE = "титан",
+		INSTRUMENTAL = "титаном",
+		PREPOSITIONAL = "титане"
+	)
+
 /datum/material/titanium/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	if(!HAS_TRAIT(victim, TRAIT_ROCK_EATER))
 		victim.apply_damage(15, BRUTE, BODY_ZONE_HEAD, wound_bonus = 7)
@@ -454,7 +554,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 
 /datum/material/runite
 	name = "runite"
-	desc = "Runite"
+	desc = "Рунит."
 	color = "#526F77"
 	strength_modifier = 1.3
 	categories = list(
@@ -478,6 +578,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_deceleration_mult = 1.2
 	fishing_gravity_mult = 1.2
 
+/datum/material/runite/get_ru_names()
+	return list(
+		NOMINATIVE = "рунит",
+		GENITIVE = "рунита",
+		DATIVE = "руниту",
+		ACCUSATIVE = "рунит",
+		INSTRUMENTAL = "рунитом",
+		PREPOSITIONAL = "руните"
+	)
+
 /datum/material/runite/on_applied(atom/source, mat_amount, multiplier)
 	. = ..()
 	if(istype(source, /obj/item/fishing_rod))
@@ -496,7 +606,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 ///Force decrease
 /datum/material/plastic
 	name = "plastic"
-	desc = "Plastic"
+	desc = "В основе любой пластмассы находится искусственная смола — полимер. Полимер когда-то был динозавром."
 	color = "#BFB9AC"
 	strength_modifier = 0.85
 	sheet_type = /obj/item/stack/sheet/plastic
@@ -522,6 +632,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 1.3
 	fishing_gravity_mult = 0.85
 
+/datum/material/plastic/get_ru_names()
+	return list(
+		NOMINATIVE = "пластик",
+		GENITIVE = "пластика",
+		DATIVE = "пластику",
+		ACCUSATIVE = "пластик",
+		INSTRUMENTAL = "пластиком",
+		PREPOSITIONAL = "пластике"
+	)
+
 /datum/material/plastic/on_accidental_mat_consumption(mob/living/carbon/eater, obj/item/food)
 	eater.reagents.add_reagent(/datum/reagent/plastic_polymers, rand(6, 8))
 	food?.reagents?.add_reagent(/datum/reagent/plastic_polymers, food.reagents.total_volume*(2/5))
@@ -530,14 +650,24 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 ///Force decrease and mushy sound effect. (Not yet implemented)
 /datum/material/biomass
 	name = "biomass"
-	desc = "Organic matter."
+	desc = "Органическое вещество сжатое в более компактную форму."
 	color = "#735b4d"
 	strength_modifier = 0.8
 	value_per_unit = 50 / SHEET_MATERIAL_AMOUNT
 
+/datum/material/biomass/get_ru_names()
+	return list(
+		NOMINATIVE = "биомасса",
+		GENITIVE = "биомассы",
+		DATIVE = "биомассу",
+		ACCUSATIVE = "биомасса",
+		INSTRUMENTAL = "биомассой",
+		PREPOSITIONAL = "биомассе"
+	)
+
 /datum/material/wood
 	name = "wood"
-	desc = "Flexible, durable, but flammable. Hard to come across in space."
+	desc = "Гибкий, прочный, но легко воспламеняющийся. Его трудно найти в космосе."
 	color = "#855932"
 	strength_modifier = 0.5
 	sheet_type = /obj/item/stack/sheet/mineral/wood
@@ -560,6 +690,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_deceleration_mult = 1.3
 	fishing_bounciness_mult = 0.4
 	fishing_gravity_mult = 0.8
+
+/datum/material/wood/get_ru_names()
+	return list(
+		NOMINATIVE = "дерево",
+		GENITIVE = "дерева",
+		DATIVE = "дереву",
+		ACCUSATIVE = "дерево",
+		INSTRUMENTAL = "деревом",
+		PREPOSITIONAL = "дереве"
+	)
 
 /datum/material/wood/on_main_applied(atom/source, mat_amount, multiplier)
 	. = ..()
@@ -584,7 +724,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 ///Stronk force increase
 /datum/material/adamantine
 	name = "adamantine"
-	desc = "A powerful material made out of magic, I mean science!"
+	desc = "Мощный материал, созданный с помощью магии... я имел в виду науку!"
 	color = "#2B7A74"
 	strength_modifier = 1.5
 	categories = list(
@@ -609,6 +749,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 0.7
 	fishing_gravity_mult = 1.3
 
+/datum/material/adamantine/get_ru_names()
+	return list(
+		NOMINATIVE = "адамантин",
+		GENITIVE = "адамантина",
+		DATIVE = "адамантину",
+		ACCUSATIVE = "адамантин",
+		INSTRUMENTAL = "адамантином",
+		PREPOSITIONAL = "адамантине"
+	)
+
 /datum/material/adamantine/on_applied(atom/source, mat_amount, multiplier)
 	. = ..()
 	if(istype(source, /obj/item/fishing_rod))
@@ -627,7 +777,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 ///RPG Magic.
 /datum/material/mythril
 	name = "mythril"
-	desc = "How this even exists is byond me"
+	desc = "Как это вообще существует, неизвестно."
 	color = "#f2d5d7"
 	categories = list(
 		MAT_CATEGORY_RIGID = TRUE,
@@ -652,6 +802,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 0.65
 	fishing_gravity_mult = 1.3
 
+/datum/material/mythril/get_ru_names() // Почему не МилфРил?
+	return list(
+		NOMINATIVE = "мифрил",
+		GENITIVE = "мифрила",
+		DATIVE = "мифрилу",
+		ACCUSATIVE = "мифрил",
+		INSTRUMENTAL = "мифрилом",
+		PREPOSITIONAL = "мифриле"
+	)
+
 /datum/material/mythril/on_applied(atom/source, mat_amount, multiplier)
 	. = ..()
 	if(isitem(source))
@@ -672,7 +832,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 //formed when freon react with o2, emits a lot of plasma when heated
 /datum/material/hot_ice
 	name = "hot ice"
-	desc = "A weird kind of ice, feels warm to the touch"
+	desc = "Странный вид льда, теплый на ощупь."
 	color = "#88cdf1"
 	alpha = 150
 	starlight_color = COLOR_BLUE_LIGHT
@@ -695,6 +855,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 0.3
 	fishing_gravity_mult = 0.8
 
+/datum/material/hot_ice/get_ru_names() // Горячий здесь только я
+	return list(
+		NOMINATIVE = "горячий лёд",
+		GENITIVE = "горячего льда",
+		DATIVE = "горячему льду",
+		ACCUSATIVE = "горячий лёд",
+		INSTRUMENTAL = "горячим льдём",
+		PREPOSITIONAL = "горячем льде"
+	)
+
 /datum/material/hot_ice/on_applied(atom/source, mat_amount, multiplier)
 	. = ..()
 	source.AddComponent(/datum/component/combustible_flooder, "plasma", mat_amount * 1.5 * multiplier, (mat_amount * 0.2 + 300) * multiplier)
@@ -711,7 +881,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 // It's basically adamantine, but it isn't!
 /datum/material/metalhydrogen
 	name = "Metal Hydrogen"
-	desc = "Solid metallic hydrogen. Some say it should be impossible"
+	desc = "Твердый металлический водород. Некоторые говорят, что это невозможно."
 	color = "#62708A"
 	alpha = 150
 	starlight_color = COLOR_MODERATE_BLUE
@@ -736,6 +906,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 1.7
 	fishing_gravity_mult = 0.7
 
+/datum/material/hot_ice/get_ru_names()
+	return list(
+		NOMINATIVE = "металлический водород",
+		GENITIVE = "металлического водорода",
+		DATIVE = "металлическому водороду",
+		ACCUSATIVE = "металлический водород",
+		INSTRUMENTAL = "металлическим водородом",
+		PREPOSITIONAL = "металлическом водороде"
+	)
+
 /datum/material/metalhydrogen/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	if(!HAS_TRAIT(victim, TRAIT_ROCK_EATER))
 		victim.apply_damage(15, BRUTE, BODY_ZONE_HEAD, wound_bonus = 7)
@@ -744,7 +924,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 //I don't like sand. It's coarse, and rough, and irritating, and it gets everywhere.
 /datum/material/sand
 	name = "sand"
-	desc = "You know, it's amazing just how structurally sound sand can be."
+	desc = "Знаете, просто удивительно, насколько прочным может быть песок с точки зрения структуры."
 	color = "#EDC9AF"
 	categories = list(
 		MAT_CATEGORY_RIGID = TRUE,
@@ -770,6 +950,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 0.3
 	fishing_gravity_mult = 0.9
 
+/datum/material/sand/get_ru_names()
+	return list(
+		NOMINATIVE = "песок",
+		GENITIVE = "песка",
+		DATIVE = "песку",
+		ACCUSATIVE = "песок",
+		INSTRUMENTAL = "песком",
+		PREPOSITIONAL = "песке"
+	)
+
 /datum/material/sand/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.adjust_disgust(17)
 	return TRUE
@@ -777,7 +967,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 //And now for our lavaland dwelling friends, sand, but in stone form! Truly revolutionary.
 /datum/material/sandstone
 	name = "sandstone"
-	desc = "Bialtaakid 'ant taerif ma hdha."
+	desc = "Когда-то наши предки строили из этого великие монументы." // И статуи фуррям в Египте
 	color = "#ECD5A8"
 	categories = list(
 		MAT_CATEGORY_RIGID = TRUE,
@@ -802,9 +992,19 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 0.2
 	fishing_gravity_mult = 0.9
 
+/datum/material/sandstone/get_ru_names()
+	return list(
+		NOMINATIVE = "песчаник",
+		GENITIVE = "песчаника",
+		DATIVE = "песчанику",
+		ACCUSATIVE = "песчаник",
+		INSTRUMENTAL = "песчаником",
+		PREPOSITIONAL = "песчанике"
+	)
+
 /datum/material/snow
 	name = "snow"
-	desc = "There's no business like snow business."
+	desc = "Нет ничего лучше зимы. Снежных ангелов, снежной бабы. Но главное не ешь жёлтый снег.."
 	color = COLOR_WHITE
 	categories = list(
 		MAT_CATEGORY_RIGID = TRUE,
@@ -836,7 +1036,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 
 /datum/material/runedmetal
 	name = "runed metal"
-	desc = "Mir'ntrath barhah Nar'sie."
+	desc = "Мир'нтрат бархах Нар'си."
 	color = "#504742"
 	categories = list(
 		MAT_CATEGORY_RIGID = TRUE,
@@ -858,6 +1058,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 0.666
 	fishing_gravity_mult = 1.666
 
+/datum/material/runedmetal/get_ru_names()
+	return list(
+		NOMINATIVE = "рунный металл",
+		GENITIVE = "рунного металла",
+		DATIVE = "рунному металлу",
+		ACCUSATIVE = "рунный металл",
+		INSTRUMENTAL = "рунным металлом",
+		PREPOSITIONAL = "рунном металле"
+	)
+
 /datum/material/runedmetal/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.reagents.add_reagent(/datum/reagent/fuel/unholywater, rand(8, 12))
 	if(!HAS_TRAIT(victim, TRAIT_ROCK_EATER))
@@ -866,7 +1076,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 
 /datum/material/bronze
 	name = "bronze"
-	desc = "Clock Cult? Never heard of it."
+	desc = "Культ часов? Никогда о таком не слышал."
 	color = "#876223"
 	categories = list(
 		MAT_CATEGORY_RIGID = TRUE,
@@ -884,9 +1094,19 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 1.2
 	fishing_gravity_mult = 1.05
 
+/datum/material/bronze/get_ru_names()
+	return list(
+		NOMINATIVE = "бронза",
+		GENITIVE = "бронзы",
+		DATIVE = "бронзе",
+		ACCUSATIVE = "бронзу",
+		INSTRUMENTAL = "бронзой",
+		PREPOSITIONAL = "бронзе"
+	)
+
 /datum/material/paper
 	name = "paper"
-	desc = "Ten thousand folds of pure starchy power."
+	desc = "Десять тысяч складок чистой крахмальной энергии."
 	color = "#E5DCD5"
 	categories = list(
 		MAT_CATEGORY_RIGID = TRUE,
@@ -909,6 +1129,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_deceleration_mult = 1.5
 	fishing_bounciness_mult = 0.2
 	fishing_gravity_mult = 0.6
+
+/datum/material/paper/get_ru_names()
+	return list(
+		NOMINATIVE = "бумага",
+		GENITIVE = "бумаги",
+		DATIVE = "бумаге",
+		ACCUSATIVE = "бумагу",
+		INSTRUMENTAL = "бумагой",
+		PREPOSITIONAL = "бумаге"
+	)
 
 /datum/material/paper/on_main_applied(atom/source, mat_amount, multiplier)
 	. = ..()
@@ -940,7 +1170,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 
 /datum/material/cardboard
 	name = "cardboard"
-	desc = "They say cardboard is used by hobos to make incredible things."
+	desc = "Бродяги делают из картона невероятные вещи."
 	color = "#5F625C"
 	categories = list(
 		MAT_CATEGORY_RIGID = TRUE,
@@ -962,6 +1192,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 0.2
 	fishing_gravity_mult = 0.6
 
+/datum/material/cardboard/get_ru_names()
+	return list(
+		NOMINATIVE = "картон",
+		GENITIVE = "картона",
+		DATIVE = "картону",
+		ACCUSATIVE = "картон",
+		INSTRUMENTAL = "картоном",
+		PREPOSITIONAL = "картоне"
+	)
+
 /datum/material/cardboard/on_main_applied(atom/source, mat_amount, multiplier)
 	. = ..()
 	if(isobj(source) && source.material_flags & MATERIAL_AFFECT_STATISTICS)
@@ -977,7 +1217,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 
 /datum/material/bone
 	name = "bone"
-	desc = "Man, building with this will make you the coolest caveman on the block."
+	desc = "Чувак, используя это, ты станешь самым крутым пещерным человеком в округе."
 	color = "#e3dac9"
 	categories = list(
 		MAT_CATEGORY_RIGID = TRUE,
@@ -998,6 +1238,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_deceleration_mult = 0.9
 	fishing_bounciness_mult = 0.8
 	fishing_gravity_mult = 0.85
+
+/datum/material/bone/get_ru_names()
+	return list(
+		NOMINATIVE = "кость",
+		GENITIVE = "кости",
+		DATIVE = "кости",
+		ACCUSATIVE = "кость",
+		INSTRUMENTAL = "костью",
+		PREPOSITIONAL = "кости"
+	)
 
 /datum/material/bone/on_main_applied(atom/source, mat_amount, multiplier)
 	. = ..()
@@ -1034,7 +1284,7 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 
 /datum/material/bamboo
 	name = "bamboo"
-	desc = "If it's good enough for pandas, it's good enough for you."
+	desc = "Если это достаточно хорошо для панд, то это достаточно хорошо и для вас."
 	color = "#87a852"
 	categories = list(
 		MAT_CATEGORY_RIGID = TRUE,
@@ -1059,9 +1309,19 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_bounciness_mult = 0.7
 	fishing_gravity_mult = 0.7
 
+/datum/material/bamboo/get_ru_names()
+	return list(
+		NOMINATIVE = "бамбук",
+		GENITIVE = "бамбука",
+		DATIVE = "бамбуку",
+		ACCUSATIVE = "бамбук",
+		INSTRUMENTAL = "бамбуком",
+		PREPOSITIONAL = "бамбуке"
+	)
+
 /datum/material/zaukerite
 	name = "zaukerite"
-	desc = "A light absorbing crystal"
+	desc = "Светопоглощающий кристалл."
 	color = COLOR_ALMOST_BLACK
 	categories = list(
 		MAT_CATEGORY_RIGID = TRUE,
@@ -1081,6 +1341,16 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	fishing_deceleration_mult = 1.3
 	fishing_bounciness_mult = 1.1
 	fishing_gravity_mult = 1.3
+
+/datum/material/zaukerite/get_ru_names()
+	return list(
+		NOMINATIVE = "заукерит",
+		GENITIVE = "заукерита",
+		DATIVE = "заукериту",
+		ACCUSATIVE = "заукерит",
+		INSTRUMENTAL = "заукеритом",
+		PREPOSITIONAL = "заукерите"
+	)
 
 /datum/material/zaukerite/on_applied(atom/source, mat_amount, multiplier)
 	. = ..()

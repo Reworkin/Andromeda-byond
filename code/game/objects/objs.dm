@@ -226,9 +226,9 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 /obj/examine_tags(mob/user)
 	. = ..()
 	if(obj_flags & UNIQUE_RENAME)
-		.["renameable"] = "Use a pen on it to rename it or change its description."
+		.["переименуемый"] = "Используйте ручку, чтобы переименовать или изменить описание."
 	if(obj_flags & CONDUCTS_ELECTRICITY)
-		.["conductive"] = "It appears to be a good conductor of electricity."
+		.["проводящий"] = "Похоже, это хороший проводник электричества."
 
 /obj/analyzer_act(mob/living/user, obj/item/analyzer/tool)
 	if(atmos_scan(user=user, target=src, silent=FALSE))

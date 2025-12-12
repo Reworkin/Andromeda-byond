@@ -28,6 +28,16 @@
 	/// whether this sheet can be sniffed by the material sniffer
 	var/sniffable = FALSE
 
+/obj/item/stack/sheet/get_ru_names()
+	return list(
+		NOMINATIVE = "лист",
+		GENITIVE = "листа",
+		DATIVE = "листу",
+		ACCUSATIVE = "лист",
+		INSTRUMENTAL = "листом",
+		PREPOSITIONAL = "листе"
+	)
+
 /obj/item/stack/sheet/Initialize(mapload, new_amount, merge = TRUE, list/mat_override=null, mat_amt=1)
 	. = ..()
 	pixel_x = rand(-4, 4)
@@ -43,7 +53,7 @@
 /obj/item/stack/sheet/examine(mob/user)
 	. = ..()
 	if (manufactured && gulag_valid)
-		. += "It has been embossed with a manufacturer's mark of guaranteed quality."
+		. += "На нём выбита марка производителя, гарантирующая качество."
 
 /obj/item/stack/sheet/add(_amount)
 	. = ..()
@@ -61,14 +71,14 @@
 /// removing from sniffable handled by the sniffer itself when it checks for targets
 
 /**
- * Facilitates sheets being smacked on the floor
+ * Обеспечивает возможность ударять листами по полу
  *
- * This is used for crafting by hitting the floor with items.
- * The initial use case is glass sheets breaking in to shards when the floor is hit.
- * Args:
- * * target: The floor that was hit
- * * user: The user that did the action
- * * modifiers: The modifiers passed in from attackby
+ * Используется для крафта путём удара предметами об пол.
+ * Первоначальный вариант использования — разбивание стеклянных листов на осколки при ударе об пол.
+ * Аргументы:
+ * * target: Пол, по которому ударили
+ * * user: Пользователь, выполнивший действие
+ * * modifiers: Модификаторы, переданные из attackby
  */
 /obj/item/stack/sheet/proc/on_attack_floor(turf/open/floor/target, mob/user, list/modifiers)
 	var/list/shards = list()
@@ -78,9 +88,9 @@
 	if(!shards.len)
 		return FALSE
 	if(!use(1))
-		to_chat(user, is_cyborg ? span_warning("There is not enough material in the synthesizer to produce a shard!") : span_warning("Somehow, there is not enough of [src] to shatter!"))
+		to_chat(user, is_cyborg ? span_warning("В синтезаторе недостаточно материала для создания осколка!") : span_warning("Как-то так вышло, что [declent_ru(GENITIVE)] недостаточно для разбивания!"))
 		if(!is_cyborg)
-			stack_trace("A stack of sheet material was attempted to be shattered into shards while having less than 1 sheets remaining.")
+			stack_trace("Стопка листового материала пыталась быть разбита на осколки, имея менее 1 листа в остатке.")
 		return FALSE
 	user.do_attack_animation(target, ATTACK_EFFECT_BOOP)
 	playsound(target, SFX_SHATTER, 70, TRUE)
@@ -88,8 +98,8 @@
 	for(var/shard_to_create in shards)
 		var/obj/item/new_shard = new shard_to_create(target)
 		new_shard.add_fingerprint(user)
-		shards_created += "[new_shard.name]"
-	user.visible_message(span_notice("[user] shatters the sheet of [name] on [target], leaving [english_list(shards_created)]."), \
-		span_notice("You shatter the sheet of [name] on [target], leaving [english_list(shards_created)]."))
+		shards_created += "[new_shard.declent_ru(NOMINATIVE)]"
+	user.visible_message(span_notice("[user] разбивает лист [declent_ru(GENITIVE)] о [target.declent_ru(GENITIVE)], оставляя [english_list(shards_created)]."), \
+		span_notice("Вы разбиваете лист [declent_ru(GENITIVE)] о [target.declent_ru(GENITIVE)], оставляя [english_list(shards_created)]."))
 	return TRUE
 

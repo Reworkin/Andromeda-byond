@@ -9,6 +9,16 @@
 	material_type = /datum/material/hot_ice
 	merge_type = /obj/item/stack/sheet/hot_ice
 
+/obj/item/stack/sheet/hot_ice/get_ru_names()
+	return list(
+		NOMINATIVE = "горячий лёд",
+		GENITIVE = "горячего льда",
+		DATIVE = "горячему льду",
+		ACCUSATIVE = "горячий лёд",
+		INSTRUMENTAL = "горячим льдом",
+		PREPOSITIONAL = "горячем льде"
+	)
+
 /obj/item/stack/sheet/hot_ice/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins licking \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] начинает облизывать [declent_ru(NOMINATIVE)]! Похоже, [GEND_HE_SHE(user)] пытается покончить с собой!"))
 	return FIRELOSS//dont you kids know that stuff is toxic?

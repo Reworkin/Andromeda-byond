@@ -435,7 +435,7 @@
 		.["partially insulated"] = "It is made from a poor insulator that will dampen (but not fully block) electric shocks passing through it."
 
 /obj/item/examine_descriptor(mob/user)
-	return "item"
+	return "предмет"
 
 /obj/item/examine(mob/user)
 	// lazily initialize the weapon description element if it hasn't been already

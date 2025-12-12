@@ -230,6 +230,14 @@
 	worn_icon_state = "knife_cyborg" //error sprite - this shouldn't have been dropped
 	slot_flags = NONE //you can't put this in your mouth
 
+
+/**
+ * MARK: Обмотанные осколки
+ * - TODO: Rewokin: обычный осколок имеет защиту от урона, хули это не имеет?
+ * - Как это блять вообще оправдали? Причина: Ээээ нуу эээ ну бляяя ну типа эээ,
+ * - меня насиловал отец учебником по физике, по этому я ээ ну типо стекло проводит ток. Кстати смотри на мою колекцию ЛГБТ пинов!
+ */
+
 /obj/item/knife/shiv
 	name = "glass shiv"
 	desc = "A makeshift glass shiv."

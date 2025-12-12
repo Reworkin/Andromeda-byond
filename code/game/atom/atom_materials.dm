@@ -145,7 +145,7 @@
 
 	if(material_flags & MATERIAL_ADD_PREFIX)
 		var/prefixes = get_material_prefixes(materials)
-		name = "[prefixes] [name]"
+		name = "[prefixes] [declent_ru(GENITIVE)]"
 
 	SEND_SIGNAL(src, COMSIG_ATOM_FINALIZE_MATERIAL_EFFECTS, materials, main_material)
 
@@ -197,7 +197,7 @@
 /atom/proc/get_material_prefixes(list/materials)
 	var/list/mat_names = list()
 	for(var/datum/material/material as anything in materials)
-		mat_names |= material.name
+		mat_names |= material.declent_ru(GENITIVE)
 	return mat_names.Join("-")
 
 ///Returns a string like "plasma, paper and glass" from a list of materials

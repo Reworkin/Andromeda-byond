@@ -1,23 +1,24 @@
-/* Glass stack types
+/**
+ * Glass stack types
  * Contains:
  * Glass sheets
  * Reinforced glass sheets
- * Glass shards - TODO: Move this into code/game/object/item/weapons
+ * Glass shards
  */
 
-/*
- * Glass sheets
+/**
+ * MARK: Стекло
  */
 GLOBAL_LIST_INIT(glass_recipes, list ( \
-	new/datum/stack_recipe("directional window", /obj/structure/window/unanchored, time = 0.5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_CHECK_DIRECTION, category = CAT_WINDOWS), \
-	new/datum/stack_recipe("fulltile window", /obj/structure/window/fulltile/unanchored, 2, time =  1 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_IS_FULLTILE, category = CAT_WINDOWS), \
-	new/datum/stack_recipe("glass shard", /obj/item/shard, time = 0, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND, category = CAT_MISC), \
-	new/datum/stack_recipe("glass tile", /obj/item/stack/tile/glass, 1, 4, 20, category = CAT_TILES) \
+	new/datum/stack_recipe("направленное окно", /obj/structure/window/unanchored, time = 0.5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_CHECK_DIRECTION, category = CAT_WINDOWS), \
+	new/datum/stack_recipe("окно", /obj/structure/window/fulltile/unanchored, 2, time =  1 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_IS_FULLTILE, category = CAT_WINDOWS), \
+	new/datum/stack_recipe("осколок стекла", /obj/item/shard, time = 0, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND, category = CAT_MISC), \
+	new/datum/stack_recipe("стеклянная плитка", /obj/item/stack/tile/glass, 1, 4, 20, category = CAT_TILES) \
 ))
 
 /obj/item/stack/sheet/glass
 	name = "glass"
-	desc = "HOLY SHEET! That is a lot of glass."
+	desc = "О боже, это прозрачный ЛИСТ! А.. это же обычное стекло."
 	singular_name = "glass sheet"
 	icon_state = "sheet-glass"
 	inhand_icon_state = "sheet-glass"
@@ -35,12 +36,22 @@ GLOBAL_LIST_INIT(glass_recipes, list ( \
 	pickup_sound = 'sound/items/handling/materials/glass_pick_up.ogg'
 	drop_sound = 'sound/items/handling/materials/glass_drop.ogg'
 
+/obj/item/stack/sheet/glass/get_ru_names()
+	return list(
+		NOMINATIVE = "стекло",
+		GENITIVE = "стекла",
+		DATIVE = "стеклу",
+		ACCUSATIVE = "стекло",
+		INSTRUMENTAL = "стеклом",
+		PREPOSITIONAL = "стекле"
+	)
+
 /datum/armor/sheet_glass
 	fire = 50
 	acid = 100
 
 /obj/item/stack/sheet/glass/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins to slice [user.p_their()] neck with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] начинает резать своё [pick("запястья", "горло")] [declent_ru(INSTRUMENTAL)]! Похоже, [GEND_HE_SHE(user)] пытается покончить с собой!"))
 	return BRUTELOSS
 
 /obj/item/stack/sheet/glass/fifty
@@ -58,11 +69,11 @@ GLOBAL_LIST_INIT(glass_recipes, list ( \
 	if(istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/CC = W
 		if (get_amount() < 1 || CC.get_amount() < 5)
-			to_chat(user, span_warning("You need five lengths of coil and one sheet of glass to make wired glass!"))
+			to_chat(user, span_warning("Вам нужно пять мотков провода и один лист стекла для создания армированного стекла!"))
 			return
 		CC.use(5)
 		use(1)
-		to_chat(user, span_notice("You attach wire to \the [src]."))
+		to_chat(user, span_notice("Вы прикрепляете провода к [declent_ru(DATIVE)]."))
 		var/obj/item/stack/light_w/new_tile = new(user.loc)
 		if (!QDELETED(new_tile))
 			new_tile.add_fingerprint(user)
@@ -79,20 +90,23 @@ GLOBAL_LIST_INIT(glass_recipes, list ( \
 			if(QDELETED(src) && replace && !QDELETED(RG))
 				user.put_in_hands(RG)
 		else
-			to_chat(user, span_warning("You need one rod and one sheet of glass to make reinforced glass!"))
+			to_chat(user, span_warning("Вам нужен одина арматура и один лист стекла для создания армированного стекла!"))
 		return
 	return ..()
 
+/**
+ * MARK: Плазменное
+ */
 GLOBAL_LIST_INIT(pglass_recipes, list ( \
-	new/datum/stack_recipe("directional window", /obj/structure/window/plasma/unanchored, time = 0.5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_CHECK_DIRECTION, category = CAT_WINDOWS), \
-	new/datum/stack_recipe("fulltile window", /obj/structure/window/plasma/fulltile/unanchored, 2, time = 2 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_IS_FULLTILE, category = CAT_WINDOWS), \
-	new/datum/stack_recipe("plasma glass shard", /obj/item/shard/plasma, time = 20, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND, category = CAT_MISC), \
-	new/datum/stack_recipe("plasma glass tile", /obj/item/stack/tile/glass/plasma, 1, 4, 20, category = CAT_TILES) \
+	new/datum/stack_recipe("направленное плазменное окно", /obj/structure/window/plasma/unanchored, time = 0.5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_CHECK_DIRECTION, category = CAT_WINDOWS), \
+	new/datum/stack_recipe("плазменное окно", /obj/structure/window/plasma/fulltile/unanchored, 2, time = 2 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_IS_FULLTILE, category = CAT_WINDOWS), \
+	new/datum/stack_recipe("плазменный осколок стекла", /obj/item/shard/plasma, time = 20, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND, category = CAT_MISC), \
+	new/datum/stack_recipe("плазменная стеклянная плитка", /obj/item/stack/tile/glass/plasma, 1, 4, 20, category = CAT_TILES) \
 ))
 
 /obj/item/stack/sheet/plasmaglass
 	name = "plasma glass"
-	desc = "A glass sheet made out of a plasma-silicate alloy. It looks extremely tough and heavily fire resistant."
+	desc = "Стеклянный лист, изготовленный из плазменно-силикатного сплава. Он выглядит чрезвычайно прочным и огнеупорным."
 	singular_name = "plasma glass sheet"
 	icon_state = "sheet-pglass"
 	inhand_icon_state = "sheet-pglass"
@@ -106,6 +120,16 @@ GLOBAL_LIST_INIT(pglass_recipes, list ( \
 	table_type = /obj/structure/table/glass/plasmaglass
 	pickup_sound = 'sound/items/handling/materials/glass_pick_up.ogg'
 	drop_sound = 'sound/items/handling/materials/glass_drop.ogg'
+
+/obj/item/stack/sheet/plasmaglass/get_ru_names()
+	return list(
+		NOMINATIVE = "плазменное стекло",
+		GENITIVE = "плазменного стекла",
+		DATIVE = "плазменному стеклу",
+		ACCUSATIVE = "плазменное стекло",
+		INSTRUMENTAL = "плазменным стеклом",
+		PREPOSITIONAL = "плазменном стекле"
+	)
 
 /obj/item/stack/sheet/plasmaglass/fifty
 	amount = 50
@@ -133,27 +157,26 @@ GLOBAL_LIST_INIT(pglass_recipes, list ( \
 			if(QDELETED(src) && replace)
 				user.put_in_hands(RG)
 		else
-			to_chat(user, span_warning("You need one rod and one sheet of plasma glass to make reinforced plasma glass!"))
+			to_chat(user, span_warning("Для изготовления укреплённого плазменного стекла вам понадобится одина арматура и один лист плазменного стекла!"))
 			return
 	else
 		return ..()
 
-/*
- * Reinforced glass sheets
+/**
+ * MARK: Армированное
  */
 GLOBAL_LIST_INIT(reinforced_glass_recipes, list ( \
-	new/datum/stack_recipe("windoor frame", /obj/structure/windoor_assembly, 5, time = 0, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_CHECK_DIRECTION, category = CAT_WINDOWS), \
+	new/datum/stack_recipe("каркас стеклянной двери", /obj/structure/windoor_assembly, 5, time = 0, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_CHECK_DIRECTION, category = CAT_WINDOWS), \
 	null, \
-	new/datum/stack_recipe("directional reinforced window", /obj/structure/window/reinforced/unanchored, time = 0.5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_CHECK_DIRECTION, category = CAT_WINDOWS), \
-	new/datum/stack_recipe("fulltile reinforced window", /obj/structure/window/reinforced/fulltile/unanchored, 2, time = 2 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_IS_FULLTILE, category = CAT_WINDOWS), \
-	new/datum/stack_recipe("glass shard", /obj/item/shard, time = 10, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_SKIP_MATERIALS_PARITY, category = CAT_MISC), \
-	new/datum/stack_recipe("reinforced glass tile", /obj/item/stack/tile/rglass, 1, 4, 20, category = CAT_TILES) \
+	new/datum/stack_recipe("направленное армированное окно", /obj/structure/window/reinforced/unanchored, time = 0.5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_CHECK_DIRECTION, category = CAT_WINDOWS), \
+	new/datum/stack_recipe("армированное окно", /obj/structure/window/reinforced/fulltile/unanchored, 2, time = 2 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_IS_FULLTILE, category = CAT_WINDOWS), \
+	new/datum/stack_recipe("армированный осколок стекла", /obj/item/shard, time = 10, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_SKIP_MATERIALS_PARITY, category = CAT_MISC), \
+	new/datum/stack_recipe("армированная стеклянная плитка", /obj/item/stack/tile/rglass, 1, 4, 20, category = CAT_TILES) \
 ))
-
 
 /obj/item/stack/sheet/rglass
 	name = "reinforced glass"
-	desc = "Glass which seems to have rods or something stuck in them."
+	desc = "Стекло, в котором, кажется, застряли тонкие арматурины, а может они там специально. Главное, что надёжно."
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
 	inhand_icon_state = "sheet-rglass"
@@ -166,6 +189,16 @@ GLOBAL_LIST_INIT(reinforced_glass_recipes, list ( \
 	table_type = /obj/structure/table/reinforced/rglass
 	pickup_sound = 'sound/items/handling/materials/glass_pick_up.ogg'
 	drop_sound = 'sound/items/handling/materials/glass_drop.ogg'
+
+/obj/item/stack/sheet/rglass/get_ru_names()
+	return list(
+		NOMINATIVE = "армированное стекло",
+		GENITIVE = "армированного стекла",
+		DATIVE = "армированному стеклу",
+		ACCUSATIVE = "армированное стекло",
+		INSTRUMENTAL = "армированным стеклом",
+		PREPOSITIONAL = "армированном стекле"
+	)
 
 /obj/item/stack/sheet/rglass/fifty
 	amount = 50
@@ -182,16 +215,19 @@ GLOBAL_LIST_INIT(reinforced_glass_recipes, list ( \
 	. = ..()
 	. += GLOB.reinforced_glass_recipes
 
+/**
+ * MARK: Плаз. армированное
+ */
 GLOBAL_LIST_INIT(prglass_recipes, list ( \
-	new/datum/stack_recipe("directional reinforced window", /obj/structure/window/reinforced/plasma/unanchored, time = 0.5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_CHECK_DIRECTION, category = CAT_WINDOWS), \
-	new/datum/stack_recipe("fulltile reinforced window", /obj/structure/window/reinforced/plasma/fulltile/unanchored, 2, time = 2 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_IS_FULLTILE, category = CAT_WINDOWS), \
-	new/datum/stack_recipe("plasma glass shard", /obj/item/shard/plasma, time = 40, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_SKIP_MATERIALS_PARITY, category = CAT_MISC), \
-	new/datum/stack_recipe("reinforced plasma glass tile", /obj/item/stack/tile/rglass/plasma, 1, 4, 20, category = CAT_TILES) \
+	new/datum/stack_recipe("направленное плазменное армированное окно", /obj/structure/window/reinforced/plasma/unanchored, time = 0.5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_CHECK_DIRECTION, category = CAT_WINDOWS), \
+	new/datum/stack_recipe("плазменное армированное окно", /obj/structure/window/reinforced/plasma/fulltile/unanchored, 2, time = 2 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_IS_FULLTILE, category = CAT_WINDOWS), \
+	new/datum/stack_recipe("плазменный армированный осколок стекла", /obj/item/shard/plasma, time = 40, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_SKIP_MATERIALS_PARITY, category = CAT_MISC), \
+	new/datum/stack_recipe("плазменная армированная стеклянная плитка", /obj/item/stack/tile/rglass/plasma, 1, 4, 20, category = CAT_TILES) \
 ))
 
 /obj/item/stack/sheet/plasmarglass
 	name = "reinforced plasma glass"
-	desc = "A glass sheet made out of a plasma-silicate alloy and a rod matrix. It looks hopelessly tough and nearly fire-proof!"
+	desc = "Стеклянный лист, изготовленный из плазменно-силикатного сплава и тонких арматур. Он выглядит безнадежно прочным и практически огнеупорным!"
 	singular_name = "reinforced plasma glass sheet"
 	icon_state = "sheet-prglass"
 	inhand_icon_state = "sheet-prglass"
@@ -207,6 +243,16 @@ GLOBAL_LIST_INIT(prglass_recipes, list ( \
 	pickup_sound = 'sound/items/handling/materials/glass_pick_up.ogg'
 	drop_sound = 'sound/items/handling/materials/glass_drop.ogg'
 
+/obj/item/stack/sheet/plasmarglass/get_ru_names()
+	return list(
+		NOMINATIVE = "плазменное армированное стекло",
+		GENITIVE = "плазменного армированного стекла",
+		DATIVE = "плазменному армированному стеклу",
+		ACCUSATIVE = "плазменное армированное стекло",
+		INSTRUMENTAL = "плазменным армированным стеклом",
+		PREPOSITIONAL = "плазменном армированном стекле"
+	)
+
 /datum/armor/sheet_plasmarglass
 	melee = 20
 	fire = 80
@@ -219,14 +265,17 @@ GLOBAL_LIST_INIT(prglass_recipes, list ( \
 	. = ..()
 	. += GLOB.prglass_recipes
 
+/**
+ * MARK: Титановое
+ */
 GLOBAL_LIST_INIT(titaniumglass_recipes, list(
-	new/datum/stack_recipe("shuttle window", /obj/structure/window/reinforced/shuttle/unanchored, 2, time = 0.5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_CHECK_DIRECTION | CRAFT_IS_FULLTILE, category = CAT_WINDOWS), \
-	new/datum/stack_recipe("titanium glass shard", /obj/item/shard/titanium, time = 40, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND, category = CAT_MISC) \
+	new/datum/stack_recipe("окно шаттла", /obj/structure/window/reinforced/shuttle/unanchored, 2, time = 0.5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_CHECK_DIRECTION | CRAFT_IS_FULLTILE, category = CAT_WINDOWS), \
+	new/datum/stack_recipe("титановый осколок стекла", /obj/item/shard/titanium, time = 40, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND, category = CAT_MISC) \
 	))
 
 /obj/item/stack/sheet/titaniumglass
 	name = "titanium glass"
-	desc = "A glass sheet made out of a titanium-silicate alloy."
+	desc = "Стеклянный лист, изготовленный из титан-силикатного сплава."
 	singular_name = "titanium glass sheet"
 	icon_state = "sheet-titaniumglass"
 	inhand_icon_state = "sheet-titaniumglass"
@@ -239,6 +288,16 @@ GLOBAL_LIST_INIT(titaniumglass_recipes, list(
 	pickup_sound = 'sound/items/handling/materials/glass_pick_up.ogg'
 	drop_sound = 'sound/items/handling/materials/glass_drop.ogg'
 
+/obj/item/stack/sheet/titaniumglass/get_ru_names()
+	return list(
+		NOMINATIVE = "титановое стекло",
+		GENITIVE = "титанового стекла",
+		DATIVE = "титановому стеклу",
+		ACCUSATIVE = "титановое стекло",
+		INSTRUMENTAL = "титановым стеклом",
+		PREPOSITIONAL = "титановом стекле"
+	)
+
 /obj/item/stack/sheet/titaniumglass/fifty
 	amount = 50
 
@@ -250,14 +309,17 @@ GLOBAL_LIST_INIT(titaniumglass_recipes, list(
 	. = ..()
 	. += GLOB.titaniumglass_recipes
 
+/**
+ * MARK: Пластитановое
+ */
 GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
-	new/datum/stack_recipe("plastitanium window", /obj/structure/window/reinforced/plasma/plastitanium/unanchored, 2, time = 2 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_IS_FULLTILE, category = CAT_WINDOWS), \
-	new/datum/stack_recipe("plastitanium glass shard", /obj/item/shard/plastitanium, time = 60, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND, category = CAT_MISC) \
+	new/datum/stack_recipe("пластитановое окно", /obj/structure/window/reinforced/plasma/plastitanium/unanchored, 2, time = 2 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND | CRAFT_IS_FULLTILE, category = CAT_WINDOWS), \
+	new/datum/stack_recipe("пластитановый осколок стекла", /obj/item/shard/plastitanium, time = 60, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND, category = CAT_MISC) \
 	))
 
 /obj/item/stack/sheet/plastitaniumglass
 	name = "plastitanium glass"
-	desc = "A glass sheet made out of a plasma-titanium-silicate alloy."
+	desc = "Стеклянный лист, изготовленный из плазменно-титаново-силикатного сплава."
 	singular_name = "plastitanium glass sheet"
 	icon_state = "sheet-plastitaniumglass"
 	inhand_icon_state = "sheet-plastitaniumglass"
@@ -271,6 +333,16 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 	pickup_sound = 'sound/items/handling/materials/glass_pick_up.ogg'
 	drop_sound = 'sound/items/handling/materials/glass_drop.ogg'
 
+/obj/item/stack/sheet/plastitaniumglass/get_ru_names()
+	return list(
+		NOMINATIVE = "пластитановое стекло",
+		GENITIVE = "пластитанового стекла",
+		DATIVE = "пластитановому стеклу",
+		ACCUSATIVE = "пластитановое стекло",
+		INSTRUMENTAL = "пластитановым стеклом",
+		PREPOSITIONAL = "пластитановом стекле"
+	)
+
 /obj/item/stack/sheet/plastitaniumglass/fifty
 	amount = 50
 
@@ -282,9 +354,13 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 	. = ..()
 	. += GLOB.plastitaniumglass_recipes
 
+/**
+ * MARK: Осколки (база)
+ * - TODO: Rewokin: Перенести это в code/game/object/item/weapons, это же оружие.
+ */
 /obj/item/shard
 	name = "shard"
-	desc = "A nasty looking shard of glass."
+	desc = "Отвратительного вида осколок стекла."
 	icon = 'icons/obj/debris.dmi'
 	icon_state = "large"
 	icon_angle = -45
@@ -308,6 +384,16 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 	var/obj/item/stack/sheet/weld_material = /obj/item/stack/sheet/glass
 	embed_type = /datum/embedding/shard
 
+/obj/item/shard/get_ru_names()
+	return list(
+		NOMINATIVE = "осколок стекла",
+		GENITIVE = "осколка стекла",
+		DATIVE = "осколку стекла",
+		ACCUSATIVE = "осколок стекла",
+		INSTRUMENTAL = "осколком стекла",
+		PREPOSITIONAL = "осколке стекла"
+	)
+
 /datum/embedding/shard
 	embed_chance = 65
 
@@ -318,7 +404,7 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 	acid = 100
 
 /obj/item/shard/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is slitting [user.p_their()] [pick("wrists", "throat")] with the shard of glass! It looks like [user.p_theyre()] trying to commit suicide."))
+	user.visible_message(span_suicide("[user] начинает резать своё [pick("запястья", "горло")] [declent_ru(INSTRUMENTAL)]! Похоже, [GEND_HE_SHE(user)] пытается покончить с собой."))
 	return BRUTELOSS
 
 /obj/item/shard/Initialize(mapload)
@@ -365,7 +451,7 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 	if(jab.get_all_covered_flags() & HANDS)
 		return
 
-	to_chat(user, span_warning("[src] cuts into your hand!"))
+	to_chat(user, span_warning("[declent_ru(NOMINATIVE)] врезается вам в руку!"))
 	jab.apply_damage(force * 0.5, BRUTE, user.get_active_hand(), attacking_item = src)
 
 /obj/item/shard/attackby(obj/item/item, mob/user, list/modifiers, list/attack_modifiers)
@@ -374,12 +460,12 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 		lightreplacer.attackby(src, user)
 	else if(istype(item, /obj/item/stack/sheet/cloth))
 		var/obj/item/stack/sheet/cloth/cloth = item
-		to_chat(user, span_notice("You begin to wrap the [cloth] around the [src]..."))
+		to_chat(user, span_notice("Вы начинаете обматывать [cloth.declent_ru(NOMINATIVE)] вокруг [declent_ru(GENITIVE)]..."))
 		if(do_after(user, craft_time, target = src))
 			var/obj/item/knife/shiv/shiv = new shiv_type
 			shiv.set_custom_materials(custom_materials)
 			cloth.use(1)
-			to_chat(user, span_notice("You wrap the [cloth] around the [src], forming a makeshift weapon."))
+			to_chat(user, span_notice("Вы оборачиваете [cloth.declent_ru(NOMINATIVE)] вокруг [declent_ru(GENITIVE)], создав импровизированное оружие."))
 			remove_item_from_storage(src, user)
 			qdel(src)
 			user.put_in_hands(shiv)
@@ -390,7 +476,7 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 /obj/item/shard/welder_act(mob/living/user, obj/item/I)
 	if(I.use_tool(src, user, 0, volume=50))
 		var/obj/item/stack/sheet/new_glass = new weld_material
-		to_chat(user, span_notice("You melt [src] down into [new_glass.name]."))
+		to_chat(user, span_notice("Вы переплавляете [declent_ru(NOMINATIVE)] в [new_glass.declent_ru(GENITIVE)]."))
 		new_glass.forceMove((Adjacent(user) ? user.drop_location() : loc)) //stack merging is handled automatically.
 		qdel(src)
 		return ITEM_INTERACT_SUCCESS
@@ -402,9 +488,12 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 		if(!(L.movement_type & MOVETYPES_NOT_TOUCHING_GROUND) || L.buckled)
 			playsound(src, 'sound/effects/footstep/glass_step.ogg', HAS_TRAIT(L, TRAIT_LIGHT_STEP) ? 30 : 50, TRUE)
 
+/**
+ * MARK: Осколки (виды)
+ */
 /obj/item/shard/plasma
 	name = "purple shard"
-	desc = "A nasty looking shard of plasma glass."
+	desc = "Отвратительного вида осколок из плазменного стекла."
 	force = 6
 	throwforce = 11
 	icon_state = "plasmalarge"
@@ -415,9 +504,19 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 	shiv_type = /obj/item/knife/shiv/plasma
 	craft_time = 7 SECONDS
 
+/obj/item/shard/plasma/get_ru_names()
+	return list(
+		NOMINATIVE = "плазменный осколок",
+		GENITIVE = "плазменного осколка",
+		DATIVE = "плазменному осколку",
+		ACCUSATIVE = "плазменный осколок",
+		INSTRUMENTAL = "плазменным осколком",
+		PREPOSITIONAL = "плазменном осколке"
+	)
+
 /obj/item/shard/titanium
 	name = "bright shard"
-	desc = "A nasty looking shard of titanium infused glass."
+	desc = "Отвратительного вида осколок стекла из титана ."
 	throwforce = 12
 	icon_state = "titaniumlarge"
 	inhand_icon_state = "shard-titanium"
@@ -427,9 +526,19 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 	shiv_type = /obj/item/knife/shiv/titanium
 	craft_time = 7 SECONDS
 
+/obj/item/shard/titanium/get_ru_names()
+	return list(
+		NOMINATIVE = "титановый осколок",
+		GENITIVE = "титанового осколка",
+		DATIVE = "титановому осколку",
+		ACCUSATIVE = "титановый осколок",
+		INSTRUMENTAL = "титановым осколком",
+		PREPOSITIONAL = "титановом осколоке"
+	)
+
 /obj/item/shard/plastitanium
 	name = "dark shard"
-	desc = "A nasty looking shard of titanium infused plasma glass."
+	desc = "Отвратительного вида осколок из пластитанового стекла."
 	force = 7
 	throwforce = 12
 	icon_state = "plastitaniumlarge"
@@ -439,3 +548,13 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 	weld_material = /obj/item/stack/sheet/plastitaniumglass
 	shiv_type = /obj/item/knife/shiv/plastitanium
 	craft_time = 14 SECONDS
+
+/obj/item/shard/plastitanium/get_ru_names()
+	return list(
+		NOMINATIVE = "пластитановый осколок",
+		GENITIVE = "пластитанового осколка",
+		DATIVE = "пластитановому осколку",
+		ACCUSATIVE = "пластитановый осколок",
+		INSTRUMENTAL = "пластитановым осколком",
+		PREPOSITIONAL = "пластитановом осколоке"
+	)

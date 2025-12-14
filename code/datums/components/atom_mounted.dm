@@ -8,7 +8,7 @@
 	if(!isobj(parent))
 		return COMPONENT_INCOMPATIBLE
 	hanging_support_atom = target_structure
-	RegisterSignal(hanging_support_atom, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+//	RegisterSignal(hanging_support_atom, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	if(isclosedturf(hanging_support_atom))
 		RegisterSignal(hanging_support_atom, COMSIG_TURF_CHANGE, PROC_REF(on_turf_changing))
 	else
@@ -33,12 +33,18 @@
 
 /**
  * When the wall is examined, explains that it's supporting the linked object.
+ * TODO: Rewokin: это функция, что отписывала закреплённые предметы на стене, но система перевода на хую вертела эту функцию.
+ * Нужно сделать, чтоб работало или удалить. Так же строчка, что в верхнем блоке кода.
+ * RegisterSignal(hanging_support_atom, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
  */
+
+/**
 /datum/component/atom_mounted/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
 	if (parent in view(user.client?.view || world.view, user))
 		examine_list += span_notice("\The [hanging_support_atom] is currently supporting [span_bold("[parent]")]. Deconstruction or excessive damage would cause it to [span_bold("fall to the ground")].")
+ */
 
 /// When the type of turf changes, if it is changing into a floor we should drop our contents
 /datum/component/atom_mounted/proc/on_turf_changing(datum/source, path, new_baseturfs, flags, post_change_callbacks)
@@ -69,7 +75,7 @@
 	PRIVATE_PROC(TRUE)
 
 	var/obj/hanging_parent = parent
-	hanging_parent.visible_message(message = span_warning("\The [hanging_parent] falls apart!"), vision_distance = 5)
+	hanging_parent.visible_message(message = span_warning("[capitalize(hanging_parent.declent_ru(NOMINATIVE))] разваливается!"), vision_distance = 5)
 	hanging_parent.deconstruct(FALSE)
 
 

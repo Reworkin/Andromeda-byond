@@ -128,11 +128,21 @@ GLOBAL_LIST_EMPTY(heretic_arenas)
 
 /turf/closed/indestructible/heretic_wall
 	name = "eldritch wall"
-	desc = "A wall penning in the sheep amongst the wolves. It glows with malevolent energy - prodding it is likely unwise."
+	desc = "Стена, что светится зловещей энергией — прикасаться к ней, вероятно, неразумно."
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "eldritch_forcewall"
 	opacity = FALSE
 	pass_flags_self = NONE // No PASSCLOSEDTURF because only arena victors are allowed to go in or out
+
+/turf/closed/indestructible/heretic_wall/get_ru_names()
+	return list(
+		NOMINATIVE = "потусторонняя стена",
+		GENITIVE = "потусторонней стены",
+		DATIVE = "потусторонней стене",
+		ACCUSATIVE = "потустороннюю стену",
+		INSTRUMENTAL = "потусторонней стеной",
+		PREPOSITIONAL = "потусторонней стене"
+	)
 
 /turf/closed/indestructible/heretic_wall/CanAllowThrough(atom/movable/mover, border_dir)
 	if(isliving(mover))
@@ -149,7 +159,7 @@ GLOBAL_LIST_EMPTY(heretic_arenas)
 	var/mob/living/living_mob = bumped_atom
 	var/atom/target = get_edge_target_turf(living_mob, get_dir(src, get_step_away(living_mob, src)))
 	living_mob.throw_at(target, 4, 5)
-	to_chat(living_mob, span_userdanger("The wall repels you with tremendous force!"))
+	to_chat(living_mob, span_userdanger("Стена отталкивает вас с огромной силой!"))
 
 /// Called when you crit somebody to update your crown
 /datum/status_effect/arena_tracker/proc/on_crit_somebody()

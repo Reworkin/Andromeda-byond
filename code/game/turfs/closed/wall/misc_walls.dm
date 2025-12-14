@@ -1,6 +1,6 @@
 /turf/closed/wall/mineral/cult
 	name = "runed metal wall"
-	desc = "A cold metal wall engraved with indecipherable symbols. Studying them causes your head to pound."
+	desc = "Холодная металлическая стена, покрытая нечитаемыми символами. При их изучении начинает пульсировать голова."
 	icon = 'icons/turf/walls/cult_wall.dmi'
 	icon_state = "cult_wall-0"
 	base_icon_state = "cult_wall"
@@ -11,6 +11,16 @@
 	sheet_amount = 1
 	girder_type = /obj/structure/girder/cult
 
+/turf/closed/wall/mineral/cult/get_ru_names()
+	return list(
+		NOMINATIVE = "руническая стена",
+		GENITIVE = "рунической стены",
+		DATIVE = "рунической стене",
+		ACCUSATIVE = "руническую стену",
+		INSTRUMENTAL = "рунической стеной",
+		PREPOSITIONAL = "рунической стене"
+	)
+
 /turf/closed/wall/mineral/cult/Initialize(mapload)
 	new /obj/effect/temp_visual/cult/turf(src)
 	. = ..()
@@ -20,7 +30,17 @@
 
 /turf/closed/wall/mineral/cult/artificer
 	name = "runed stone wall"
-	desc = "A cold stone wall engraved with indecipherable symbols. Studying them causes your head to pound."
+	desc = "Холодная каменная стена, покрытая нечитаемыми символами. При их изучении начинает пульсировать голова."
+
+/turf/closed/wall/mineral/cult/artificer/get_ru_names()
+	return list(
+		NOMINATIVE = "каменная руническая стена",
+		GENITIVE = "каменной рунической стены",
+		DATIVE = "каменной рунической стене",
+		ACCUSATIVE = "каменную руническую стену",
+		INSTRUMENTAL = "каменной рунической стеной",
+		PREPOSITIONAL = "каменной рунической стене"
+	)
 
 /turf/closed/wall/mineral/cult/artificer/break_wall()
 	new /obj/effect/temp_visual/cult/turf(get_turf(src))
@@ -33,13 +53,13 @@
 	icon = 'icons/turf/walls/icedmetal_wall.dmi'
 	icon_state = "icedmetal_wall-0"
 	base_icon_state = "icedmetal_wall"
-	desc = "A wall covered in a thick sheet of ice."
+	desc = "Стена, покрытая толстым слоем льда."
 	turf_flags = IS_SOLID
 	smoothing_flags = SMOOTH_BITMASK
 	canSmoothWith = null
 	rcd_memory = null
 	hardness = 35
-	slicing_duration = 150 //welding through the ice+metal
+	slicing_duration = 150 //резка через лёд+металл
 	bullet_sizzle = TRUE
 
 /turf/closed/wall/rust
@@ -75,7 +95,7 @@
 
 /turf/closed/wall/mineral/bronze
 	name = "clockwork wall"
-	desc = "A huge chunk of bronze, decorated like gears and cogs."
+	desc = "Огромный кусок бронзы, украшенный как шестерни и механизмы."
 	icon = 'icons/turf/walls/clockwork_wall.dmi'
 	icon_state = "clockwork_wall-0"
 	base_icon_state = "clockwork_wall"
@@ -85,9 +105,19 @@
 	sheet_amount = 2
 	girder_type = /obj/structure/girder/bronze
 
+/turf/closed/wall/mineral/bronze/get_ru_names()
+	return list(
+		NOMINATIVE = "часовая стена",
+		GENITIVE = "часовой стены",
+		DATIVE = "часовой стене",
+		ACCUSATIVE = "часовую стену",
+		INSTRUMENTAL = "часовой стеной",
+		PREPOSITIONAL = "часовой стене"
+	)
+
 /turf/closed/wall/rock
 	name = "reinforced rock"
-	desc = "It has metal struts that need to be welded away before it can be mined."
+	desc = "Имеет металлические распорки, которые нужно вырезать сваркой, прежде чем можно будет добывать."
 	icon = 'icons/turf/walls/reinforced_rock.dmi'
 	icon_state = "porous_rock-0"
 	base_icon_state = "porous_rock"
@@ -97,10 +127,30 @@
 	girder_type = null
 	decon_type = /turf/closed/mineral/asteroid
 
+/turf/closed/wall/rock/get_ru_names()
+	return list(
+		NOMINATIVE = "укреплённая порода",
+		GENITIVE = "укреплённой породы",
+		DATIVE = "укреплённой породе",
+		ACCUSATIVE = "укреплённую породу",
+		INSTRUMENTAL = "укреплённой породой",
+		PREPOSITIONAL = "укреплённой породе"
+	)
+
 /turf/closed/wall/rock/porous
 	name = "reinforced porous rock"
-	desc = "This rock is filled with pockets of breathable air. It has metal struts to protect it from mining."
+	desc = "Эта порода содержит карманы с пригодным для дыхания воздухом. Она имеет металлические распорки для защиты от добычи."
 	decon_type = /turf/closed/mineral/asteroid/porous
+
+/turf/closed/wall/rock/porous/get_ru_names()
+	return list(
+		NOMINATIVE = "укреплённая пористая порода",
+		GENITIVE = "укреплённой пористой породы",
+		DATIVE = "укреплённой пористой породе",
+		ACCUSATIVE = "укреплённую пористую породу",
+		INSTRUMENTAL = "укреплённой пористой породой",
+		PREPOSITIONAL = "укреплённой пористой породе"
+	)
 
 /turf/closed/wall/space
 	name = "illusionist wall"
@@ -112,11 +162,31 @@
 	canSmoothWith = null
 	smoothing_groups = null
 
+/turf/closed/wall/space/get_ru_names()
+	return list(
+		NOMINATIVE = "иллюзионистская стена",
+		GENITIVE = "иллюзионистской стены",
+		DATIVE = "иллюзионистской стене",
+		ACCUSATIVE = "иллюзионистскую стену",
+		INSTRUMENTAL = "иллюзионистской стеной",
+		PREPOSITIONAL = "иллюзионистской стене"
+	)
+
 /turf/closed/wall/material/meat
 	name = "living wall"
 	baseturfs = /turf/open/floor/material/meat
 	girder_type = null
 	material_flags = MATERIAL_EFFECTS | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
+
+/turf/closed/wall/material/meat/get_ru_names()
+	return list(
+		NOMINATIVE = "живая стена",
+		GENITIVE = "живой стены",
+		DATIVE = "живой стене",
+		ACCUSATIVE = "живую стену",
+		INSTRUMENTAL = "живой стеной",
+		PREPOSITIONAL = "живой стене"
+	)
 
 /turf/closed/wall/material/meat/Initialize(mapload)
 	. = ..()
@@ -127,7 +197,7 @@
 
 /turf/closed/wall/tomb
 	name = "tomb wall"
-	desc = "The carved surface of a dusty tomb. It's not clear who built this."
+	desc = "Резная поверхность пыльной гробницы. Неясно, кто её построил."
 	icon = 'icons/turf/walls/boss_wall.dmi'
 	icon_state = "boss_wall-0"
 	base_icon_state = "boss_wall"
@@ -137,3 +207,13 @@
 	turf_flags = NO_RUST
 	explosive_resistance = 50
 	baseturfs = /turf/open/misc/asteroid/basalt/airless
+
+/turf/closed/wall/tomb/get_ru_names()
+	return list(
+		NOMINATIVE = "стена гробницы",
+		GENITIVE = "стены гробницы",
+		DATIVE = "стене гробницы",
+		ACCUSATIVE = "стену гробницы",
+		INSTRUMENTAL = "стеной гробницы",
+		PREPOSITIONAL = "стене гробницы"
+	)

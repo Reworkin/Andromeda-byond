@@ -45,6 +45,15 @@
 	/// How long it takes to mine this turf without tools, if it's weak.
 	var/hand_mine_speed = 15 SECONDS
 
+/turf/closed/mineral/get_ru_names()
+	return list(
+		NOMINATIVE = "камень",
+		GENITIVE = "камня",
+		DATIVE = "камню",
+		ACCUSATIVE = "камень",
+		INSTRUMENTAL = "камнем",
+		PREPOSITIONAL = "камне"
+	)
 
 /turf/closed/mineral/Initialize(mapload)
 	. = ..()
@@ -164,7 +173,7 @@
 
 /turf/closed/mineral/attackby(obj/item/I, mob/user, list/modifiers, list/attack_modifiers, exp_multiplier = 1)
 	if (!ISADVANCEDTOOLUSER(user))
-		to_chat(usr, span_warning("You don't have the dexterity to do this!"))
+		to_chat(usr, span_warning("Вам не хватает ловкости для этого!"))
 		return
 
 	if(I.tool_behaviour != TOOL_MINING)
@@ -198,7 +207,7 @@
 	var/mining_speed = mining_arms ? tool_mine_speed : hand_mine_speed
 	TIMER_COOLDOWN_START(src, REF(user), mining_speed)
 	var/skill_modifier = user.mind?.get_skill_modifier(/datum/skill/mining, SKILL_SPEED_MODIFIER) || 1
-	balloon_alert(user, "pulling out pieces...")
+	balloon_alert(user, "вытаскиваю куски...")
 	if(!do_after(user, mining_speed * skill_modifier, target = src))
 		TIMER_COOLDOWN_END(src, REF(user)) //if we fail we can start again immediately
 		return
@@ -238,7 +247,7 @@
 	mined.update_visuals()
 
 /turf/closed/mineral/attack_alien(mob/living/carbon/alien/user, list/modifiers)
-	balloon_alert(user, "digging...")
+	balloon_alert(user, "копаю...")
 	playsound(src, 'sound/effects/break_stone.ogg', 50, TRUE)
 	if(do_after(user, 4 SECONDS, target = src))
 		gets_drilled(user)
@@ -247,7 +256,7 @@
 	..()
 	if(do_after(H, 5 SECONDS, target = src))
 		playsound(src, 'sound/effects/meteorimpact.ogg', 100, TRUE)
-		H.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ), forced = "hulk")
+		H.say(pick(";РАААААААААААРГХ!", ";ХНННННННННГГГГГГХ!", ";ГВАААААААААРРРХХ!", ";ННННННННГГГГГГГГХХ!", ";АААААААААРРГХ!" ), forced = "hulk")
 		gets_drilled(H)
 	return TRUE
 
@@ -441,6 +450,16 @@
 	weak_turf = TRUE
 	proximity_based = TRUE
 
+/turf/closed/mineral/random/snow/get_ru_names()
+	return list(
+		NOMINATIVE = "плотный снег",
+		GENITIVE = "плотного снега",
+		DATIVE = "плотному снегу",
+		ACCUSATIVE = "плотный снег",
+		INSTRUMENTAL = "плотным снегом",
+		PREPOSITIONAL = "плотном снеге"
+	)
+
 /turf/closed/mineral/random/snow/Change_Ore(ore_type, random = 0)
 	. = ..()
 	if(mineralType)
@@ -535,6 +554,16 @@
 	baseturfs = /turf/open/misc/asteroid/snow/icemoon
 	initial_gas_mix = ICEMOON_DEFAULT_ATMOS
 	defer_change = TRUE
+
+/turf/closed/mineral/random/labormineral/ice/get_ru_names()
+	return list(
+		NOMINATIVE = "плотный снег",
+		GENITIVE = "плотного снега",
+		DATIVE = "плотному снегу",
+		ACCUSATIVE = "плотный снег",
+		INSTRUMENTAL = "плотным снегом",
+		PREPOSITIONAL = "плотном снеге"
+	)
 
 /turf/closed/mineral/random/labormineral/ice/mineral_chances()
 	return list(
@@ -706,6 +735,16 @@
 	defer_change = TRUE
 	rust_resistance = RUST_RESISTANCE_ORGANIC
 
+/turf/closed/mineral/ash_rock/get_ru_names()
+	return list(
+		NOMINATIVE = "камень",
+		GENITIVE = "камня",
+		DATIVE = "камню",
+		ACCUSATIVE = "камень",
+		INSTRUMENTAL = "камнем",
+		PREPOSITIONAL = "камне"
+	)
+
 /turf/closed/mineral/snowmountain
 	name = "snowy mountainside"
 	icon = MAP_SWITCH('icons/turf/walls/mountain_wall.dmi', 'icons/turf/mining.dmi')
@@ -717,6 +756,16 @@
 	initial_gas_mix = FROZEN_ATMOS
 	turf_type = /turf/open/misc/asteroid/snow
 	defer_change = TRUE
+
+/turf/closed/mineral/snowmountain/get_ru_names()
+	return list(
+		NOMINATIVE = "плотный снег",
+		GENITIVE = "плотного снега",
+		DATIVE = "плотному снегу",
+		ACCUSATIVE = "плотный снег",
+		INSTRUMENTAL = "плотным снегом",
+		PREPOSITIONAL = "плотном снеге"
+	)
 
 /turf/closed/mineral/snowmountain/icemoon
 	turf_type = /turf/open/misc/asteroid/snow/icemoon
@@ -738,6 +787,16 @@
 	baseturfs = /turf/open/misc/asteroid/snow/ice
 	turf_type = /turf/open/misc/asteroid/snow/ice
 
+/turf/closed/mineral/snowmountain/cavern/get_ru_names()
+	return list(
+		NOMINATIVE = "плотный лёд",
+		GENITIVE = "плотного льда",
+		DATIVE = "плотному льду",
+		ACCUSATIVE = "плотный лёд",
+		INSTRUMENTAL = "плотным льдом",
+		PREPOSITIONAL = "плотном льде"
+	)
+
 /turf/closed/mineral/snowmountain/cavern/icemoon
 	baseturfs = /turf/open/misc/asteroid/snow/ice/icemoon
 	turf_type = /turf/open/misc/asteroid/snow/ice/icemoon
@@ -757,20 +816,60 @@
 	icon = MAP_SWITCH('icons/turf/walls/red_wall.dmi', 'icons/turf/mining.dmi')
 	base_icon_state = "red_wall"
 
+/turf/closed/mineral/asteroid/get_ru_names()
+	return list(
+		NOMINATIVE = "железосодержащий камень",
+		GENITIVE = "железосодержащего камня",
+		DATIVE = "железосодержащему камню",
+		ACCUSATIVE = "железосодержащий камень",
+		INSTRUMENTAL = "железосодержащим камнем",
+		PREPOSITIONAL = "железосодержащем камне"
+	)
+
 /turf/closed/mineral/random/stationside/asteroid
 	name = "iron rock"
 	icon = MAP_SWITCH('icons/turf/walls/red_wall.dmi', 'icons/turf/mining.dmi')
 	base_icon_state = "red_wall"
 
+/turf/closed/mineral/random/stationside/asteroid/get_ru_names()
+	return list(
+		NOMINATIVE = "железосодержащий камень",
+		GENITIVE = "железосодержащего камня",
+		DATIVE = "железосодержащему камню",
+		ACCUSATIVE = "железосодержащий камень",
+		INSTRUMENTAL = "железосодержащим камнем",
+		PREPOSITIONAL = "железосодержащем камне"
+	)
+
 /turf/closed/mineral/random/stationside/asteroid/porus
 	name = "porous iron rock"
-	desc = "This rock is filled with pockets of breathable air."
+	desc = "Эта скала заполнена карманами с воздухом, пригодным для дыхания."
 	baseturfs = /turf/open/misc/asteroid
+
+/turf/closed/mineral/random/stationside/asteroid/porus/get_ru_names()
+	return list(
+		NOMINATIVE = "пористый железосодержащий камень",
+		GENITIVE = "пористого железосодержащего камня",
+		DATIVE = "пористому железосодержащему камню",
+		ACCUSATIVE = "пористый железосодержащий камень",
+		INSTRUMENTAL = "пористым железосодержащим камнем",
+		PREPOSITIONAL = "пористом железосодержащем камне"
+	)
 
 /turf/closed/mineral/asteroid/porous
 	name = "porous rock"
-	desc = "This rock is filled with pockets of breathable air."
+	desc = "Эта скала заполнена карманами с воздухом, пригодным для дыхания."
 	baseturfs = /turf/open/misc/asteroid
+
+/turf/closed/mineral/asteroid/porous/get_ru_names()
+	return list(
+		NOMINATIVE = "пористый камень",
+		GENITIVE = "пористого камня",
+		DATIVE = "пористому камню",
+		ACCUSATIVE = "пористый камень",
+		INSTRUMENTAL = "пористым камнем",
+		PREPOSITIONAL = "пористом камне"
+	)
 
 //GIBTONITE
 
@@ -791,32 +890,31 @@
 /turf/closed/mineral/gibtonite/attackby(obj/item/attacking_item, mob/living/user, list/modifiers, list/attack_modifiers, exp_multiplier = 1)
 	var/previous_stage = stage
 	if(istype(attacking_item, /obj/item/goliath_infuser_hammer) && stage == GIBTONITE_ACTIVE)
-		user.visible_message(span_notice("[user] digs [attacking_item] to [src]..."), span_notice("Your tendril hammer instictively digs and wraps around [src] to stop it..."))
+		user.visible_message(span_notice("[user] погружает [attacking_item.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]..."), span_notice("Ваш щупальцевый молот инстинктивно погружается и обвивает [declent_ru(NOMINATIVE)], чтобы остановить его..."))
 		defuse(user)
 	else if(istype(attacking_item, /obj/item/mining_scanner) || istype(attacking_item, /obj/item/t_scanner/adv_mining_scanner) && stage == GIBTONITE_ACTIVE)
-		user.visible_message(span_notice("[user] holds [attacking_item] to [src]..."), span_notice("You use [attacking_item] to locate where to cut off the chain reaction and attempt to stop it..."))
+		user.visible_message(span_notice("[user] подносит [attacking_item.declent_ru(ACCUSATIVE)] к [declent_ru(ACCUSATIVE)]..."), span_notice("Вы используете [attacking_item.declent_ru(ACCUSATIVE)], чтобы определить, где прервать цепную реакцию и попытаться остановить её..."))
 		defuse(user)
 	. = ..()
 	if(istype(attacking_item, /obj/item/clothing/gloves/gauntlets) && previous_stage == GIBTONITE_UNSTRUCK && stage == GIBTONITE_ACTIVE && istype(user))
 		user.Immobilize(0.5 SECONDS)
 		user.throw_at(get_ranged_target_turf(src, get_dir(src, user), 5), range = 5, speed = 3, spin = FALSE)
-		user.visible_message(span_danger("[user] hit gibtonite with [attacking_item.name], launching [user.p_them()] back!"), span_danger("You've struck gibtonite! Your [attacking_item.name] launched you back!"))
-
+		user.visible_message(span_danger("[user] ударил гибтонит [attacking_item.declent_ru(INSTRUMENTAL)], отбрасывая [GEND_HIM_HER(user)] назад!"), span_danger("Вы ударили гибтонит! Ваш [attacking_item.declent_ru(NOMINATIVE)] отбросил вас назад!"))
 /turf/closed/mineral/gibtonite/proc/explosive_reaction(mob/user = null)
 	if(stage == GIBTONITE_UNSTRUCK)
 		activated_overlay = mutable_appearance('icons/turf/smoothrocks_overlays.dmi', "rock_Gibtonite_inactive", ON_EDGED_TURF_LAYER) //shows in gaps between pulses if there are any
 		add_overlay(activated_overlay)
 		name = "gibtonite deposit"
-		desc = "An active gibtonite reserve. Run!"
+		desc = "Активная залежь гибтонита. БЕГИ БЛЯТЬ!"
 		stage = GIBTONITE_ACTIVE
-		visible_message(span_danger("There's gibtonite inside! It's going to explode!"))
+		visible_message(span_danger("Там гибтонит! Он сейчас взорвётся!"))
 
 		var/notify_admins = !is_mining_level(z)
 
 		if(user)
-			log_bomber(user, "has triggered a gibtonite deposit reaction via", src, null, notify_admins)
+			log_bomber(user, "Спровоцировал реакцию гибтонитовой залежи через", src, null, notify_admins)
 		else
-			log_bomber(null, "An explosion has triggered a gibtonite deposit reaction via", src, null, notify_admins)
+			log_bomber(null, "Взрыв спровоцировал реакцию гибтонитовой залежи через", src, null, notify_admins)
 
 		countdown(notify_admins)
 
@@ -838,11 +936,11 @@
 		cut_overlay(activated_overlay)
 		activated_overlay.icon_state = "rock_Gibtonite_inactive"
 		add_overlay(activated_overlay)
-		desc = "An inactive gibtonite reserve. The ore can be extracted."
+		desc = "Неактивная залежь гибтонита. Руду можно добывать."
 		stage = GIBTONITE_STABLE
 		if(det_time < 0)
 			det_time = 0
-		visible_message(span_notice("The chain reaction stopped! The gibtonite had [det_time] reactions left till the explosion!"))
+		visible_message(span_notice("Цепная реакция остановлена! До взрыва гибтонита оставалось [det_time] стадий!"))
 		if(defuser)
 			SEND_SIGNAL(defuser, COMSIG_LIVING_DEFUSED_GIBTONITE, det_time)
 
@@ -903,8 +1001,8 @@
 	initial_gas_mix = ICEMOON_DEFAULT_ATMOS
 
 /turf/closed/mineral/strong
-	name = "Very strong rock"
-	desc = "Seems to be stronger than the other rocks in the area. Only a master of mining techniques could destroy this."
+	name = "very strong rock"
+	desc = "Кажется, прочнее других пород в этой области. Только мастер горного дела сможет разрушить это."
 	turf_type = /turf/open/misc/asteroid/basalt/lava_land_surface
 	baseturfs = /turf/open/misc/asteroid/basalt/lava_land_surface
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
@@ -913,14 +1011,24 @@
 	base_icon_state = "rock_wall"
 	smoothing_flags = SMOOTH_BITMASK | SMOOTH_BORDER
 
+/turf/closed/mineral/asteroid/porous/get_ru_names()
+	return list(
+		NOMINATIVE = "очень прочный камень",
+		GENITIVE = "очень прочного камня",
+		DATIVE = "очень прочному камню",
+		ACCUSATIVE = "очень прочный камень",
+		INSTRUMENTAL = "очень прочным камнем",
+		PREPOSITIONAL = "очень прочном камне"
+	)
+
 /turf/closed/mineral/strong/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers, exp_multiplier = 1)
 	if(!ishuman(user))
-		to_chat(usr, span_warning("Only a more advanced species could break a rock such as this one!"))
+		to_chat(usr, span_warning("Только более развитый вид сможет разрушить такую породу!"))
 		return FALSE
 	if(user.mind?.get_skill_level(/datum/skill/mining) >= SKILL_LEVEL_MASTER)
 		. = ..()
 	else
-		to_chat(usr, span_warning("The rock seems to be too strong to destroy. Maybe I can break it once I become a master miner."))
+		to_chat(usr, span_warning("Порода кажется слишком прочной для разрушения. Возможно, я смогу её разбить, когда стану мастером горного дела.")) // Ебучий Слейв мечтает стать Мастером
 
 
 /turf/closed/mineral/strong/gets_drilled(mob/user, exp_multiplier = 0)

@@ -256,11 +256,21 @@ GLOBAL_VAR_INIT(hhMysteryRoomNumber, rand(1, 999999))
 //Turfs and Areas
 /turf/closed/indestructible/hotelwall
 	name = "hotel wall"
-	desc = "A wall designed to protect the security of the hotel's guests."
+	desc = "Стена, созданная для защиты безопасности гостей отеля."
 	icon_state = "hotelwall"
 	smoothing_groups = SMOOTH_GROUP_CLOSED_TURFS + SMOOTH_GROUP_HOTEL_WALLS
 	canSmoothWith = SMOOTH_GROUP_HOTEL_WALLS
 	explosive_resistance = INFINITY
+
+/turf/closed/indestructible/hotelwall/get_ru_names()
+	return list(
+		NOMINATIVE = "стена отеля",
+		GENITIVE = "стены отеля",
+		DATIVE = "стене отеля",
+		ACCUSATIVE = "стену отеля",
+		INSTRUMENTAL = "стеной отеля",
+		PREPOSITIONAL = "стене отеля"
+	)
 
 /turf/open/indestructible/hotelwood
 	desc = "Stylish dark wood with extra reinforcement. Secured firmly to the floor to prevent tampering."

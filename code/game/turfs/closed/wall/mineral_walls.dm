@@ -1,6 +1,6 @@
 /turf/closed/wall/mineral
 	name = "mineral wall"
-	desc = "This shouldn't exist"
+	desc = "Этого не должно существовать."
 	icon_state = ""
 	abstract_type = /turf/closed/wall/mineral
 	smoothing_flags = SMOOTH_BITMASK
@@ -11,7 +11,7 @@
 
 /turf/closed/wall/mineral/gold
 	name = "gold wall"
-	desc = "A wall with gold plating. Swag!"
+	desc = "Стена с золотым покрытием."
 	icon = 'icons/turf/walls/gold_wall.dmi'
 	icon_state = "gold_wall-0"
 	base_icon_state = "gold_wall"
@@ -23,9 +23,19 @@
 	custom_materials = list(/datum/material/gold = SHEET_MATERIAL_AMOUNT*2)
 	rust_resistance = RUST_RESISTANCE_BASIC
 
+/turf/closed/wall/mineral/gold/get_ru_names()
+	return list(
+		NOMINATIVE = "золотая стена",
+		GENITIVE = "золотой стены",
+		DATIVE = "золотой стене",
+		ACCUSATIVE = "золотую стену",
+		INSTRUMENTAL = "золотой стеной",
+		PREPOSITIONAL = "золотой стене"
+	)
+
 /turf/closed/wall/mineral/silver
 	name = "silver wall"
-	desc = "A wall with silver plating. Shiny!"
+	desc = "Стена с серебряным покрытием."
 	icon = 'icons/turf/walls/silver_wall.dmi'
 	icon_state = "silver_wall-0"
 	base_icon_state = "silver_wall"
@@ -36,9 +46,19 @@
 	canSmoothWith = SMOOTH_GROUP_SILVER_WALLS
 	custom_materials = list(/datum/material/silver = SHEET_MATERIAL_AMOUNT*2)
 
+/turf/closed/wall/mineral/silver/get_ru_names()
+	return list(
+		NOMINATIVE = "серебряная стена",
+		GENITIVE = "серебряной стены",
+		DATIVE = "серебряной стене",
+		ACCUSATIVE = "серебряную стену",
+		INSTRUMENTAL = "серебряной стеной",
+		PREPOSITIONAL = "серебряной стене"
+	)
+
 /turf/closed/wall/mineral/diamond
 	name = "diamond wall"
-	desc = "A wall with diamond plating. You monster."
+	desc = "Стена с алмазным покрытием."
 	icon = 'icons/turf/walls/diamond_wall.dmi'
 	icon_state = "diamond_wall-0"
 	base_icon_state = "diamond_wall"
@@ -52,12 +72,22 @@
 	custom_materials = list(/datum/material/diamond = SHEET_MATERIAL_AMOUNT*2)
 	rust_resistance = RUST_RESISTANCE_REINFORCED
 
+/turf/closed/wall/mineral/diamond/get_ru_names()
+	return list(
+		NOMINATIVE = "алмазная стена",
+		GENITIVE = "алмазной стены",
+		DATIVE = "алмазной стене",
+		ACCUSATIVE = "алмазную стену",
+		INSTRUMENTAL = "алмазной стеной",
+		PREPOSITIONAL = "алмазной стене"
+	)
+
 /turf/closed/wall/mineral/diamond/hulk_recoil(obj/item/bodypart/arm, mob/living/carbon/human/hulkman, damage = 41)
 	return ..()
 
 /turf/closed/wall/mineral/bananium
 	name = "bananium wall"
-	desc = "A wall with bananium plating. Honk!"
+	desc = "Стена с бананиевым покрытием."
 	icon = 'icons/turf/walls/bananium_wall.dmi'
 	icon_state = "bananium_wall-0"
 	base_icon_state = "bananium_wall"
@@ -69,9 +99,19 @@
 	custom_materials = list(/datum/material/bananium = SHEET_MATERIAL_AMOUNT*2)
 	rust_resistance = RUST_RESISTANCE_BASIC
 
+/turf/closed/wall/mineral/bananium/get_ru_names()
+	return list(
+		NOMINATIVE = "баннаниумовая стена",
+		GENITIVE = "баннаниумовой стены",
+		DATIVE = "баннаниумовой стене",
+		ACCUSATIVE = "баннаниумовую стену",
+		INSTRUMENTAL = "баннаниумовой стеной",
+		PREPOSITIONAL = "баннаниумовой стене"
+	)
+
 /turf/closed/wall/mineral/sandstone
 	name = "sandstone wall"
-	desc = "A wall with sandstone plating. Rough."
+	desc = "Стена с песчаниковым покрытием."
 	icon = 'icons/turf/walls/sandstone_wall.dmi'
 	icon_state = "sandstone_wall-0"
 	base_icon_state = "sandstone_wall"
@@ -84,10 +124,19 @@
 	custom_materials = list(/datum/material/sandstone = SHEET_MATERIAL_AMOUNT*2)
 	rust_resistance = RUST_RESISTANCE_BASIC
 
+/turf/closed/wall/mineral/sandstone/get_ru_names()
+	return list(
+		NOMINATIVE = "песчаниковая стена",
+		GENITIVE = "песчаниковой стены",
+		DATIVE = "песчаниковой стене",
+		ACCUSATIVE = "песчаниковую стену",
+		INSTRUMENTAL = "песчаниковой стеной",
+		PREPOSITIONAL = "песчаниковой стене"
+	)
+
 /turf/closed/wall/mineral/uranium
-	article = "a"
 	name = "uranium wall"
-	desc = "A wall with uranium plating. This is probably a bad idea."
+	desc = "Стена с урановым покрытием."
 	icon = 'icons/turf/walls/uranium_wall.dmi'
 	icon_state = "uranium_wall-0"
 	base_icon_state = "uranium_wall"
@@ -98,12 +147,20 @@
 	canSmoothWith = SMOOTH_GROUP_URANIUM_WALLS
 	custom_materials = list(/datum/material/uranium = SHEET_MATERIAL_AMOUNT*2)
 	rust_resistance = RUST_RESISTANCE_REINFORCED
-
 	/// Mutex to prevent infinite recursion when propagating radiation pulses
 	var/active = null
-
 	/// The last time a radiation pulse was performed
 	var/last_event = 0
+
+/turf/closed/wall/mineral/uranium/get_ru_names()
+	return list(
+		NOMINATIVE = "урановая стена",
+		GENITIVE = "урановой стены",
+		DATIVE = "урановой стене",
+		ACCUSATIVE = "урановую стену",
+		INSTRUMENTAL = "урановой стеной",
+		PREPOSITIONAL = "урановой стене"
+	)
 
 /turf/closed/wall/mineral/uranium/Initialize(mapload)
 	. = ..()
@@ -144,7 +201,7 @@
 
 /turf/closed/wall/mineral/plasma
 	name = "plasma wall"
-	desc = "A wall with plasma plating. This is definitely a bad idea."
+	desc = "Стена с плазменным покрытием."
 	icon = 'icons/turf/walls/plasma_wall.dmi'
 	icon_state = "plasma_wall-0"
 	base_icon_state = "plasma_wall"
@@ -157,9 +214,19 @@
 	custom_materials = list(/datum/material/plasma = SHEET_MATERIAL_AMOUNT*2)
 	rust_resistance = RUST_RESISTANCE_BASIC
 
+/turf/closed/wall/mineral/plasma/get_ru_names()
+	return list(
+		NOMINATIVE = "плазменная стена",
+		GENITIVE = "плазменной стены",
+		DATIVE = "плазменной стене",
+		ACCUSATIVE = "плазменную стену",
+		INSTRUMENTAL = "плазменной стеной",
+		PREPOSITIONAL = "плазменной стене"
+	)
+
 /turf/closed/wall/mineral/wood
 	name = "wooden wall"
-	desc = "A wall with wooden plating. Stiff."
+	desc = "Стена с деревянным покрытием."
 	icon = 'icons/turf/walls/wood_wall.dmi'
 	icon_state = "wood_wall-0"
 	base_icon_state = "wood_wall"
@@ -172,6 +239,16 @@
 	canSmoothWith = SMOOTH_GROUP_WOOD_WALLS
 	custom_materials = list(/datum/material/wood = SHEET_MATERIAL_AMOUNT*2)
 	rust_resistance = RUST_RESISTANCE_BASIC
+
+/turf/closed/wall/mineral/wood/get_ru_names()
+	return list(
+		NOMINATIVE = "деревянная стена",
+		GENITIVE = "деревянной стены",
+		DATIVE = "деревянной стене",
+		ACCUSATIVE = "деревянную стену",
+		INSTRUMENTAL = "деревянной стеной",
+		PREPOSITIONAL = "деревянной стене"
+	)
 
 /turf/closed/wall/mineral/wood/attackby(obj/item/W, mob/user)
 	if(W.get_sharpness() && W.force)
@@ -187,13 +264,13 @@
 	return ..() //No recoil damage, wood is weak
 
 /turf/closed/wall/mineral/wood/nonmetal
-	desc = "A solidly wooden wall. It's a bit weaker than a wall made with metal."
+	desc = "Основательная деревянная стена. Она немного слабее стены из металла."
 	girder_type = /obj/structure/barricade/wooden
 	hardness = 67 //a bit weaker than iron (60)
 
 /turf/closed/wall/mineral/bamboo
 	name = "bamboo wall"
-	desc = "A wall with a bamboo finish."
+	desc = "Стена с бамбуковой отделкой."
 	icon = 'icons/turf/walls/bamboo_wall.dmi'
 	icon_state = "bamboo_wall-0"
 	base_icon_state = "bamboo_wall"
@@ -204,9 +281,19 @@
 	hardness = 80 //it's not a mineral...
 	rust_resistance = RUST_RESISTANCE_BASIC
 
+/turf/closed/wall/mineral/bamboo/get_ru_names()
+	return list(
+		NOMINATIVE = "бамбуковая стена",
+		GENITIVE = "бамбуковой стены",
+		DATIVE = "бамбуковой стене",
+		ACCUSATIVE = "бамбуковую стену",
+		INSTRUMENTAL = "бамбуковой стеной",
+		PREPOSITIONAL = "бамбуковой стене"
+	)
+
 /turf/closed/wall/mineral/iron
 	name = "rough iron wall"
-	desc = "A wall with rough iron plating."
+	desc = "Стена с покрытием из грубого железа."
 	icon = 'icons/turf/walls/iron_wall.dmi'
 	icon_state = "iron_wall-0"
 	base_icon_state = "iron_wall"
@@ -219,9 +306,19 @@
 	custom_materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT * 2.5)
 	rust_resistance = RUST_RESISTANCE_BASIC
 
+/turf/closed/wall/mineral/bamboo/get_ru_names()
+	return list(
+		NOMINATIVE = "грубая железная стена",
+		GENITIVE = "грубой железной стены",
+		DATIVE = "грубой железной стене",
+		ACCUSATIVE = "грубую железную стену",
+		INSTRUMENTAL = "грубой железной стеной",
+		PREPOSITIONAL = "грубой железной стене"
+	)
+
 /turf/closed/wall/mineral/snow
 	name = "packed snow wall"
-	desc = "A wall made of densely packed snow blocks."
+	desc = "Стена из плотно спрессованных снежных блоков."
 	icon = 'icons/turf/walls/snow_wall.dmi'
 	icon_state = "snow_wall-0"
 	base_icon_state = "snow_wall"
@@ -237,12 +334,22 @@
 	custom_materials = list(/datum/material/snow = SHEET_MATERIAL_AMOUNT*2)
 	rust_resistance = RUST_RESISTANCE_BASIC
 
+/turf/closed/wall/mineral/snow/get_ru_names()
+	return list(
+		NOMINATIVE = "снежная стена",
+		GENITIVE = "снежной стены",
+		DATIVE = "снежной стене",
+		ACCUSATIVE = "снежную стену",
+		INSTRUMENTAL = "снежной стеной",
+		PREPOSITIONAL = "снежной стене"
+	)
+
 /turf/closed/wall/mineral/snow/hulk_recoil(obj/item/bodypart/arm, mob/living/carbon/human/hulkman, damage = 0)
 	return ..() //No recoil damage, snow is weak
 
 /turf/closed/wall/mineral/abductor
 	name = "alien wall"
-	desc = "A wall with alien alloy plating."
+	desc = "Стена с покрытием из инопланетного сплава."
 	icon = 'icons/turf/walls/abductor_wall.dmi'
 	icon_state = "abductor_wall-0"
 	base_icon_state = "abductor_wall"
@@ -256,11 +363,21 @@
 	custom_materials = list(/datum/material/alloy/alien = SHEET_MATERIAL_AMOUNT*2)
 	rust_resistance = RUST_RESISTANCE_ORGANIC
 
+/turf/closed/wall/mineral/abductor/get_ru_names()
+	return list(
+		NOMINATIVE = "инопланетная стена",
+		GENITIVE = "инопланетной стены",
+		DATIVE = "инопланетной стене",
+		ACCUSATIVE = "инопланетную стену",
+		INSTRUMENTAL = "инопланетной стеной",
+		PREPOSITIONAL = "инопланетной стене"
+	)
+
 /////////////////////Titanium walls/////////////////////
 
 /turf/closed/wall/mineral/titanium //has to use this path due to how building walls works
 	name = "wall"
-	desc = "A light-weight titanium wall used in shuttles."
+	desc = "Лёгкая титановая стена, используемая в шаттлах."
 	icon = 'icons/turf/walls/shuttle_wall.dmi'
 	icon_state = "shuttle_wall-0"
 	base_icon_state = "shuttle_wall"
@@ -274,6 +391,16 @@
 	canSmoothWith = SMOOTH_GROUP_SHUTTLE_PARTS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_TITANIUM_WALLS
 	custom_materials = list(/datum/material/titanium = SHEET_MATERIAL_AMOUNT*2)
 	rust_resistance = RUST_RESISTANCE_TITANIUM
+
+/turf/closed/wall/mineral/titanium/get_ru_names()
+	return list(
+		NOMINATIVE = "стена",
+		GENITIVE = "стены",
+		DATIVE = "стене",
+		ACCUSATIVE = "стену",
+		INSTRUMENTAL = "стеной",
+		PREPOSITIONAL = "стене"
+	)
 
 /turf/closed/wall/mineral/titanium/rust_turf()
 	if(HAS_TRAIT(src, TRAIT_RUSTY))
@@ -301,13 +428,23 @@
 
 /turf/closed/wall/mineral/titanium/survival
 	name = "pod wall"
-	desc = "An easily-compressible wall used for temporary shelter."
+	desc = "Легко сжимаемая стена, используемая для временного укрытия."
 	icon = 'icons/turf/walls/survival_pod_walls.dmi'
 	icon_state = "survival_pod_walls-0"
 	base_icon_state = "survival_pod_walls"
 	smoothing_flags = SMOOTH_BITMASK | SMOOTH_DIAGONAL_CORNERS
 	canSmoothWith = SMOOTH_GROUP_SHUTTLE_PARTS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_TITANIUM_WALLS
 	rust_resistance = RUST_RESISTANCE_TITANIUM
+
+/turf/closed/wall/mineral/titanium/survival/get_ru_names()
+	return list(
+		NOMINATIVE = "стена",
+		GENITIVE = "стены",
+		DATIVE = "стене",
+		ACCUSATIVE = "стену",
+		INSTRUMENTAL = "стеной",
+		PREPOSITIONAL = "стене"
+	)
 
 /turf/closed/wall/mineral/titanium/survival/nodiagonal
 	icon = 'icons/turf/walls/survival_pod_walls.dmi'
@@ -331,7 +468,7 @@
 
 /turf/closed/wall/mineral/plastitanium
 	name = "wall"
-	desc = "A durable wall made of an alloy of plasma and titanium."
+	desc = "Прочная стена из сплава плазмы и титана."
 	icon = 'icons/turf/walls/plastitanium_wall.dmi'
 	icon_state = "plastitanium_wall-0"
 	base_icon_state = "plastitanium_wall"
@@ -343,6 +480,16 @@
 	canSmoothWith = SMOOTH_GROUP_SHUTTLE_PARTS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_PLASTITANIUM_WALLS + SMOOTH_GROUP_SYNDICATE_WALLS
 	custom_materials = list(/datum/material/alloy/plastitanium = SHEET_MATERIAL_AMOUNT*2)
 	rust_resistance = RUST_RESISTANCE_TITANIUM
+
+/turf/closed/wall/mineral/plastitanium/get_ru_names()
+	return list(
+		NOMINATIVE = "пластитановая стена",
+		GENITIVE = "пластитановой стены",
+		DATIVE = "пластитановой стене",
+		ACCUSATIVE = "пластитановую стену",
+		INSTRUMENTAL = "пластитановой стеной",
+		PREPOSITIONAL = "пластитановой стене"
+	)
 
 /turf/closed/wall/mineral/plastitanium/rust_turf()
 	if(HAS_TRAIT(src, TRAIT_RUSTY))

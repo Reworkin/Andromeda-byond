@@ -5,7 +5,8 @@
 
 /turf/open/floor/light
 	name = "light floor"
-	desc = "A wired glass tile embedded into the floor. Modify the color with a Multitool."
+	desc = "Стеклянная напольная плитка с проводкой. Цвет меняется мультитулом."
+	gender = MALE
 	light_range = 5
 	icon_state = "light_on-1"
 	floor_tile = /obj/item/stack/tile/light
@@ -25,16 +26,26 @@
 	///used for light floors that cycle colours
 	var/cycle = FALSE
 
+/turf/open/floor/light/get_ru_names()
+	return list(
+		NOMINATIVE = "светящийся пол",
+		GENITIVE = "светящегося пола",
+		DATIVE = "светящемуся полу",
+		ACCUSATIVE = "светящийся пол",
+		INSTRUMENTAL = "светящимся полом",
+		PREPOSITIONAL = "светящемся поле",
+	)
+
 /turf/open/floor/light/broken_states()
 	return list("light_broken")
 
 /turf/open/floor/light/examine(mob/user)
 	. = ..()
-	. += span_notice("There's a <b>small crack</b> on the edge of it.")
-	. += span_notice("Use a multitool on it to change colors.")
-	. += span_notice("Use a screwdriver to turn it off or on.")
+	. += span_notice("На краю виднеется <b>небольшая трещина</b>.")
+	. += span_notice("Используйте мультитул для смены цвета.")
+	. += span_notice("Используйте отвёртку, чтобы включить или выключить.")
 	if(state) ///check if broken
-		. += span_danger("The light bulb seems fried!")
+		. += span_danger("Похоже, лампочка перегорела!")
 
 ///create radial menu
 /turf/open/floor/light/proc/populate_lighttile_designs()
@@ -135,15 +146,15 @@
 	if(istype(C, /obj/item/light/bulb)) //only for light tiles
 		var/obj/item/light/bulb/B = C
 		if(B.status)/// check if broken
-			to_chat(user, span_danger("The light bulb is broken!"))
+			to_chat(user, span_danger("Лампочка разбита!"))
 			return
 		if(state && user.temporarilyRemoveItemFromInventory(C))
 			qdel(C)
 			state = LIGHTFLOOR_FINE //fixing it by bashing it with a light bulb, fun eh?
 			update_appearance()
-			to_chat(user, span_notice("You replace the light bulb."))
+			to_chat(user, span_notice("Вы заменяете лампочку."))
 		else
-			to_chat(user, span_notice("The light bulb seems fine, no need to replace it."))
+			to_chat(user, span_notice("Лампочка в порядке, замена не требуется."))
 
 /turf/open/floor/light/emp_act(severity)
 	. = ..()
@@ -160,11 +171,22 @@
 //Cycles through all of the colours
 /turf/open/floor/light/colour_cycle
 	name = "dancefloor"
-	desc = "Funky floor."
+	desc = "Пол в стиле диско."
+	gender = MALE
 	icon_state = "light_on-cycle_all"
 	light_color = LIGHT_COLOR_SLIME_LAMP
 	can_modify_colour = FALSE
 	cycle = TRUE
+
+/turf/open/floor/light/colour_cycle/get_ru_names()
+	return list(
+		NOMINATIVE = "танцпол",
+		GENITIVE = "танцпола",
+		DATIVE = "танцполу",
+		ACCUSATIVE = "танцпол",
+		INSTRUMENTAL = "танцполом",
+		PREPOSITIONAL = "танцполе",
+	)
 
 //Two different "dancefloor" types so that you can have a checkered pattern
 // (also has a longer delay than colour_cycle between cycling colours)

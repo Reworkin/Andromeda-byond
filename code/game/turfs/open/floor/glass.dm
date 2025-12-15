@@ -1,6 +1,7 @@
 /turf/open/floor/glass
 	name = "glass floor"
-	desc = "Don't jump on it, or do, I'm not your mom."
+	desc = "Не прыгайте на нём. Или прыгайте, я вам не мамка."
+	gender = MALE
 	icon = 'icons/turf/floors/glass.dmi'
 	icon_state = "glass-0"
 	base_icon_state = "glass"
@@ -21,6 +22,16 @@
 	var/alpha_to_leave = 255
 	/// Color of starlight to use. Defaults to STARLIGHT_COLOR if not set
 	var/starlight_color
+
+/turf/open/floor/glass/get_ru_names()
+	return list(
+		NOMINATIVE = "стеклянный пол",
+		GENITIVE = "стеклянного пола",
+		DATIVE = "стеклянному полу",
+		ACCUSATIVE = "стеклянный пол",
+		INSTRUMENTAL = "стеклянным полом",
+		PREPOSITIONAL = "стеклянном поле",
+	)
 
 /turf/open/floor/glass/broken_states()
 	return list("glass-damaged1", "glass-damaged2", "glass-damaged3")
@@ -67,12 +78,22 @@
 
 /turf/open/floor/glass/reinforced
 	name = "reinforced glass floor"
-	desc = "Do jump on it, it can take it."
+	desc = "Можете попрыгать на нём, он выдержит."
 	icon = 'icons/turf/floors/reinf_glass.dmi'
 	icon_state = "reinf_glass-0"
 	base_icon_state = "reinf_glass"
 	floor_tile = /obj/item/stack/tile/rglass
 	alpha_to_leave = 206
+
+/turf/open/floor/glass/reinforced/get_ru_names()
+	return list(
+		NOMINATIVE = "укреплённый стеклянный пол",
+		GENITIVE = "укреплённого стеклянного пола",
+		DATIVE = "укреплённому стеклянному полу",
+		ACCUSATIVE = "укреплённый стеклянный пол",
+		INSTRUMENTAL = "укреплённым стеклянным полом",
+		PREPOSITIONAL = "укреплённом стеклянном поле",
+	)
 
 /turf/open/floor/glass/reinforced/telecomms
 	initial_gas_mix = TCOMMS_ATMOS
@@ -83,15 +104,26 @@
 /turf/open/floor/glass/reinforced/airless
 	initial_gas_mix = AIRLESS_ATMOS
 
+
 /turf/open/floor/glass/plasma
 	name = "plasma glass floor"
-	desc = "Studies by the Nanotrasen Materials Safety Division have not yet determined if this is safe to jump on, do so at your own risk."
+	desc = "Отдел безопасности материалов Nanotrasen ещё не подтвердил надёжность этого покрытия. Прыгайте на свой страх и риск."
 	icon = 'icons/turf/floors/plasma_glass.dmi'
 	icon_state = "plasma_glass-0"
 	base_icon_state = "plasma_glass"
 	floor_tile = /obj/item/stack/tile/glass/plasma
 	starlight_color = COLOR_STRONG_VIOLET
 	alpha_to_leave = 255
+
+/turf/open/floor/glass/plasma/get_ru_names()
+	return list(
+		NOMINATIVE = "плазменный стеклянный пол",
+		GENITIVE = "плазменного стеклянного пола",
+		DATIVE = "плазменному стеклянному полу",
+		ACCUSATIVE = "плазменный стеклянный пол",
+		INSTRUMENTAL = "плазменным стеклянным полом",
+		PREPOSITIONAL = "плазменном стеклянном поле",
+	)
 
 /turf/open/floor/glass/plasma/icemoon
 	initial_gas_mix = ICEMOON_DEFAULT_ATMOS
@@ -101,13 +133,23 @@
 
 /turf/open/floor/glass/reinforced/plasma
 	name = "reinforced plasma glass floor"
-	desc = "Do jump on it, jump on it while in a mecha, it can take it."
+	desc = "Можете попрыгать на нём даже в мехе, он выдержит."
 	icon = 'icons/turf/floors/reinf_plasma_glass.dmi'
 	icon_state = "reinf_plasma_glass-0"
 	base_icon_state = "reinf_plasma_glass"
 	floor_tile = /obj/item/stack/tile/rglass/plasma
 	starlight_color = COLOR_STRONG_VIOLET
 	alpha_to_leave = 206
+
+/turf/open/floor/glass/reinforced/plasma/get_ru_names()
+	return list(
+		NOMINATIVE = "укреплённый плазменный стеклянный пол",
+		GENITIVE = "укреплённого плазменного стеклянного пола",
+		DATIVE = "укреплённому плазменному стеклянному полу",
+		ACCUSATIVE = "укреплённый плазменный стеклянный пол",
+		INSTRUMENTAL = "укреплённым плазменным стеклянным полом",
+		PREPOSITIONAL = "укреплённом плазменном стеклянном поле",
+	)
 
 /turf/open/floor/glass/reinforced/plasma/icemoon
 	initial_gas_mix = ICEMOON_DEFAULT_ATMOS

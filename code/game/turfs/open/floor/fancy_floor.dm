@@ -9,7 +9,8 @@
  */
 
 /turf/open/floor/wood
-	desc = "Stylish dark wood."
+	desc = "Стильное тёмное дерево."
+	gender = MALE
 	icon_state = "wood"
 	floor_tile = /obj/item/stack/tile/wood
 	footstep = FOOTSTEP_WOOD
@@ -19,12 +20,19 @@
 	tiled_turf = FALSE
 	rust_resistance = RUST_RESISTANCE_BASIC
 
-/turf/open/floor/wood/broken_states()
-	return list("wood-broken", "wood-broken2", "wood-broken3", "wood-broken4", "wood-broken5", "wood-broken6", "wood-broken7")
+/turf/open/floor/wood/get_ru_names()
+	return list(
+		NOMINATIVE = "деревянный пол",
+		GENITIVE = "деревянного пола",
+		DATIVE = "деревянному полу",
+		ACCUSATIVE = "деревянный пол",
+		INSTRUMENTAL = "деревянным полом",
+		PREPOSITIONAL = "деревянном поле",
+	)
 
 /turf/open/floor/wood/examine(mob/user)
 	. = ..()
-	. += span_notice("There's a few <b>screws</b> and a <b>small crack</b> visible.")
+	. += span_notice("Видны несколько <b>шурупов</b> и <b>небольшая трещина</b>.")
 
 /turf/open/floor/wood/screwdriver_act(mob/living/user, obj/item/I)
 	if(..())
@@ -53,15 +61,15 @@
 		broken = FALSE
 		burnt = FALSE
 		if(user && !silent)
-			to_chat(user, span_notice("You remove the broken planks."))
+			to_chat(user, span_notice("Вы убираете сломанные доски."))
 	else
 		if(make_tile)
 			if(user && !silent)
-				to_chat(user, span_notice("You unscrew the planks."))
+				to_chat(user, span_notice("Вы откручиваете доски."))
 			spawn_tile()
 		else
 			if(user && !silent)
-				to_chat(user, span_notice("You forcefully pry off the planks, destroying them in the process."))
+				to_chat(user, span_notice("Вы силой отрываете доски, ломая их в процессе."))
 	return make_plating(force_plating)
 
 /turf/open/floor/wood/cold
@@ -88,6 +96,16 @@
 	icon_state = "wood_parquet"
 	floor_tile = /obj/item/stack/tile/wood/parquet
 
+/turf/open/floor/wood/parquet/get_ru_names()
+	return list(
+		NOMINATIVE = "паркет",
+		GENITIVE = "паркета",
+		DATIVE = "паркету",
+		ACCUSATIVE = "паркет",
+		INSTRUMENTAL = "паркетом",
+		PREPOSITIONAL = "паркете",
+	)
+
 /turf/open/floor/wood/parquet/broken_states()
 	return list("wood_parquet-broken", "wood_parquet-broken2", "wood_parquet-broken3", "wood_parquet-broken4", "wood_parquet-broken5", "wood_parquet-broken6", "wood_parquet-broken7")
 
@@ -95,11 +113,22 @@
 	icon_state = "wood_large"
 	floor_tile = /obj/item/stack/tile/wood/large
 
+/turf/open/floor/wood/large/get_ru_names()
+	return list(
+		NOMINATIVE = "крупный дощатый пол",
+		GENITIVE = "крупного дощатого пола",
+		DATIVE = "крупному дощатому полу",
+		ACCUSATIVE = "крупный дощатый пол",
+		INSTRUMENTAL = "крупным дощатым полом",
+		PREPOSITIONAL = "крупном дощатом поле",
+	)
+
 /turf/open/floor/wood/large/broken_states()
 	return list("wood_large-broken", "wood_large-broken2", "wood_large-broken3")
 
 /turf/open/floor/bamboo
-	desc = "A bamboo mat with a decorative trim."
+	desc = "Бамбуковый мат с декоративной отделкой."
+	gender = MALE
 	icon = 'icons/turf/floors/bamboo_mat.dmi'
 	icon_state = "mat-0"
 	base_icon_state = "mat"
@@ -116,12 +145,33 @@
 /turf/open/floor/bamboo/broken_states()
 	return list("bamboodamaged")
 
+/turf/open/floor/bamboo/get_ru_names()
+	return list(
+		NOMINATIVE = "бамбуковый пол",
+		GENITIVE = "бамбукового пола",
+		DATIVE = "бамбуковому полу",
+		ACCUSATIVE = "бамбуковый пол",
+		INSTRUMENTAL = "бамбуковым полом",
+		PREPOSITIONAL = "бамбуковом поле",
+	)
+
 /turf/open/floor/bamboo/tatami
-	desc = "A traditional Japanese floor mat."
+	desc = "Традиционный японский напольный мат."
+	gender = NEUTER
 	icon = 'icons/turf/floors/floor_variations.dmi'
 	icon_state = "bamboo-green"
 	floor_tile = /obj/item/stack/tile/bamboo/tatami
 	smoothing_flags = NONE
+
+/turf/open/floor/bamboo/tatami/get_ru_names()
+	return list(
+		NOMINATIVE = "татами",
+		GENITIVE = "татами",
+		DATIVE = "татами",
+		ACCUSATIVE = "татами",
+		INSTRUMENTAL = "татами",
+		PREPOSITIONAL = "татами",
+	)
 
 /turf/open/floor/bamboo/tatami/broken_states()
 	// This state doesn't exist why is it here?
@@ -139,7 +189,8 @@
 
 /turf/open/floor/grass
 	name = "grass patch"
-	desc = "You can't tell if this is real grass or just cheap plastic imitation."
+	desc = "Непонятно, настоящая это трава или дешёвая пластиковая имитация."
+	gender = FEMALE
 	icon_state = "grass"
 	floor_tile = /obj/item/stack/tile/grass
 	flags_1 = NONE
@@ -154,11 +205,21 @@
 /turf/open/floor/grass/broken_states()
 	return list("[initial(icon_state)]_damaged")
 
+/turf/open/floor/grass/get_ru_names()
+	return list(
+		NOMINATIVE = "трава",
+		GENITIVE = "травы",
+		DATIVE = "траве",
+		ACCUSATIVE = "траву",
+		INSTRUMENTAL = "травой",
+		PREPOSITIONAL = "траве",
+	)
+
 /turf/open/floor/grass/Initialize(mapload)
 	. = ..()
 	spawniconchange()
 	AddElement(/datum/element/diggable, /obj/item/stack/ore/glass, 2, worm_chance = 50, \
-		action_text = "uproot", action_text_third_person = "uproots")
+		action_text = "uproot", action_text_third_person = "uproots") // Эти тексты обрабатываются в элементе diggable, обычно их не нужно переводить здесь, если элемент не поддерживает локализацию через аргументы.
 
 /turf/open/floor/grass/airless
 	initial_gas_mix = AIRLESS_ATMOS
@@ -168,7 +229,7 @@
 
 /turf/open/floor/grass/lavaland
 	name = "dead grass patch"
-	desc = "It turns out grass doesn't grow very well in hell."
+	desc = "Оказывается, в аду трава растёт плохо."
 	icon_state = "sand"
 	broken = TRUE
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
@@ -177,9 +238,19 @@
 /turf/open/floor/grass/lavaland/spawniconchange()
 	return
 
+/turf/open/floor/grass/lavaland/get_ru_names()
+	return list(
+		NOMINATIVE = "мёртвая трава",
+		GENITIVE = "мёртвой травы",
+		DATIVE = "мёртвой траве",
+		ACCUSATIVE = "мёртвую траву",
+		INSTRUMENTAL = "мёртвой травой",
+		PREPOSITIONAL = "мёртвой траве",
+	)
+
 /turf/open/floor/grass/fairy //like grass but fae-er
 	name = "fairygrass patch"
-	desc = "Something about this grass makes you want to frolic. Or get high."
+	desc = "Эта трава вызывает желание резвиться. Или словить кайф."
 	icon_state = "fairygrass"
 	floor_tile = /obj/item/stack/tile/fairygrass
 	light_range = 2
@@ -189,9 +260,20 @@
 /turf/open/floor/grass/fairy/spawniconchange()
 	icon_state = "fairygrass[rand(0,3)]"
 
+/turf/open/floor/grass/fairy/get_ru_names()
+	return list(
+		NOMINATIVE = "волшебная трава",
+		GENITIVE = "волшебной травы",
+		DATIVE = "волшебной траве",
+		ACCUSATIVE = "волшебную траву",
+		INSTRUMENTAL = "волшебной травой",
+		PREPOSITIONAL = "волшебной траве",
+	)
+
 /turf/open/floor/hay
 	name = "hay"
-	desc = "HOW hungry?"
+	desc = "НАСКОЛЬКО голоден?"
+	gender = NEUTER
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "hay"
 	base_icon_state = "hay"
@@ -205,12 +287,23 @@
 	tiled_turf = FALSE
 	rust_resistance = RUST_RESISTANCE_ORGANIC
 
+/turf/open/floor/hay/get_ru_names()
+	return list(
+		NOMINATIVE = "сено",
+		GENITIVE = "сена",
+		DATIVE = "сену",
+		ACCUSATIVE = "сено",
+		INSTRUMENTAL = "сеном",
+		PREPOSITIONAL = "сене",
+	)
+
 /turf/open/floor/fake_snow
 	gender = PLURAL
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
 	damaged_dmi = 'icons/turf/snow.dmi'
-	desc = "Looks cold."
+	desc = "Выглядит холодным."
+	gender = MALE
 	icon_state = "snow"
 	flags_1 = NONE
 	floor_tile = null
@@ -227,8 +320,8 @@
 
 
 /turf/open/floor/fake_snow/Initialize(mapload)
-	. = ..()
-	AddElement(/datum/element/diggable, /obj/item/stack/tile/mineral/snow, 1, worm_chance = 0)
+		. = ..()
+		AddElement(/datum/element/diggable, /obj/item/stack/tile/mineral/snow, 1, worm_chance = 0)
 
 /turf/open/floor/fake_snow/broken_states()
 	return list("snow_dug")
@@ -239,9 +332,20 @@
 /turf/open/floor/fake_snow/crowbar_act(mob/living/user, obj/item/I)
 	return
 
+/turf/open/floor/fake_snow/get_ru_names()
+	return list(
+		NOMINATIVE = "снег",
+		GENITIVE = "снега",
+		DATIVE = "снегу",
+		ACCUSATIVE = "снег",
+		INSTRUMENTAL = "снегом",
+		PREPOSITIONAL = "снеге",
+	)
+
 /turf/open/floor/fakebasalt
 	name = "aesthetic volcanic flooring"
-	desc = "Safely recreated turf for your hellplanet-scaping."
+	desc = "Безопасная имитация для воссоздания ландшафта адской планеты."
+	gender = MALE
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "basalt"
 	floor_tile = /obj/item/stack/tile/basalt
@@ -252,6 +356,16 @@
 	clawfootstep = FOOTSTEP_SAND
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
 	tiled_turf = FALSE
+
+/turf/open/floor/fakebasalt/get_ru_names()
+	return list(
+		NOMINATIVE = "декоративный базальтовый пол",
+		GENITIVE = "декоративного базальтового пола",
+		DATIVE = "декоративному базальтовому полу",
+		ACCUSATIVE = "декоративный базальтовый пол",
+		INSTRUMENTAL = "декоративным базальтовым полом",
+		PREPOSITIONAL = "декоративном базальтовом поле",
+	)
 
 /turf/open/floor/fakebasalt/Initialize(mapload)
 	. = ..()
@@ -266,7 +380,8 @@
 
 /turf/open/floor/carpet
 	name = "carpet"
-	desc = "Soft velvet carpeting. Feels good between your toes."
+	desc = "Мягкий бархатный ковёр. Приятен на ощупь."
+	gender = MALE
 	icon = 'icons/turf/floors/carpet.dmi'
 	icon_state = "carpet-255"
 	base_icon_state = "carpet"
@@ -283,9 +398,19 @@
 	tiled_turf = FALSE
 	rust_resistance = RUST_RESISTANCE_BASIC
 
+/turf/open/floor/carpet/get_ru_names()
+	return list(
+		NOMINATIVE = "ковёр",
+		GENITIVE = "ковра",
+		DATIVE = "ковру",
+		ACCUSATIVE = "ковёр",
+		INSTRUMENTAL = "ковром",
+		PREPOSITIONAL = "ковре",
+	)
+
 /turf/open/floor/carpet/examine(mob/user)
 	. = ..()
-	. += span_notice("There's a <b>small crack</b> on the edge of it.")
+	. += span_notice("На краю виднеется <b>небольшая трещина</b>.")
 
 /turf/open/floor/carpet/Initialize(mapload)
 	. = ..()
@@ -398,6 +523,16 @@
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_EXECUTIVE
 	canSmoothWith = SMOOTH_GROUP_CARPET_EXECUTIVE
 
+/turf/open/floor/carpet/executive/get_ru_names()
+	return list(
+		NOMINATIVE = "исполнительный ковёр",
+		GENITIVE = "исполнительного ковра",
+		DATIVE = "исполнительному ковру",
+		ACCUSATIVE = "исполнительный ковёр",
+		INSTRUMENTAL = "исполнительным ковром",
+		PREPOSITIONAL = "исполнительном ковре",
+	)
+
 /turf/open/floor/carpet/stellar
 	name = "stellar carpet"
 	icon = 'icons/turf/floors/carpet_stellar.dmi'
@@ -407,6 +542,16 @@
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_STELLAR
 	canSmoothWith = SMOOTH_GROUP_CARPET_STELLAR
 
+/turf/open/floor/carpet/stellar/get_ru_names()
+	return list(
+		NOMINATIVE = "звёздный ковёр",
+		GENITIVE = "звёздного ковра",
+		DATIVE = "звёздному ковру",
+		ACCUSATIVE = "звёздный ковёр",
+		INSTRUMENTAL = "звёздным ковром",
+		PREPOSITIONAL = "звёздном ковре",
+	)
+
 /turf/open/floor/carpet/donk
 	name = "Donk Co. carpet"
 	icon = 'icons/turf/floors/carpet_donk.dmi'
@@ -415,6 +560,16 @@
 	floor_tile = /obj/item/stack/tile/carpet/donk
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_DONK
 	canSmoothWith = SMOOTH_GROUP_CARPET_DONK
+
+/turf/open/floor/carpet/donk/get_ru_names()
+	return list(
+		NOMINATIVE = "ковёр Donk Co.",
+		GENITIVE = "ковра Donk Co.",
+		DATIVE = "ковру Donk Co.",
+		ACCUSATIVE = "ковёр Donk Co.",
+		INSTRUMENTAL = "ковром Donk Co.",
+		PREPOSITIONAL = "ковре Donk Co.",
+	)
 
 //*****Airless versions of all of the above.*****
 /turf/open/floor/carpet/airless
@@ -470,7 +625,7 @@
 /// An emissive turf used to test emissive turfs.
 /turf/open/floor/emissive_test
 	name = "emissive test floor"
-	desc = "A glow-in-the-dark floor used to test emissive turfs."
+	desc = "Светящийся в темноте пол для проверки излучающих тайлов."
 	floor_tile = /obj/item/stack/tile/emissive_test
 
 /turf/open/floor/emissive_test/smooth_icon()
@@ -488,7 +643,7 @@
 
 /turf/open/floor/carpet/neon
 	name = "neon carpet"
-	desc = "A rubbery pad inset with a phosphorescent pattern."
+	desc = "Резиновое покрытие с фосфоресцирующим узором."
 	icon = 'icons/turf/floors/carpet_black.dmi'
 	icon_state = "carpet_black-255"
 	base_icon_state = "carpet_black"
@@ -504,6 +659,16 @@
 	var/neon_color
 	/// The alpha used for the emissive decal.
 	var/emissive_alpha = 150
+
+/turf/open/floor/carpet/neon/get_ru_names()
+	return list(
+		NOMINATIVE = "неоновый ковёр",
+		GENITIVE = "неонового ковра",
+		DATIVE = "неоновому ковру",
+		ACCUSATIVE = "неоновый ковёр",
+		INSTRUMENTAL = "неоновым ковром",
+		PREPOSITIONAL = "неоновом ковре",
+	)
 
 /turf/open/floor/carpet/neon/Initialize(mapload)
 	. = ..()
@@ -521,6 +686,17 @@
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON
 
+/turf/open/floor/carpet/neon/simple/get_ru_names()
+	return list(
+		NOMINATIVE = "простой неоновый ковёр",
+		GENITIVE = "простого неонового ковра",
+		DATIVE = "простому неоновому ковру",
+		ACCUSATIVE = "простой неоновый ковёр",
+		INSTRUMENTAL = "простым неоновым ковром",
+		PREPOSITIONAL = "простом неоновом ковре",
+	)
+
+
 /turf/open/floor/carpet/neon/simple/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
 	icon_state = "base-nodots-255"
@@ -533,11 +709,21 @@
 
 /turf/open/floor/carpet/neon/simple/white
 	name = "simple white neon carpet"
-	desc = "A rubbery mat with a inset pattern of white phosphorescent dye."
+	desc = "Резиновый мат со вставками из белого фосфоресцирующего красителя."
 	neon_color = COLOR_WHITE
 	floor_tile = /obj/item/stack/tile/carpet/neon/simple/white
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON_WHITE
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_WHITE
+
+/turf/open/floor/carpet/neon/simple/white/get_ru_names()
+	return list(
+		NOMINATIVE = "простой белый неоновый ковёр",
+		GENITIVE = "простого белого неонового ковра",
+		DATIVE = "простому белому неоновому ковру",
+		ACCUSATIVE = "простой белый неоновый ковёр",
+		INSTRUMENTAL = "простым белым неоновым ковром",
+		PREPOSITIONAL = "простом белом неоновом ковре",
+	)
 
 /turf/open/floor/carpet/neon/simple/white/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
@@ -551,13 +737,24 @@
 
 /turf/open/floor/carpet/neon/simple/black
 	name = "simple black neon carpet"
-	desc = "A rubbery mat with a inset pattern of black phosphorescent dye."
+	desc = "Резиновый мат со вставками из черного фосфоресцирующего красителя."
 	neon_icon = 'icons/turf/floors/carpet_neon_glow.dmi'
 	neon_icon_state = "glow" // This one also lights up the edges of the lines.
 	neon_color = COLOR_BLACK
 	floor_tile = /obj/item/stack/tile/carpet/neon/simple/black
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON_BLACK
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_BLACK
+
+/turf/open/floor/carpet/neon/simple/black/get_ru_names()
+	return list(
+		NOMINATIVE = "простой черный неоновый ковёр",
+		GENITIVE = "простого черного неонового ковра",
+		DATIVE = "простому черному неоновому ковру",
+		ACCUSATIVE = "простой черный неоновый ковёр",
+		INSTRUMENTAL = "простым черным неоновым ковром",
+		PREPOSITIONAL = "простом черном неоновом ковре",
+	)
+
 
 /turf/open/floor/carpet/neon/simple/black/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
@@ -572,11 +769,22 @@
 
 /turf/open/floor/carpet/neon/simple/red
 	name = "simple red neon carpet"
-	desc = "A rubbery mat with a inset pattern of red phosphorescent dye."
+	desc = "Резиновый мат со вставками из красного фосфоресцирующего красителя."
 	neon_color = COLOR_RED
 	floor_tile = /obj/item/stack/tile/carpet/neon/simple/red
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON_RED
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_RED
+
+/turf/open/floor/carpet/neon/simple/white/get_ru_names()
+	return list(
+		NOMINATIVE = "простой красный неоновый ковёр",
+		GENITIVE = "простого красного неонового ковра",
+		DATIVE = "простому красному неоновому ковру",
+		ACCUSATIVE = "простой красный неоновый ковёр",
+		INSTRUMENTAL = "простым красным неоновым ковром",
+		PREPOSITIONAL = "простом красном неоновом ковре",
+	)
+
 
 /turf/open/floor/carpet/neon/simple/red/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
@@ -590,11 +798,22 @@
 
 /turf/open/floor/carpet/neon/simple/orange
 	name = "simple orange neon carpet"
-	desc = "A rubbery mat with a inset pattern of orange phosphorescent dye."
+	desc = "Резиновый мат со вставками из оранжевого фосфоресцирующего красителя."
 	neon_color = COLOR_ORANGE
 	floor_tile = /obj/item/stack/tile/carpet/neon/simple/orange
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON_ORANGE
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_ORANGE
+
+/turf/open/floor/carpet/neon/simple/white/get_ru_names()
+	return list(
+		NOMINATIVE = "простой оранжевый неоновый ковёр",
+		GENITIVE = "простого оранжевого неонового ковра",
+		DATIVE = "простому оранжевому неоновому ковру",
+		ACCUSATIVE = "простой оранжевый неоновый ковёр",
+		INSTRUMENTAL = "простым оранжевым неоновым ковром",
+		PREPOSITIONAL = "простом оранжевом неоновом ковре",
+	)
+
 
 /turf/open/floor/carpet/neon/simple/orange/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
@@ -608,11 +827,22 @@
 
 /turf/open/floor/carpet/neon/simple/yellow
 	name = "simple yellow neon carpet"
-	desc = "A rubbery mat with a inset pattern of yellow phosphorescent dye."
+	desc = "Резиновый мат со вставками из желтого фосфоресцирующего красителя."
 	neon_color = COLOR_YELLOW
 	floor_tile = /obj/item/stack/tile/carpet/neon/simple/yellow
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON_YELLOW
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_YELLOW
+
+/turf/open/floor/carpet/neon/simple/white/get_ru_names()
+	return list(
+		NOMINATIVE = "простой желтый неоновый ковёр",
+		GENITIVE = "простого желтого неонового ковра",
+		DATIVE = "простому желтому неоновому ковру",
+		ACCUSATIVE = "простой желтый неоновый ковёр",
+		INSTRUMENTAL = "простым желтым неоновым ковром",
+		PREPOSITIONAL = "простом желтом неоновом ковре",
+	)
+
 
 /turf/open/floor/carpet/neon/simple/yellow/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
@@ -626,11 +856,22 @@
 
 /turf/open/floor/carpet/neon/simple/lime
 	name = "simple lime neon carpet"
-	desc = "A rubbery mat with a inset pattern of lime phosphorescent dye."
+	desc = "Резиновый мат со вставками из лаймового фосфоресцирующего красителя."
 	neon_color = COLOR_LIME
 	floor_tile = /obj/item/stack/tile/carpet/neon/simple/lime
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON_LIME
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_LIME
+
+/turf/open/floor/carpet/neon/simple/white/get_ru_names()
+	return list(
+		NOMINATIVE = "простой лаймовый неоновый ковёр",
+		GENITIVE = "простого лаймового неонового ковра",
+		DATIVE = "простому лаймовому неоновому ковру",
+		ACCUSATIVE = "простой лаймовый неоновый ковёр",
+		INSTRUMENTAL = "простым лаймовым неоновым ковром",
+		PREPOSITIONAL = "простом лаймовом неоновом ковре",
+	)
+
 
 /turf/open/floor/carpet/neon/simple/lime/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
@@ -644,11 +885,22 @@
 
 /turf/open/floor/carpet/neon/simple/green
 	name = "simple green neon carpet"
-	desc = "A rubbery mat with a inset pattern of green phosphorescent dye."
+	desc = "Резиновый мат со вставками из зеленого фосфоресцирующего красителя."
 	neon_color = COLOR_GREEN
 	floor_tile = /obj/item/stack/tile/carpet/neon/simple/green
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON_GREEN
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_GREEN
+
+/turf/open/floor/carpet/neon/simple/white/get_ru_names()
+	return list(
+		NOMINATIVE = "простой зеленый неоновый ковёр",
+		GENITIVE = "простого зеленого неонового ковра",
+		DATIVE = "простому зеленому неоновому ковру",
+		ACCUSATIVE = "простой зеленый неоновый ковёр",
+		INSTRUMENTAL = "простым зеленым неоновым ковром",
+		PREPOSITIONAL = "простом зеленом неоновом ковре",
+	)
+
 
 /turf/open/floor/carpet/neon/simple/green/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
@@ -662,11 +914,22 @@
 
 /turf/open/floor/carpet/neon/simple/teal
 	name = "simple teal neon carpet"
-	desc = "A rubbery mat with a inset pattern of teal phosphorescent dye."
+	desc = "Резиновый мат со вставками из бирюзового фосфоресцирующего красителя."
 	neon_color = COLOR_TEAL
 	floor_tile = /obj/item/stack/tile/carpet/neon/simple/teal
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON_TEAL
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_TEAL
+
+/turf/open/floor/carpet/neon/simple/white/get_ru_names()
+	return list(
+		NOMINATIVE = "простой бирюзовый неоновый ковёр",
+		GENITIVE = "простого бирюзового неонового ковра",
+		DATIVE = "простому бирюзовому неоновому ковру",
+		ACCUSATIVE = "простой бирюзовый неоновый ковёр",
+		INSTRUMENTAL = "простым бирюзовым неоновым ковром",
+		PREPOSITIONAL = "простом бирюзовом неоновом ковре",
+	)
+
 
 /turf/open/floor/carpet/neon/simple/teal/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
@@ -680,11 +943,22 @@
 
 /turf/open/floor/carpet/neon/simple/cyan
 	name = "simple cyan neon carpet"
-	desc = "A rubbery mat with a inset pattern of cyan phosphorescent dye."
+	desc = "Резиновый мат со вставками из голубого фосфоресцирующего красителя."
 	neon_color = COLOR_CYAN
 	floor_tile = /obj/item/stack/tile/carpet/neon/simple/cyan
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON_CYAN
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_CYAN
+
+/turf/open/floor/carpet/neon/simple/white/get_ru_names()
+	return list(
+		NOMINATIVE = "простой голубой неоновый ковёр",
+		GENITIVE = "простого голубого неонового ковра",
+		DATIVE = "простому голубому неоновому ковру",
+		ACCUSATIVE = "простой голубой неоновый ковёр",
+		INSTRUMENTAL = "простым голубым неоновым ковром",
+		PREPOSITIONAL = "простом голубом неоновом ковре",
+	)
+
 
 /turf/open/floor/carpet/neon/simple/cyan/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
@@ -698,11 +972,22 @@
 
 /turf/open/floor/carpet/neon/simple/blue
 	name = "simple blue neon carpet"
-	desc = "A rubbery mat with a inset pattern of blue phosphorescent dye."
+	desc = "Резиновый мат со вставками из синего фосфоресцирующего красителя."
 	neon_color = COLOR_BLUE
 	floor_tile = /obj/item/stack/tile/carpet/neon/simple/blue
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON_BLUE
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_BLUE
+
+/turf/open/floor/carpet/neon/simple/white/get_ru_names()
+	return list(
+		NOMINATIVE = "простой синий неоновый ковёр",
+		GENITIVE = "простого синего неонового ковра",
+		DATIVE = "простому синому неоновому ковру",
+		ACCUSATIVE = "простой синий неоновый ковёр",
+		INSTRUMENTAL = "простым синим неоновым ковром",
+		PREPOSITIONAL = "простом синем неоновом ковре",
+	)
+
 
 /turf/open/floor/carpet/neon/simple/blue/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
@@ -716,11 +1001,21 @@
 
 /turf/open/floor/carpet/neon/simple/purple
 	name = "simple purple neon carpet"
-	desc = "A rubbery mat with a inset pattern of purple phosphorescent dye."
+	desc = "Резиновый мат со вставками из пурпурного фосфоресцирующего красителя."
 	neon_color = COLOR_PURPLE
 	floor_tile = /obj/item/stack/tile/carpet/neon/simple/purple
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON_PURPLE
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_PURPLE
+
+/turf/open/floor/carpet/neon/simple/white/get_ru_names()
+	return list(
+		NOMINATIVE = "простой пурпурный неоновый ковёр",
+		GENITIVE = "простого пурпурного неонового ковра",
+		DATIVE = "простому пурпурному неоновому ковру",
+		ACCUSATIVE = "простой пурпурный неоновый ковёр",
+		INSTRUMENTAL = "простым пурпурным неоновым ковром",
+		PREPOSITIONAL = "простом пурпурном неоновом ковре",
+	)
 
 /turf/open/floor/carpet/neon/simple/purple/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
@@ -734,11 +1029,21 @@
 
 /turf/open/floor/carpet/neon/simple/violet
 	name = "simple violet neon carpet"
-	desc = "A rubbery mat with a inset pattern of violet phosphorescent dye."
+	desc = "Резиновый мат со вставками из фиолетового фосфоресцирующего красителя."
 	neon_color = COLOR_VIOLET
 	floor_tile = /obj/item/stack/tile/carpet/neon/simple/violet
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON_VIOLET
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_VIOLET
+
+/turf/open/floor/carpet/neon/simple/white/get_ru_names()
+	return list(
+		NOMINATIVE = "простой фиолетовый неоновый ковёр",
+		GENITIVE = "простого фиолетового неонового ковра",
+		DATIVE = "простому фиолетовому неоновому ковру",
+		ACCUSATIVE = "простой фиолетовый неоновый ковёр",
+		INSTRUMENTAL = "простым фиолетовым неоновым ковром",
+		PREPOSITIONAL = "простом фиолетовом неоновом ковре",
+	)
 
 /turf/open/floor/carpet/neon/simple/violet/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
@@ -752,11 +1057,21 @@
 
 /turf/open/floor/carpet/neon/simple/pink
 	name = "simple pink neon carpet"
-	desc = "A rubbery mat with a inset pattern of pink phosphorescent dye."
+	desc = "Резиновый мат со вставками из розового фосфоресцирующего красителя."
 	neon_color = COLOR_LIGHT_PINK
 	floor_tile = /obj/item/stack/tile/carpet/neon/simple/pink
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_CARPET_SIMPLE_NEON_PINK
 	canSmoothWith = SMOOTH_GROUP_CARPET_SIMPLE_NEON_PINK
+
+/turf/open/floor/carpet/neon/simple/white/get_ru_names()
+	return list(
+		NOMINATIVE = "простой розовый неоновый ковёр",
+		GENITIVE = "простого розового неонового ковра",
+		DATIVE = "простому розовому неоновому ковру",
+		ACCUSATIVE = "простой розовый неоновый ковёр",
+		INSTRUMENTAL = "простым розовым неоновым ковром",
+		PREPOSITIONAL = "простом розовом неоновом ковре",
+	)
 
 /turf/open/floor/carpet/neon/simple/pink/nodots
 	icon = 'icons/turf/floors/carpet_neon_base_nodots.dmi'
@@ -859,7 +1174,8 @@
 	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 
 /turf/open/floor/fakepit
-	desc = "A clever illusion designed to look like a bottomless pit."
+	desc = "Искусная иллюзия, выглядящая как бездонная яма."
+	gender = FEMALE
 	icon = 'icons/turf/floors/chasms.dmi'
 	icon_state = "chasms-0"
 	floor_tile = /obj/item/stack/tile/fakepit
@@ -869,19 +1185,40 @@
 	canSmoothWith = SMOOTH_GROUP_TURF_CHASM
 	tiled_turf = FALSE
 
+/turf/open/floor/fakepit/get_ru_names()
+	return list(
+		NOMINATIVE = "фальшивая яма",
+		GENITIVE = "фальшивой ямы",
+		DATIVE = "фальшивой яме",
+		ACCUSATIVE = "фальшивую яму",
+		INSTRUMENTAL = "фальшивой ямой",
+		PREPOSITIONAL = "фальшивой яме",
+	)
+
 /turf/open/floor/fakepit/get_smooth_underlay_icon(mutable_appearance/underlay_appearance, turf/asking_turf, adjacency_dir)
 	underlay_appearance.icon = 'icons/turf/floors.dmi'
 	underlay_appearance.icon_state = "basalt"
 	return TRUE
 
 /turf/open/floor/fakeice
-	desc = "Is it marble, polished to a mirror finish? Or just really, really grippy ice?"
+	desc = "Отполированный до блеска мрамор? Или просто очень, очень скользкий лёд?"
+	gender = MALE
 	icon = 'icons/turf/floors/ice_turf.dmi'
 	icon_state = "ice_turf-0"
 	base_icon_state = "ice_turf-0"
 
+/turf/open/floor/fakeice/get_ru_names()
+	return list(
+		NOMINATIVE = "фальшивый лёд",
+		GENITIVE = "фальшивого льда",
+		DATIVE = "фальшивому льду",
+		ACCUSATIVE = "фальшивый лёд",
+		INSTRUMENTAL = "фальшивым льдом",
+		PREPOSITIONAL = "фальшивом льду",
+	)
+
 /turf/open/floor/fakeice/slippery
-	desc = "Somehow, it is not melting under these conditions. Must be some very thick ice. Just as slippery too."
+	desc = "Почему-то он не тает. Должно быть, очень толстый лёд. И такой же скользкий."
 
 /turf/open/floor/fakeice/slippery/Initialize(mapload)
 	. = ..()
@@ -895,6 +1232,16 @@
 	plane = PLANE_SPACE
 	tiled_turf = FALSE
 	damaged_dmi = 'icons/turf/space.dmi'
+
+/turf/open/floor/fakespace/get_ru_names()
+	return list(
+		NOMINATIVE = "фальшивый космос",
+		GENITIVE = "фальшивого космоса",
+		DATIVE = "фальшивому космосу",
+		ACCUSATIVE = "фальшивый космос",
+		INSTRUMENTAL = "фальшивым космосом",
+		PREPOSITIONAL = "фальшивом космосе",
+	)
 
 /turf/open/floor/fakespace/broken_states()
 	return list("damaged")

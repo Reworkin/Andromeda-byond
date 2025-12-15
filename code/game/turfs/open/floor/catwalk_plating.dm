@@ -9,7 +9,8 @@
 	icon = 'icons/turf/floors/catwalk_plating.dmi'
 	icon_state = "maint_above"
 	name = "catwalk floor"
-	desc = "Flooring that shows its contents underneath. Engineers love it!"
+	desc = "Решётчатый настил, открывающий вид на коммуникации. Инженеры его обожают!"
+	gender = MALE
 	baseturfs = /turf/open/floor/plating
 	floor_tile = /obj/item/stack/tile/catwalk_tile
 	layer = CATWALK_LAYER
@@ -20,19 +21,24 @@
 	var/covered = TRUE
 	var/catwalk_type = "maint"
 
-/turf/open/floor/catwalk_floor/Initialize(mapload)
-	. = ..()
-	underlays += mutable_appearance(icon, "[catwalk_type]_below", LOW_FLOOR_LAYER, src, FLOOR_PLANE)
-	update_appearance()
+/turf/open/floor/catwalk_floor/get_ru_names()
+	return list(
+		NOMINATIVE = "мостик",
+		GENITIVE = "мостика",
+		DATIVE = "мостику",
+		ACCUSATIVE = "мостик",
+		INSTRUMENTAL = "мостиком",
+		PREPOSITIONAL = "мостике",
+	)
 
 /turf/open/floor/catwalk_floor/examine(mob/user)
 	. = ..()
 
 	if(covered)
-		. += span_notice("You can <b>unscrew</b> it to reveal the contents beneath.")
+		. += span_notice("Вы можете <b>открутить</b> покрытие, чтобы открыть доступ к коммуникациям.")
 	else
-		. += span_notice("You can <b>screw</b> it to hide the contents beneath.")
-		. += span_notice("There's a <b>small crack</b> on the edge of it.")
+		. += span_notice("Вы можете <b>прикрутить</b> покрытие, чтобы скрыть коммуникации.")
+		. += span_notice("На краю виднеется <b>небольшая трещина</b>.")
 
 /turf/open/floor/catwalk_floor/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ..()
@@ -49,7 +55,7 @@
 		REMOVE_TRAIT(src, TRAIT_UNCOVERED_TURF, INNATE_TRAIT)
 
 	levelupdate()
-	user.balloon_alert(user, "[!covered ? "cover removed" : "cover added"]")
+	user.balloon_alert(user, "[!covered ? "покрытие снято" : "покрытие установлено"]")
 	tool.play_tool_sound(src)
 	update_appearance()
 
@@ -60,7 +66,7 @@
 
 /turf/open/floor/catwalk_floor/crowbar_act(mob/user, obj/item/crowbar)
 	if(covered)
-		user.balloon_alert(user, "remove cover first!")
+		user.balloon_alert(user, "сначала нужно снять покрытие!")
 		return FALSE
 	. = ..()
 
@@ -71,17 +77,47 @@
 	floor_tile = /obj/item/stack/tile/catwalk_tile/iron
 	catwalk_type = "iron"
 
+/turf/open/floor/catwalk_floor/iron/get_ru_names()
+	return list(
+		NOMINATIVE = "железный мостик",
+		GENITIVE = "железного мостика",
+		DATIVE = "железному мостику",
+		ACCUSATIVE = "железный мостик",
+		INSTRUMENTAL = "железным мостиком",
+		PREPOSITIONAL = "железном мостике",
+	)
+
 /turf/open/floor/catwalk_floor/iron_white
 	name = "white plated catwalk floor"
 	icon_state = "whiteiron_above"
 	floor_tile = /obj/item/stack/tile/catwalk_tile/iron_white
 	catwalk_type = "whiteiron"
 
+/turf/open/floor/catwalk_floor/iron_white/get_ru_names()
+	return list(
+		NOMINATIVE = "белый железный мостик",
+		GENITIVE = "белого железного мостика",
+		DATIVE = "белому железному мостику",
+		ACCUSATIVE = "белый железный мостик",
+		INSTRUMENTAL = "белым железным мостиком",
+		PREPOSITIONAL = "белом железном мостике",
+	)
+
 /turf/open/floor/catwalk_floor/iron_dark
 	name = "dark plated catwalk floor"
 	icon_state = "darkiron_above"
 	floor_tile = /obj/item/stack/tile/catwalk_tile/iron_dark
 	catwalk_type = "darkiron"
+
+/turf/open/floor/catwalk_floor/iron_dark/get_ru_names()
+	return list(
+		NOMINATIVE = "тёмный железный мостик",
+		GENITIVE = "тёмного железного мостика",
+		DATIVE = "тёмному железному мостику",
+		ACCUSATIVE = "тёмный железный мостик",
+		INSTRUMENTAL = "тёмным железным мостиком",
+		PREPOSITIONAL = "тёмном железном мостике",
+	)
 
 /turf/open/floor/catwalk_floor/titanium
 	name = "titanium plated catwalk floor"
@@ -90,11 +126,31 @@
 	catwalk_type = "titanium"
 	rust_resistance = RUST_RESISTANCE_TITANIUM
 
+/turf/open/floor/catwalk_floor/titanium/get_ru_names()
+	return list(
+		NOMINATIVE = "титановый мостик",
+		GENITIVE = "титанового мостика",
+		DATIVE = "титановому мостику",
+		ACCUSATIVE = "титановый мостик",
+		INSTRUMENTAL = "титановым мостиком",
+		PREPOSITIONAL = "титановом мостике",
+	)
+
 /turf/open/floor/catwalk_floor/iron_smooth //the original green type
 	name = "smooth plated catwalk floor"
 	icon_state = "smoothiron_above"
 	floor_tile = /obj/item/stack/tile/catwalk_tile/iron_smooth
 	catwalk_type = "smoothiron"
+
+/turf/open/floor/catwalk_floor/iron_smooth/get_ru_names()
+	return list(
+		NOMINATIVE = "гладкий железный мостик",
+		GENITIVE = "гладкого железного мостика",
+		DATIVE = "гладкому железному мостику",
+		ACCUSATIVE = "гладкий железный мостик",
+		INSTRUMENTAL = "гладким железным мостиком",
+		PREPOSITIONAL = "гладком железном мостике",
+	)
 
 //Airless variants of the above
 /turf/open/floor/catwalk_floor/airless

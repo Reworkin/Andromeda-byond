@@ -6,7 +6,8 @@
 /obj/item/stack/tile
 	name = "broken tile"
 	singular_name = "broken tile"
-	desc = "A broken tile. This should not exist."
+	desc = "Сломанная плитка. Этого не должно существовать."
+	gender = FEMALE
 	lefthand_file = 'icons/mob/inhands/items/tiles_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/items/tiles_righthand.dmi'
 	icon = 'icons/obj/tiles.dmi'
@@ -29,6 +30,17 @@
 	/// tile_rotate_dirs but before it gets converted to text
 	var/list/tile_rotate_dirs_number
 
+/obj/item/stack/tile/get_ru_names()
+	return list(
+		NOMINATIVE = "сломанная плитка",
+		GENITIVE = "сломанной плитки",
+		DATIVE = "сломанной плитке",
+		ACCUSATIVE = "сломанную плитку",
+		INSTRUMENTAL = "сломанной плиткой",
+		PREPOSITIONAL = "сломанной плитке",
+	)
+
+
 /obj/item/stack/tile/Initialize(mapload, new_amount, merge = TRUE, list/mat_override=null, mat_amt=1)
 	. = ..()
 	pixel_x = rand(-3, 3)
@@ -47,23 +59,23 @@
 /obj/item/stack/tile/examine(mob/user)
 	. = ..()
 	if(tile_reskin_types || tile_rotate_dirs)
-		. += span_notice("Use while in your hand to change what type of [src] you want.")
+		. += span_notice("Используйте в руке, чтобы изменить тип [src].")
 	if(throwforce && !is_cyborg) //do not want to divide by zero or show the message to borgs who can't throw
 		var/damage_value
 		switch(CEILING(MAX_LIVING_HEALTH / throwforce, 1)) //throws to crit a human
 			if(1 to 3)
-				damage_value = "superb"
+				damage_value = "превосходным"
 			if(4 to 6)
-				damage_value = "great"
+				damage_value = "отличным"
 			if(7 to 9)
-				damage_value = "good"
+				damage_value = "хорошим"
 			if(10 to 12)
-				damage_value = "fairly decent"
+				damage_value = "неплохим"
 			if(13 to 15)
-				damage_value = "mediocre"
+				damage_value = "посредственным"
 		if(!damage_value)
 			return
-		. += span_notice("Those could work as a [damage_value] throwing weapon.")
+		. += span_notice("Может послужить [damage_value] метательным оружием.")
 
 /**
  * Place our tile on a plating, or replace it.
@@ -93,39 +105,69 @@
 /obj/item/stack/tile/grass
 	name = "grass tile"
 	singular_name = "grass floor tile"
-	desc = "A patch of grass like they use on space golf courses."
+	desc = "Кусочек газона, как на полях для космического гольфа."
 	icon_state = "tile_grass"
 	inhand_icon_state = "tile-grass"
 	turf_type = /turf/open/floor/grass
 	resistance_flags = FLAMMABLE
 	merge_type = /obj/item/stack/tile/grass
 
+/obj/item/stack/tile/grass/get_ru_names()
+	return list(
+		NOMINATIVE = "дерновая плитка",
+		GENITIVE = "дерновой плитки",
+		DATIVE = "дерновой плитке",
+		ACCUSATIVE = "дерновую плитку",
+		INSTRUMENTAL = "дерновой плиткой",
+		PREPOSITIONAL = "дерновой плитке",
+	)
+
 //Hay
 /obj/item/stack/tile/hay
 	name = "hay tile"
 	singular_name = "hay floor tile"
-	desc = "Man, I'm so hungry I could eat a-"
+	desc = "Блин, я так голоден, что мог бы съесть сл..."
 	icon_state = "tile_hay"
 	inhand_icon_state = "tile-hay"
 	turf_type = /turf/open/floor/hay
 	resistance_flags = FLAMMABLE
 	merge_type = /obj/item/stack/tile/hay
 
+/obj/item/stack/tile/hay/get_ru_names()
+	return list(
+		NOMINATIVE = "сноп сена",
+		GENITIVE = "снопа сена",
+		DATIVE = "снопу сена",
+		ACCUSATIVE = "сноп сена",
+		INSTRUMENTAL = "снопом сена",
+		PREPOSITIONAL = "снопе сена",
+	)
+
 //Fairygrass
 /obj/item/stack/tile/fairygrass
 	name = "fairygrass tile"
 	singular_name = "fairygrass floor tile"
-	desc = "A patch of odd, glowing blue grass."
+	desc = "Кусочек странной светящейся синей травы."
 	icon_state = "tile_fairygrass"
 	turf_type = /turf/open/floor/grass/fairy
 	resistance_flags = FLAMMABLE
 	merge_type = /obj/item/stack/tile/fairygrass
 
+/obj/item/stack/tile/fairygrass/get_ru_names()
+	return list(
+		NOMINATIVE = "волшебная дерновая плитка",
+		GENITIVE = "волшебной дерновой плитки",
+		DATIVE = "волшебной дерновой плитке",
+		ACCUSATIVE = "волшебную дерновую плитку",
+		INSTRUMENTAL = "волшебной дерновой плиткой",
+		PREPOSITIONAL = "волшебной дерновой плитке",
+	)
+
 //Wood
 /obj/item/stack/tile/wood
 	name = "wood floor tile"
 	singular_name = "wood floor tile"
-	desc = "An easy to fit wood floor tile. Use while in your hand to change what pattern you want."
+	desc = "Легко укладываемая деревянная плитка. Используйте в руке, чтобы выбрать узор."
 	icon_state = "tile-wood"
 	inhand_icon_state = "tile-wood"
 	turf_type = /turf/open/floor/wood
@@ -139,12 +181,32 @@
 	)
 	mats_per_unit = list(/datum/material/wood = HALF_SHEET_MATERIAL_AMOUNT / 2)
 
+/obj/item/stack/tile/wood/get_ru_names()
+	return list(
+		NOMINATIVE = "деревянная плитка",
+		GENITIVE = "деревянной плитки",
+		DATIVE = "деревянной плитке",
+		ACCUSATIVE = "деревянную плитку",
+		INSTRUMENTAL = "деревянной плиткой",
+		PREPOSITIONAL = "деревянной плитке",
+	)
+
 /obj/item/stack/tile/wood/parquet
 	name = "parquet wood floor tile"
 	singular_name = "parquet wood floor tile"
 	icon_state = "tile-wood_parquet"
 	turf_type = /turf/open/floor/wood/parquet
 	merge_type = /obj/item/stack/tile/wood/parquet
+
+/obj/item/stack/tile/wood/parquet/get_ru_names()
+	return list(
+		NOMINATIVE = "паркетная плитка",
+		GENITIVE = "паркетной плитки",
+		DATIVE = "паркетной плитке",
+		ACCUSATIVE = "паркетную плитку",
+		INSTRUMENTAL = "паркетной плиткой",
+		PREPOSITIONAL = "паркетной плитке",
+	)
 
 /obj/item/stack/tile/wood/large
 	name = "large wood floor tile"
@@ -153,6 +215,16 @@
 	turf_type = /turf/open/floor/wood/large
 	merge_type = /obj/item/stack/tile/wood/large
 
+/obj/item/stack/tile/wood/large/get_ru_names()
+	return list(
+		NOMINATIVE = "большая деревянная плитка",
+		GENITIVE = "большой деревянной плитки",
+		DATIVE = "большой деревянной плитке",
+		ACCUSATIVE = "большую деревянную плитку",
+		INSTRUMENTAL = "большой деревянной плиткой",
+		PREPOSITIONAL = "большой деревянной плитке",
+	)
+
 /obj/item/stack/tile/wood/tile
 	name = "tiled wood floor tile"
 	singular_name = "tiled wood floor tile"
@@ -160,11 +232,21 @@
 	turf_type = /turf/open/floor/wood/tile
 	merge_type = /obj/item/stack/tile/wood/tile
 
+/obj/item/stack/tile/wood/tile/get_ru_names()
+	return list(
+		NOMINATIVE = "узорчатая деревянная плитка",
+		GENITIVE = "узорчатой деревянной плитки",
+		DATIVE = "узорчатой деревянной плитке",
+		ACCUSATIVE = "узорчатую деревянную плитку",
+		INSTRUMENTAL = "узорчатой деревянной плиткой",
+		PREPOSITIONAL = "узорчатой деревянной плитке",
+	)
+
 //Bamboo
 /obj/item/stack/tile/bamboo
 	name = "bamboo mat pieces"
 	singular_name = "bamboo mat piece"
-	desc = "A piece of a bamboo mat with a decorative trim."
+	desc = "Часть бамбукового мата с декоративной отделкой."
 	icon_state = "tile_bamboo"
 	inhand_icon_state = "tile-bamboo"
 	turf_type = /turf/open/floor/bamboo
@@ -178,6 +260,16 @@
 	)
 	mats_per_unit = list(/datum/material/bamboo = HALF_SHEET_MATERIAL_AMOUNT / 2)
 
+/obj/item/stack/tile/bamboo/get_ru_names()
+	return list(
+		NOMINATIVE = "часть бамбукового мата",
+		GENITIVE = "части бамбукового мата",
+		DATIVE = "части бамбукового мата",
+		ACCUSATIVE = "часть бамбукового мата",
+		INSTRUMENTAL = "частью бамбукового мата",
+		PREPOSITIONAL = "части бамбукового мата",
+	)
+
 /obj/item/stack/tile/bamboo/tatami
 	name = "Tatami with green rim"
 	singular_name = "green tatami floor tile"
@@ -186,12 +278,32 @@
 	merge_type = /obj/item/stack/tile/bamboo/tatami
 	tile_rotate_dirs = list(NORTH, EAST, SOUTH, WEST)
 
+/obj/item/stack/tile/bamboo/tatami/get_ru_names()
+	return list(
+		NOMINATIVE = "плитка татами (зелёная)",
+		GENITIVE = "плитки татами (зелёной)",
+		DATIVE = "плитке татами (зелёной)",
+		ACCUSATIVE = "плитку татами (зелёную)",
+		INSTRUMENTAL = "плиткой татами (зелёной)",
+		PREPOSITIONAL = "плитке татами (зелёной)",
+	)
+
 /obj/item/stack/tile/bamboo/tatami/purple
 	name = "Tatami with purple rim"
 	singular_name = "purple tatami floor tile"
 	icon_state = "tile_tatami_purple"
 	turf_type = /turf/open/floor/bamboo/tatami/purple
 	merge_type = /obj/item/stack/tile/bamboo/tatami/purple
+
+/obj/item/stack/tile/bamboo/tatami/purple/get_ru_names()
+	return list(
+		NOMINATIVE = "плитка татами (фиолетовая)",
+		GENITIVE = "плитки татами (фиолетовой)",
+		DATIVE = "плитке татами (фиолетовой)",
+		ACCUSATIVE = "плитку татами (фиолетовую)",
+		INSTRUMENTAL = "плиткой татами (фиолетовой)",
+		PREPOSITIONAL = "плитке татами (фиолетовой)",
+	)
 
 /obj/item/stack/tile/bamboo/tatami/black
 	name = "Tatami with black rim"
@@ -200,22 +312,42 @@
 	turf_type = /turf/open/floor/bamboo/tatami/black
 	merge_type = /obj/item/stack/tile/bamboo/tatami/black
 
+/obj/item/stack/tile/bamboo/tatami/black/get_ru_names()
+	return list(
+		NOMINATIVE = "плитка татами (чёрная)",
+		GENITIVE = "плитки татами (чёрной)",
+		DATIVE = "плитке татами (чёрной)",
+		ACCUSATIVE = "плитку татами (чёрную)",
+		INSTRUMENTAL = "плиткой татами (чёрной)",
+		PREPOSITIONAL = "плитке татами (чёрной)",
+	)
+
 //Basalt
 /obj/item/stack/tile/basalt
 	name = "basalt tile"
 	singular_name = "basalt floor tile"
-	desc = "Artificially made ashy soil themed on a hostile environment."
+	desc = "Искусственно созданная пепельная почва, имитирующая враждебную среду."
 	icon_state = "tile_basalt"
 	inhand_icon_state = "tile-basalt"
 	turf_type = /turf/open/floor/fakebasalt
 	merge_type = /obj/item/stack/tile/basalt
 	mats_per_unit = list(/datum/material/sand = SHEET_MATERIAL_AMOUNT * 2)
 
+/obj/item/stack/tile/basalt/get_ru_names()
+	return list(
+		NOMINATIVE = "базальтовая плитка",
+		GENITIVE = "базальтовой плитки",
+		DATIVE = "базальтовой плитке",
+		ACCUSATIVE = "базальтовую плитку",
+		INSTRUMENTAL = "базальтовой плиткой",
+		PREPOSITIONAL = "базальтовой плитке",
+	)
+
 //Carpets
 /obj/item/stack/tile/carpet
 	name = "carpet"
 	singular_name = "carpet tile"
-	desc = "A piece of carpet. It is the same size as a floor tile."
+	desc = "Кусок ковролина. По размеру совпадает с напольной плиткой."
 	icon_state = "tile-carpet"
 	inhand_icon_state = "tile-carpet"
 	turf_type = /turf/open/floor/carpet
@@ -228,22 +360,52 @@
 		/obj/item/stack/tile/carpet/star,
 	)
 
+/obj/item/stack/tile/carpet/get_ru_names()
+	return list(
+		NOMINATIVE = "ковровая плитка",
+		GENITIVE = "ковровой плитки",
+		DATIVE = "ковровой плитке",
+		ACCUSATIVE = "ковровую плитку",
+		INSTRUMENTAL = "ковровой плиткой",
+		PREPOSITIONAL = "ковровой плитке",
+	)
+
 /obj/item/stack/tile/carpet/symbol
 	name = "symbol carpet"
 	singular_name = "symbol carpet tile"
 	icon_state = "tile-carpet-symbol"
-	desc = "A piece of carpet. This one has a symbol on it."
+	desc = "Кусок ковролина. На этом изображён символ."
 	turf_type = /turf/open/floor/carpet/lone
 	merge_type = /obj/item/stack/tile/carpet/symbol
 	tile_rotate_dirs = list(SOUTH, NORTH, EAST, WEST, SOUTHEAST)
+
+/obj/item/stack/tile/carpet/symbol/get_ru_names()
+	return list(
+		NOMINATIVE = "ковровая плитка с символом",
+		GENITIVE = "ковровой плитки с символом",
+		DATIVE = "ковровой плитке с символом",
+		ACCUSATIVE = "ковровую плитку с символом",
+		INSTRUMENTAL = "ковровой плиткой с символом",
+		PREPOSITIONAL = "ковровой плитке с символом",
+	)
 
 /obj/item/stack/tile/carpet/star
 	name = "star carpet"
 	singular_name = "star carpet tile"
 	icon_state = "tile-carpet-star"
-	desc = "A piece of carpet. This one has a star on it."
+	desc = "Кусок ковролина. На этом изображена звезда."
 	turf_type = /turf/open/floor/carpet/lone/star
 	merge_type = /obj/item/stack/tile/carpet/star
+
+/obj/item/stack/tile/carpet/star/get_ru_names()
+	return list(
+		NOMINATIVE = "ковровая плитка со звездой",
+		GENITIVE = "ковровой плитки со звездой",
+		DATIVE = "ковровой плитке со звездой",
+		ACCUSATIVE = "ковровую плитку со звездой",
+		INSTRUMENTAL = "ковровой плиткой со звездой",
+		PREPOSITIONAL = "ковровой плитке со звездой",
+	)
 
 /obj/item/stack/tile/carpet/black
 	name = "black carpet"
@@ -254,6 +416,16 @@
 	merge_type = /obj/item/stack/tile/carpet/black
 	tile_reskin_types = null
 
+/obj/item/stack/tile/carpet/black/get_ru_names()
+	return list(
+		NOMINATIVE = "черная ковровая плитка",
+		GENITIVE = "черной ковровой плитки",
+		DATIVE = "черной ковровой плитке",
+		ACCUSATIVE = "черную ковровую плитку",
+		INSTRUMENTAL = "черной ковровой плиткой",
+		PREPOSITIONAL = "черной ковровой плитке",
+	)
+
 /obj/item/stack/tile/carpet/blue
 	name = "blue carpet"
 	icon_state = "tile-carpet-blue"
@@ -262,6 +434,7 @@
 	table_type = /obj/structure/table/wood/fancy/blue
 	merge_type = /obj/item/stack/tile/carpet/blue
 	tile_reskin_types = null
+
 
 /obj/item/stack/tile/carpet/cyan
 	name = "cyan carpet"
@@ -272,6 +445,18 @@
 	merge_type = /obj/item/stack/tile/carpet/cyan
 	tile_reskin_types = null
 
+
+/obj/item/stack/tile/carpet/cyan/get_ru_names()
+	return list(
+		NOMINATIVE = "голубая ковровая плитка",
+		GENITIVE = "голубой ковровой плитки",
+		DATIVE = "голубой ковровой плитке",
+		ACCUSATIVE = "голубую ковровую плитку",
+		INSTRUMENTAL = "голубой ковровой плиткой",
+		PREPOSITIONAL = "голубой ковровой плитке",
+	)
+
+
 /obj/item/stack/tile/carpet/green
 	name = "green carpet"
 	icon_state = "tile-carpet-green"
@@ -280,6 +465,17 @@
 	table_type = /obj/structure/table/wood/fancy/green
 	merge_type = /obj/item/stack/tile/carpet/green
 	tile_reskin_types = null
+
+/obj/item/stack/tile/carpet/green/get_ru_names()
+	return list(
+		NOMINATIVE = "зеленая ковровая плитка",
+		GENITIVE = "зеленой ковровой плитки",
+		DATIVE = "зеленой ковровой плитке",
+		ACCUSATIVE = "зеленую ковровую плитку",
+		INSTRUMENTAL = "зеленой ковровой плиткой",
+		PREPOSITIONAL = "зеленой ковровой плитке",
+	)
+
 
 /obj/item/stack/tile/carpet/orange
 	name = "orange carpet"
@@ -299,6 +495,17 @@
 	merge_type = /obj/item/stack/tile/carpet/purple
 	tile_reskin_types = null
 
+/obj/item/stack/tile/carpet/purple/get_ru_names()
+	return list(
+		NOMINATIVE = "фиолетовая ковровая плитка",
+		GENITIVE = "фиолетовой ковровой плитки",
+		DATIVE = "фиолетовой ковровой плитке",
+		ACCUSATIVE = "фиолетовую ковровую плитку",
+		INSTRUMENTAL = "фиолетовой ковровой плиткой",
+		PREPOSITIONAL = "фиолетовой ковровой плитке",
+	)
+
+
 /obj/item/stack/tile/carpet/red
 	name = "red carpet"
 	icon_state = "tile-carpet-red"
@@ -307,6 +514,17 @@
 	table_type = /obj/structure/table/wood/fancy/red
 	merge_type = /obj/item/stack/tile/carpet/red
 	tile_reskin_types = null
+
+/obj/item/stack/tile/carpet/red/get_ru_names()
+	return list(
+		NOMINATIVE = "красная ковровая плитка",
+		GENITIVE = "красной ковровой плитки",
+		DATIVE = "красной ковровой плитке",
+		ACCUSATIVE = "красную ковровую плитку",
+		INSTRUMENTAL = "красной ковровой плиткой",
+		PREPOSITIONAL = "красной ковровой плитке",
+	)
+
 
 /obj/item/stack/tile/carpet/royalblack
 	name = "royal black carpet"
@@ -317,6 +535,16 @@
 	merge_type = /obj/item/stack/tile/carpet/royalblack
 	tile_reskin_types = null
 
+/obj/item/stack/tile/carpet/royalblack/get_ru_names()
+	return list(
+		NOMINATIVE = "королевски черная ковровая плитка",
+		GENITIVE = "королевски черной ковровой плитки",
+		DATIVE = "королевски черной ковровой плитке",
+		ACCUSATIVE = "королевски черную ковровую плитку",
+		INSTRUMENTAL = "королевски черной ковровой плиткой",
+		PREPOSITIONAL = "королевски черной ковровой плитке",
+	)
+
 /obj/item/stack/tile/carpet/royalblue
 	name = "royal blue carpet"
 	icon_state = "tile-carpet-royalblue"
@@ -326,6 +554,16 @@
 	merge_type = /obj/item/stack/tile/carpet/royalblue
 	tile_reskin_types = null
 
+/obj/item/stack/tile/carpet/blue/get_ru_names()
+	return list(
+		NOMINATIVE = "королевски синяя ковровая плитка",
+		GENITIVE = "королевски синей ковровой плитки",
+		DATIVE = "королевски синей ковровой плитке",
+		ACCUSATIVE = "королевски синюю ковровую плитку",
+		INSTRUMENTAL = "королевски синей ковровой плиткой",
+		PREPOSITIONAL = "королевски синей ковровой плитке",
+	)
+
 /obj/item/stack/tile/carpet/executive
 	name = "executive carpet"
 	icon_state = "tile_carpet_executive"
@@ -333,6 +571,16 @@
 	turf_type = /turf/open/floor/carpet/executive
 	merge_type = /obj/item/stack/tile/carpet/executive
 	tile_reskin_types = null
+
+/obj/item/stack/tile/carpet/executive/get_ru_names()
+	return list(
+		NOMINATIVE = "исполнительная ковровая плитка",
+		GENITIVE = "исполнительной ковровой плитки",
+		DATIVE = "исполнительной ковровой плитке",
+		ACCUSATIVE = "исполнительную ковровую плитку",
+		INSTRUMENTAL = "исполнительной ковровой плиткой",
+		PREPOSITIONAL = "исполнительной ковровой плитке",
+	)
 
 /obj/item/stack/tile/carpet/stellar
 	name = "stellar carpet"
@@ -342,6 +590,16 @@
 	merge_type = /obj/item/stack/tile/carpet/stellar
 	tile_reskin_types = null
 
+/turf/open/floor/carpet/stellar/get_ru_names()
+	return list(
+		NOMINATIVE = "звёздная ковровая плитка",
+		GENITIVE = "звёздной ковровой плитке",
+		DATIVE = "звёздной ковровой плитке",
+		ACCUSATIVE = "звёздную ковровую плитку",
+		INSTRUMENTAL = "звёздной ковровой плиткой",
+		PREPOSITIONAL = "звёздной ковровой плитке",
+	)
+
 /obj/item/stack/tile/carpet/donk
 	name = "\improper Donk Co. promotional carpet"
 	icon_state = "tile_carpet_donk"
@@ -349,6 +607,16 @@
 	turf_type = /turf/open/floor/carpet/donk
 	merge_type = /obj/item/stack/tile/carpet/donk
 	tile_reskin_types = null
+
+/obj/item/stack/tile/carpet/donk/get_ru_names()
+	return list(
+		NOMINATIVE = "рекламная ковровая плитка Donk Co.",
+		GENITIVE = "рекламной ковровой плитки Donk Co.",
+		DATIVE = "рекламной ковровой плитке Donk Co.",
+		ACCUSATIVE = "рекламную ковровую плитку Donk Co.",
+		INSTRUMENTAL = "рекламной ковровой плиткой Donk Co.",
+		PREPOSITIONAL = "рекламной ковровой плитке Donk Co.",
+	)
 
 /obj/item/stack/tile/carpet/fifty
 	amount = 50
@@ -395,7 +663,7 @@
 /obj/item/stack/tile/carpet/neon
 	name = "neon carpet"
 	singular_name = "neon carpet tile"
-	desc = "A piece of rubbery mat inset with a phosphorescent pattern."
+	desc = "Кусок резинового покрытия со вставками фосфоресцирующего узора."
 	inhand_icon_state = "tile-neon"
 	turf_type = /turf/open/floor/carpet/neon
 	merge_type = /obj/item/stack/tile/carpet/neon
@@ -413,6 +681,17 @@
 	var/neon_color
 	/// The alpha used for the emissive overlay.
 	var/emissive_alpha = 150
+
+/obj/item/stack/tile/carpet/neon/get_ru_names()
+	return list(
+		NOMINATIVE = "неоновая ковровая плитка",
+		GENITIVE = "неоновой ковровой плитки",
+		DATIVE = "неоновой ковровой плитке",
+		ACCUSATIVE = "неоновую ковровую плитку",
+		INSTRUMENTAL = "неоновой ковровой плиткой",
+		PREPOSITIONAL = "неоновой ковровой плитке",
+	)
+
 
 /obj/item/stack/tile/carpet/neon/update_overlays()
 	. = ..()
@@ -444,6 +723,17 @@
 		/obj/item/stack/tile/carpet/neon/simple/nodots,
 	)
 
+/obj/item/stack/tile/carpet/neon/simple/get_ru_names()
+	return list(
+		NOMINATIVE = "простая неоновая ковровая плитка",
+		GENITIVE = "простой неоновой ковровой плитки",
+		DATIVE = "простой неоновой ковровой плитке",
+		ACCUSATIVE = "простую неоновую ковровую плитку",
+		INSTRUMENTAL = "простой неоновой ковровой плиткой",
+		PREPOSITIONAL = "простой неоновой ковровой плитке",
+	)
+
+
 /obj/item/stack/tile/carpet/neon/simple/nodots
 	icon_state = "tile_carpet_neon_simple_nodots"
 	neon_icon_state = "tile_carpet_neon_simple_light_nodots"
@@ -463,6 +753,16 @@
 	tile_reskin_types = list(
 		/obj/item/stack/tile/carpet/neon/simple/white,
 		/obj/item/stack/tile/carpet/neon/simple/white/nodots,
+	)
+
+/obj/item/stack/tile/carpet/neon/simple/white/get_ru_names()
+	return list(
+		NOMINATIVE = "белая неоновая ковровая плитка",
+		GENITIVE = "белой неоновой ковровой плитки",
+		DATIVE = "белой неоновой ковровой плитке",
+		ACCUSATIVE = "белую неоновую ковровую плитку",
+		INSTRUMENTAL = "белой неоновой ковровой плиткой",
+		PREPOSITIONAL = "белой неоновой ковровой плитке",
 	)
 
 /obj/item/stack/tile/carpet/neon/simple/white/nodots
@@ -487,6 +787,16 @@
 		/obj/item/stack/tile/carpet/neon/simple/black/nodots,
 	)
 
+/obj/item/stack/tile/carpet/neon/simple/black/get_ru_names()
+	return list(
+		NOMINATIVE = "чёрная неоновая ковровая плитка",
+		GENITIVE = "чёрной неоновой ковровой плитки",
+		DATIVE = "чёрной неоновой ковровой плитке",
+		ACCUSATIVE = "чёрную неоновую ковровую плитку",
+		INSTRUMENTAL = "чёрной неоновой ковровой плиткой",
+		PREPOSITIONAL = "чёрной неоновой ковровой плитке",
+	)
+
 /obj/item/stack/tile/carpet/neon/simple/black/nodots
 	icon_state = "tile_carpet_neon_simple_nodots"
 	neon_icon_state = "tile_carpet_neon_simple_glow_nodots"
@@ -506,6 +816,16 @@
 	tile_reskin_types = list(
 		/obj/item/stack/tile/carpet/neon/simple/red,
 		/obj/item/stack/tile/carpet/neon/simple/red/nodots,
+	)
+
+/obj/item/stack/tile/carpet/neon/simple/red/get_ru_names()
+	return list(
+		NOMINATIVE = "красная неоновая ковровая плитка",
+		GENITIVE = "красной неоновой ковровой плитки",
+		DATIVE = "красной неоновой ковровой плитке",
+		ACCUSATIVE = "красную неоновую ковровую плитку",
+		INSTRUMENTAL = "красной неоновой ковровой плиткой",
+		PREPOSITIONAL = "красной неоновой ковровой плитке",
 	)
 
 /obj/item/stack/tile/carpet/neon/simple/red/nodots
@@ -529,6 +849,17 @@
 		/obj/item/stack/tile/carpet/neon/simple/orange/nodots,
 	)
 
+/obj/item/stack/tile/carpet/neon/simple/orange/get_ru_names()
+	return list(
+		NOMINATIVE = "оранжевая неоновая ковровая плитка",
+		GENITIVE = "оранжевой неоновой ковровой плитки",
+		DATIVE = "оранжевой неоновой ковровой плитке",
+		ACCUSATIVE = "оранжевую неоновую ковровую плитку",
+		INSTRUMENTAL = "оранжевой неоновой ковровой плиткой",
+		PREPOSITIONAL = "оранжевой неоновой ковровой плитке",
+	)
+
+
 /obj/item/stack/tile/carpet/neon/simple/orange/nodots
 	icon_state = "tile_carpet_neon_simple_nodots"
 	neon_icon_state = "tile_carpet_neon_simple_light_nodots"
@@ -550,6 +881,16 @@
 		/obj/item/stack/tile/carpet/neon/simple/yellow/nodots,
 	)
 
+/obj/item/stack/tile/carpet/neon/simple/yellow/get_ru_names()
+	return list(
+		NOMINATIVE = "жёлтая неоновая ковровая плитка",
+		GENITIVE = "жёлтой неоновой ковровой плитки",
+		DATIVE = "жёлтой неоновой ковровой плитке",
+		ACCUSATIVE = "жёлтую неоновую ковровую плитку",
+		INSTRUMENTAL = "жёлтой неоновой ковровой плиткой",
+		PREPOSITIONAL = "жёлтой неоновой ковровой плитке",
+	)
+
 /obj/item/stack/tile/carpet/neon/simple/yellow/nodots
 	icon_state = "tile_carpet_neon_simple_nodots"
 	neon_icon_state = "tile_carpet_neon_simple_light_nodots"
@@ -559,7 +900,6 @@
 		/obj/item/stack/tile/carpet/neon/simple/yellow,
 		/obj/item/stack/tile/carpet/neon/simple/yellow/nodots,
 	)
-
 /obj/item/stack/tile/carpet/neon/simple/lime
 	name = "simple lime neon carpet"
 	singular_name = "simple lime neon carpet tile"
@@ -569,6 +909,16 @@
 	tile_reskin_types = list(
 		/obj/item/stack/tile/carpet/neon/simple/lime,
 		/obj/item/stack/tile/carpet/neon/simple/lime/nodots,
+	)
+
+/obj/item/stack/tile/carpet/neon/simple/lime/get_ru_names()
+	return list(
+		NOMINATIVE = "лаймовая неоновая ковровая плитка",
+		GENITIVE = "лаймовой неоновой ковровой плитки",
+		DATIVE = "лаймовой неоновой ковровой плитке",
+		ACCUSATIVE = "лаймовую неоновую ковровую плитку",
+		INSTRUMENTAL = "лаймовой неоновой ковровой плиткой",
+		PREPOSITIONAL = "лаймовой неоновой ковровой плитке",
 	)
 
 /obj/item/stack/tile/carpet/neon/simple/lime/nodots
@@ -592,6 +942,16 @@
 		/obj/item/stack/tile/carpet/neon/simple/green/nodots,
 	)
 
+/obj/item/stack/tile/carpet/neon/simple/green/get_ru_names()
+	return list(
+		NOMINATIVE = "зелёная неоновая ковровая плитка",
+		GENITIVE = "зелёной неоновой ковровой плитки",
+		DATIVE = "зелёной неоновой ковровой плитке",
+		ACCUSATIVE = "зелёную неоновую ковровую плитку",
+		INSTRUMENTAL = "зелёной неоновой ковровой плиткой",
+		PREPOSITIONAL = "зелёной неоновой ковровой плитке",
+	)
+
 /obj/item/stack/tile/carpet/neon/simple/green/nodots
 	icon_state = "tile_carpet_neon_simple_nodots"
 	neon_icon_state = "tile_carpet_neon_simple_light_nodots"
@@ -611,6 +971,17 @@
 	tile_reskin_types = list(
 		/obj/item/stack/tile/carpet/neon/simple/teal,
 		/obj/item/stack/tile/carpet/neon/simple/teal/nodots,
+	)
+
+
+/obj/item/stack/tile/carpet/neon/simple/teal/get_ru_names()
+	return list(
+		NOMINATIVE = "бирюзовая неоновая ковровая плитка",
+		GENITIVE = "бирюзовой неоновой ковровой плитки",
+		DATIVE = "бирюзовой неоновой ковровой плитке",
+		ACCUSATIVE = "бирюзовую неоновую ковровую плитку",
+		INSTRUMENTAL = "бирюзовой неоновой ковровой плиткой",
+		PREPOSITIONAL = "бирюзовой неоновой ковровой плитке",
 	)
 
 /obj/item/stack/tile/carpet/neon/simple/teal/nodots
@@ -634,6 +1005,16 @@
 		/obj/item/stack/tile/carpet/neon/simple/cyan/nodots,
 	)
 
+/obj/item/stack/tile/carpet/neon/simple/cyan/get_ru_names()
+	return list(
+		NOMINATIVE = "голубая неоновая ковровая плитка",
+		GENITIVE = "голубой неоновой ковровой плитки",
+		DATIVE = "голубой неоновой ковровой плитке",
+		ACCUSATIVE = "голубую неоновую ковровую плитку",
+		INSTRUMENTAL = "голубой неоновой ковровой плиткой",
+		PREPOSITIONAL = "голубой неоновой ковровой плитке",
+	)
+
 /obj/item/stack/tile/carpet/neon/simple/cyan/nodots
 	icon_state = "tile_carpet_neon_simple_nodots"
 	neon_icon_state = "tile_carpet_neon_simple_light_nodots"
@@ -644,6 +1025,7 @@
 		/obj/item/stack/tile/carpet/neon/simple/cyan/nodots,
 	)
 
+
 /obj/item/stack/tile/carpet/neon/simple/blue
 	name = "simple blue neon carpet"
 	singular_name = "simple blue neon carpet tile"
@@ -653,6 +1035,16 @@
 	tile_reskin_types = list(
 		/obj/item/stack/tile/carpet/neon/simple/blue,
 		/obj/item/stack/tile/carpet/neon/simple/blue/nodots,
+	)
+
+/obj/item/stack/tile/carpet/neon/simple/blue/get_ru_names()
+	return list(
+		NOMINATIVE = "синяя неоновая ковровая плитка",
+		GENITIVE = "синей неоновой ковровой плитки",
+		DATIVE = "синей неоновой ковровой плитке",
+		ACCUSATIVE = "синюю неоновую ковровую плитку",
+		INSTRUMENTAL = "синей неоновой ковровой плиткой",
+		PREPOSITIONAL = "синей неоновой ковровой плитке",
 	)
 
 /obj/item/stack/tile/carpet/neon/simple/blue/nodots
@@ -676,6 +1068,16 @@
 		/obj/item/stack/tile/carpet/neon/simple/purple/nodots,
 	)
 
+/obj/item/stack/tile/carpet/neon/simple/purple/get_ru_names()
+	return list(
+		NOMINATIVE = "пурпурная неоновая ковровая плитка",
+		GENITIVE = "пурпурной неоновой ковровой плитки",
+		DATIVE = "пурпурной неоновой ковровой плитке",
+		ACCUSATIVE = "пурпурную неоновую ковровую плитку",
+		INSTRUMENTAL = "пурпурной неоновой ковровой плиткой",
+		PREPOSITIONAL = "пурпурной неоновой ковровой плитке",
+	)
+
 /obj/item/stack/tile/carpet/neon/simple/purple/nodots
 	icon_state = "tile_carpet_neon_simple_nodots"
 	neon_icon_state = "tile_carpet_neon_simple_light_nodots"
@@ -695,6 +1097,16 @@
 	tile_reskin_types = list(
 		/obj/item/stack/tile/carpet/neon/simple/violet,
 		/obj/item/stack/tile/carpet/neon/simple/violet/nodots,
+	)
+
+/obj/item/stack/tile/carpet/neon/simple/violet/get_ru_names()
+	return list(
+		NOMINATIVE = "фиолетовая неоновая ковровая плитка",
+		GENITIVE = "фиолетовой неоновой ковровой плитки",
+		DATIVE = "фиолетовой неоновой ковровой плитке",
+		ACCUSATIVE = "фиолетовую неоновую ковровую плитку",
+		INSTRUMENTAL = "фиолетовой неоновой ковровой плиткой",
+		PREPOSITIONAL = "фиолетовой неоновой ковровой плитке",
 	)
 
 /obj/item/stack/tile/carpet/neon/simple/violet/nodots
@@ -717,6 +1129,17 @@
 		/obj/item/stack/tile/carpet/neon/simple/pink,
 		/obj/item/stack/tile/carpet/neon/simple/pink/nodots,
 	)
+
+/obj/item/stack/tile/carpet/neon/simple/pink/get_ru_names()
+	return list(
+		NOMINATIVE = "розовая неоновая ковровая плитка",
+		GENITIVE = "розовой неоновой ковровой плитки",
+		DATIVE = "розовой неоновой ковровой плитке",
+		ACCUSATIVE = "розовую неоновую ковровую плитку",
+		INSTRUMENTAL = "розовой неоновой ковровой плиткой",
+		PREPOSITIONAL = "розовой неоновой ковровой плитке",
+	)
+
 
 /obj/item/stack/tile/carpet/neon/simple/pink/nodots
 	icon_state = "tile_carpet_neon_simple_nodots"
@@ -992,12 +1415,23 @@
 /obj/item/stack/tile/fakespace
 	name = "astral carpet"
 	singular_name = "astral carpet tile"
-	desc = "A piece of carpet with a convincing star pattern."
+	desc = "Кусок ковролина с убедительным звёздным узором."
 	icon_state = "tile_space"
 	inhand_icon_state = "tile-space"
 	turf_type = /turf/open/floor/fakespace
 	resistance_flags = FLAMMABLE
 	merge_type = /obj/item/stack/tile/fakespace
+
+/obj/item/stack/tile/fakespace/get_ru_names()
+	return list(
+		NOMINATIVE = "звёздная ковровая плитка",
+		GENITIVE = "звёздной ковровой плитки",
+		DATIVE = "звёздной ковровой плитке",
+		ACCUSATIVE = "звёздную ковровую плитку",
+		INSTRUMENTAL = "звёздной ковровой плиткой",
+		PREPOSITIONAL = "звёздной ковровой плитке",
+	)
+
 
 /obj/item/stack/tile/fakespace/loaded
 	amount = 30
@@ -1005,12 +1439,22 @@
 /obj/item/stack/tile/fakepit
 	name = "fake pits"
 	singular_name = "fake pit"
-	desc = "A piece of carpet with a forced perspective illusion of a pit. No way this could fool anyone!"
+	desc = "Кусок ковролина с иллюзией принудительной перспективы. Вряд ли это кого-то обманет!"
 	icon_state = "tile_pit"
 	inhand_icon_state = "tile-basalt"
 	turf_type = /turf/open/floor/fakepit
 	resistance_flags = FLAMMABLE
 	merge_type = /obj/item/stack/tile/fakepit
+
+/obj/item/stack/tile/fakepit/get_ru_names()
+	return list(
+		NOMINATIVE = "ковровая плитка с иллюзией ямы",
+		GENITIVE = "ковровой плитки с иллюзией ямы",
+		DATIVE = "ковровой плитке с иллюзией ямы",
+		ACCUSATIVE = "ковровую плитку с иллюзией ямы",
+		INSTRUMENTAL = "ковровой плиткой с иллюзией ямы",
+		PREPOSITIONAL = "ковровой плитке с иллюзией ямы",
+	)
 
 /obj/item/stack/tile/fakepit/loaded
 	amount = 30
@@ -1018,12 +1462,22 @@
 /obj/item/stack/tile/fakeice
 	name = "fake ice"
 	singular_name = "fake ice tile"
-	desc = "A piece of tile with a convincing ice pattern."
+	desc = "Кусок плитки с убедительным ледяным узором."
 	icon_state = "tile_ice"
 	inhand_icon_state = "tile-diamond"
 	turf_type = /turf/open/floor/fakeice
 	resistance_flags = FLAMMABLE
 	merge_type = /obj/item/stack/tile/fakeice
+
+/obj/item/stack/tile/fakeice/get_ru_names()
+	return list(
+		NOMINATIVE = "плитка с имитацией льда",
+		GENITIVE = "плитки с имитацией льда",
+		DATIVE = "плитке с имитацией льда",
+		ACCUSATIVE = "плитку с имитацией льда",
+		INSTRUMENTAL = "плиткой с имитацией льда",
+		PREPOSITIONAL = "плитке с имитацией льда",
+	)
 
 /obj/item/stack/tile/fakeice/loaded
 	amount = 30
@@ -1032,11 +1486,21 @@
 /obj/item/stack/tile/noslip
 	name = "high-traction floor tile"
 	singular_name = "high-traction floor tile"
-	desc = "A high-traction floor tile. It feels rubbery in your hand."
+	desc = "Напольная плитка с высоким сцеплением. На ощупь напоминает резину."
 	icon_state = "tile_noslip"
 	inhand_icon_state = "tile-noslip"
 	turf_type = /turf/open/floor/noslip
 	merge_type = /obj/item/stack/tile/noslip
+
+/obj/item/stack/tile/noslip/get_ru_names()
+	return list(
+		NOMINATIVE = "нескользящая плитка",
+		GENITIVE = "нескользящей плитки",
+		DATIVE = "нескользящей плитке",
+		ACCUSATIVE = "нескользящую плитку",
+		INSTRUMENTAL = "нескользящей плиткой",
+		PREPOSITIONAL = "нескользящей плитке",
+	)
 
 /obj/item/stack/tile/noslip/thirty
 	amount = 30
@@ -1044,7 +1508,7 @@
 /obj/item/stack/tile/noslip/tram
 	name = "high-traction platform tile"
 	singular_name = "high-traction platform tile"
-	desc = "A titanium-aluminium induction plate that powers the tram."
+	desc = "Титано-алюминиевая индукционная пластина, питающая трамвай."
 	icon_state = "tile_noslip"
 	inhand_icon_state = "tile-noslip"
 	turf_type = /turf/open/floor/noslip/tram
@@ -1053,16 +1517,26 @@
 /obj/item/stack/tile/tram
 	name = "tram platform tiles"
 	singular_name = "tram platform"
-	desc = "A tile used for tram platforms."
+	desc = "Плитка, используемая для трамвайных платформ."
 	icon_state = "darkiron_catwalk"
 	inhand_icon_state = "tile-neon"
 	turf_type = /turf/open/floor/tram
 	merge_type = /obj/item/stack/tile/tram
 
+/obj/item/stack/tile/tram/get_ru_names()
+	return list(
+		NOMINATIVE = "плитка трамвайной платформы",
+		GENITIVE = "плитки трамвайной платформы",
+		DATIVE = "плитке трамвайной платформы",
+		ACCUSATIVE = "плитку трамвайной платформы",
+		INSTRUMENTAL = "плиткой трамвайной платформы",
+		PREPOSITIONAL = "плитке трамвайной платформы",
+	)
+
 /obj/item/stack/tile/tram/plate
 	name = "linear induction tram tiles"
 	singular_name = "linear induction tram tile"
-	desc = "A tile with an aluminium plate for tram propulsion."
+	desc = "Плитка с алюминиевой пластиной для движения трамвая."
 	icon_state = "darkiron_plate"
 	inhand_icon_state = "tile-neon"
 	turf_type = /turf/open/floor/tram/plate
@@ -1072,7 +1546,7 @@
 /obj/item/stack/tile/circuit
 	name = "blue circuit tile"
 	singular_name = "blue circuit tile"
-	desc = "A blue circuit tile."
+	desc = "Синяя плитка в виде схемы."
 	icon_state = "tile_bcircuit"
 	inhand_icon_state = "tile-bcircuit"
 	turf_type = /turf/open/floor/circuit
@@ -1084,14 +1558,34 @@
 	)
 	mats_per_unit = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 1.05, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 1.05)
 
+/obj/item/stack/tile/circuit/get_ru_names()
+	return list(
+		NOMINATIVE = "плитка-микросхема",
+		GENITIVE = "плитки-микросхемы",
+		DATIVE = "плитке-микросхеме",
+		ACCUSATIVE = "плитку-микросхему",
+		INSTRUMENTAL = "плиткой-микросхемой",
+		PREPOSITIONAL = "плитке-микросхеме",
+	)
+
 /obj/item/stack/tile/circuit/green
 	name = "green circuit tile"
 	singular_name = "green circuit tile"
-	desc = "A green circuit tile."
+	desc = "Зеленая плитка в виде схемы.."
 	icon_state = "tile_gcircuit"
 	inhand_icon_state = "tile-gcircuit"
 	turf_type = /turf/open/floor/circuit/green
 	merge_type = /obj/item/stack/tile/circuit/green
+
+/obj/item/stack/tile/circuit/green/get_ru_names()
+	return list(
+		NOMINATIVE = "зеленая плитка-микросхема",
+		GENITIVE = "зеленой плитки-микросхемы",
+		DATIVE = "зеленой плитке-микросхеме",
+		ACCUSATIVE = "зеленую плитку-микросхему",
+		INSTRUMENTAL = "зеленой плиткой-микросхемой",
+		PREPOSITIONAL = "зеленой плитке-микросхеме",
+	)
 
 /obj/item/stack/tile/circuit/green/anim
 	turf_type = /turf/open/floor/circuit/green/anim
@@ -1100,11 +1594,21 @@
 /obj/item/stack/tile/circuit/red
 	name = "red circuit tile"
 	singular_name = "red circuit tile"
-	desc = "A red circuit tile."
+	desc = "Красная плитка в виде схемы."
 	icon_state = "tile_rcircuit"
 	inhand_icon_state = "tile-rcircuit"
 	turf_type = /turf/open/floor/circuit/red
 	merge_type = /obj/item/stack/tile/circuit/red
+
+/obj/item/stack/tile/circuit/red/get_ru_names()
+	return list(
+		NOMINATIVE = "красная плитка-микросхема",
+		GENITIVE = "красной плитки-микросхемы",
+		DATIVE = "красной плитке-микросхеме",
+		ACCUSATIVE = "красную плитку-микросхему",
+		INSTRUMENTAL = "красной плиткой-микросхемой",
+		PREPOSITIONAL = "красной плитке-микросхеме",
+	)
 
 /obj/item/stack/tile/circuit/red/anim
 	turf_type = /turf/open/floor/circuit/red/anim
@@ -1114,7 +1618,7 @@
 /obj/item/stack/tile/pod
 	name = "pod floor tile"
 	singular_name = "pod floor tile"
-	desc = "A grooved floor tile."
+	desc = "Рифлёная напольная плитка."
 	icon_state = "tile_pod"
 	inhand_icon_state = "tile-pod"
 	turf_type = /turf/open/floor/pod
@@ -1125,41 +1629,92 @@
 		/obj/item/stack/tile/pod/dark,
 		)
 
+/obj/item/stack/tile/pod/get_ru_names()
+	return list(
+		NOMINATIVE = "рифлёная плитка",
+		GENITIVE = "рифлёной плитки",
+		DATIVE = "рифлёной плитке",
+		ACCUSATIVE = "рифлёную плитку",
+		INSTRUMENTAL = "рифлёной плиткой",
+		PREPOSITIONAL = "рифлёной плитке",
+	)
+
 /obj/item/stack/tile/pod/light
 	name = "light pod floor tile"
 	singular_name = "light pod floor tile"
-	desc = "A lightly colored grooved floor tile."
+	desc = "Светло окрашенная рифлёная напольная плитка."
 	icon_state = "tile_podlight"
 	turf_type = /turf/open/floor/pod/light
 	merge_type = /obj/item/stack/tile/pod/light
 
+/obj/item/stack/tile/pod/light/get_ru_names()
+	return list(
+		NOMINATIVE = "светлая рифлёная плитка",
+		GENITIVE = "светлой рифлёной плитки",
+		DATIVE = "светлой рифлёной плитке",
+		ACCUSATIVE = "светлую рифлёную плитку",
+		INSTRUMENTAL = "светлой рифлёной плиткой",
+		PREPOSITIONAL = "светлой рифлёной плитке",
+	)
+
 /obj/item/stack/tile/pod/dark
 	name = "dark pod floor tile"
 	singular_name = "dark pod floor tile"
-	desc = "A darkly colored grooved floor tile."
+	desc = "Тёмно окрашенная рифлёная напольная плитка."
 	icon_state = "tile_poddark"
 	turf_type = /turf/open/floor/pod/dark
 	merge_type = /obj/item/stack/tile/pod/dark
 
+/obj/item/stack/tile/pod/dark/get_ru_names()
+	return list(
+		NOMINATIVE = "темная рифлёная плитка",
+		GENITIVE = "темной рифлёной плитки",
+		DATIVE = "темной рифлёной плитке",
+		ACCUSATIVE = "темную рифлёную плитку",
+		INSTRUMENTAL = "темной рифлёной плиткой",
+		PREPOSITIONAL = "темной рифлёной плитке",
+	)
+
+
 /obj/item/stack/tile/plastic
 	name = "plastic tile"
 	singular_name = "plastic floor tile"
-	desc = "A tile of cheap, flimsy plastic flooring."
+	desc = "Плитка дешёвого, хлипкого пластикового покрытия."
 	icon_state = "tile_plastic"
 	mats_per_unit = list(/datum/material/plastic = HALF_SHEET_MATERIAL_AMOUNT / 2)
 	turf_type = /turf/open/floor/plastic
 	merge_type = /obj/item/stack/tile/plastic
 
+/obj/item/stack/tile/plastic/get_ru_names()
+	return list(
+		NOMINATIVE = "пластиковая плитка",
+		GENITIVE = "пластиковой плитки",
+		DATIVE = "пластиковой плитке",
+		ACCUSATIVE = "пластиковую плитку",
+		INSTRUMENTAL = "пластиковой плиткой",
+		PREPOSITIONAL = "пластиковой плитке",
+	)
+
 /obj/item/stack/tile/material
 	name = "floor tile"
 	singular_name = "floor tile"
-	desc = "The ground you walk on."
+	desc = "Земля, по которой вы ходите."
 	throwforce = 10
 	icon_state = "material_tile"
 	inhand_icon_state = "tile"
 	turf_type = /turf/open/floor/material
 	material_flags = MATERIAL_EFFECTS | MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
 	merge_type = /obj/item/stack/tile/material
+
+/obj/item/stack/tile/material/get_ru_names()
+	return list(
+		NOMINATIVE = "напольная плитка",
+		GENITIVE = "напольной плитки",
+		DATIVE = "напольной плитке",
+		ACCUSATIVE = "напольную плитку",
+		INSTRUMENTAL = "напольной плиткой",
+		PREPOSITIONAL = "напольной плитке",
+	)
 
 /obj/item/stack/tile/material/place_tile(turf/open/target_plating, mob/user)
 	. = ..()
@@ -1169,7 +1724,7 @@
 /obj/item/stack/tile/eighties
 	name = "retro tile"
 	singular_name = "retro floor tile"
-	desc = "A stack of floor tiles that remind you of an age of funk. Use in your hand to pick between a black or red pattern."
+	desc = "Стопка плитки, напоминающая об эпохе фанка. Используйте в руке, чтобы выбрать чёрный или красный узор."
 	icon_state = "tile_eighties"
 	turf_type = /turf/open/floor/eighties
 	merge_type = /obj/item/stack/tile/eighties
@@ -1178,13 +1733,23 @@
 		/obj/item/stack/tile/eighties/red,
 	)
 
+/obj/item/stack/tile/eighties/get_ru_names()
+	return list(
+		NOMINATIVE = "ретро-плитка",
+		GENITIVE = "ретро-плитки",
+		DATIVE = "ретро-плитке",
+		ACCUSATIVE = "ретро-плитку",
+		INSTRUMENTAL = "ретро-плиткой",
+		PREPOSITIONAL = "ретро-плитке",
+	)
+
 /obj/item/stack/tile/eighties/loaded
 	amount = 15
 
 /obj/item/stack/tile/eighties/red
 	name = "red retro tile"
 	singular_name = "red retro floor tile"
-	desc = "A stack of REDICAL floor tiles! Use in your hand to pick between a black or red pattern!" //i am so sorry
+	desc = "Стопка РАДИКАЛЬНО красной плитки! Используйте в руке, чтобы выбрать чёрный или красный узор!" //i am so sorry
 	icon_state = "tile_eightiesred"
 	turf_type = /turf/open/floor/eighties/red
 	merge_type = /obj/item/stack/tile/eighties/red
@@ -1192,7 +1757,7 @@
 /obj/item/stack/tile/bronze
 	name = "bronze tile"
 	singular_name = "bronze floor tile"
-	desc = "A clangy tile made of high-quality bronze. Clockwork construction techniques allow the clanging to be minimized."
+	desc = "Звонкая плитка из высококачественной бронзы. Технологии заводной сборки позволяют минимизировать звон."
 	icon_state = "tile_brass"
 	turf_type = /turf/open/floor/bronze
 	mats_per_unit = list(/datum/material/bronze = HALF_SHEET_MATERIAL_AMOUNT / 2)
@@ -1201,6 +1766,16 @@
 		/obj/item/stack/tile/bronze,
 		/obj/item/stack/tile/bronze/flat,
 		/obj/item/stack/tile/bronze/filled,
+	)
+
+/obj/item/stack/tile/bronze/get_ru_names()
+	return list(
+		NOMINATIVE = "бронзовая плитка",
+		GENITIVE = "бронзовой плитки",
+		DATIVE = "бронзовой плитке",
+		ACCUSATIVE = "бронзовую плитку",
+		INSTRUMENTAL = "бронзовой плиткой",
+		PREPOSITIONAL = "бронзовой плитке",
 	)
 
 /obj/item/stack/tile/bronze/flat
@@ -1220,17 +1795,27 @@
 /obj/item/stack/tile/cult
 	name = "engraved tile"
 	singular_name = "engraved floor tile"
-	desc = "A strange tile made from runed metal. Doesn't seem to actually have any paranormal powers."
+	desc = "Странная плитка из рунного металла. Кажется, паранормальными силами не обладает."
 	icon_state = "tile_cult"
 	turf_type = /turf/open/floor/cult
 	mats_per_unit = list(/datum/material/runedmetal=SMALL_MATERIAL_AMOUNT*5)
 	merge_type = /obj/item/stack/tile/cult
 
+/obj/item/stack/tile/cult/get_ru_names()
+	return list(
+		NOMINATIVE = "гравированная плитка",
+		GENITIVE = "гравированной плитки",
+		DATIVE = "гравированной плитке",
+		ACCUSATIVE = "гравированную плитку",
+		INSTRUMENTAL = "гравированной плиткой",
+		PREPOSITIONAL = "гравированной плитке",
+	)
+
 /// Floor tiles used to test emissive turfs.
 /obj/item/stack/tile/emissive_test
 	name = "emissive test tile"
 	singular_name = "emissive test floor tile"
-	desc = "A glow-in-the-dark floor tile used to test emissive turfs."
+	desc = "Светящаяся в темноте плитка для проверки излучающих тайлов."
 	turf_type = /turf/open/floor/emissive_test
 	merge_type = /obj/item/stack/tile/emissive_test
 
@@ -1258,7 +1843,7 @@
 /obj/item/stack/tile/catwalk_tile //This is our base type, sprited to look maintenance-styled
 	name = "catwalk plating"
 	singular_name = "catwalk plating tile"
-	desc = "Flooring that shows its contents underneath. Engineers love it!"
+	desc = "Покрытие, открывающее вид на коммуникации. Инженеры его обожают!"
 	icon_state = "maint_catwalk"
 	inhand_icon_state = "tile-catwalk"
 	mats_per_unit = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 1.2)
@@ -1273,6 +1858,15 @@
 		/obj/item/stack/tile/catwalk_tile/iron_smooth //this is the original greenish one
 	)
 
+/obj/item/stack/tile/catwalk_tile/get_ru_names()
+	return list(
+		NOMINATIVE = "плитка для мостика",
+		GENITIVE = "плитки для мостика",
+		DATIVE = "плитке для мостика",
+		ACCUSATIVE = "плитку для мостика",
+		INSTRUMENTAL = "плиткой для мостика",
+		PREPOSITIONAL = "плитке для мостика",
+	)
 /obj/item/stack/tile/catwalk_tile/sixty
 	amount = 60
 
@@ -1310,25 +1904,44 @@
 /obj/item/stack/tile/glass
 	name = "glass floor"
 	singular_name = "glass floor tile"
-	desc = "Glass window floors, to let you see... Whatever that is down there."
+	desc = "Стеклянный пол, позволяющий видеть... Что бы там внизу ни было."
 	icon_state = "tile_glass"
 	turf_type = /turf/open/floor/glass
 	inhand_icon_state = "tile-glass"
 	merge_type = /obj/item/stack/tile/glass
 	mats_per_unit = list(/datum/material/glass=SHEET_MATERIAL_AMOUNT * 0.25) // 4 tiles per sheet
 
+/obj/item/stack/tile/glass/get_ru_names()
+	return list(
+		NOMINATIVE = "стеклянная плитка",
+		GENITIVE = "стеклянной плитки",
+		DATIVE = "стеклянной плитке",
+		ACCUSATIVE = "стеклянную плитку",
+		INSTRUMENTAL = "стеклянной плиткой",
+		PREPOSITIONAL = "стеклянной плитке",
+	)
 /obj/item/stack/tile/glass/sixty
 	amount = 60
 
 /obj/item/stack/tile/rglass
 	name = "reinforced glass floor"
 	singular_name = "reinforced glass floor tile"
-	desc = "Reinforced glass window floors. These bad boys are 50% stronger than their predecessors!"
+	desc = "Укреплённый стеклянный пол. Эти красавцы на 50% прочнее своих предшественников!"
 	icon_state = "tile_rglass"
 	inhand_icon_state = "tile-rglass"
 	turf_type = /turf/open/floor/glass/reinforced
 	merge_type = /obj/item/stack/tile/rglass
 	mats_per_unit = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 0.125, /datum/material/glass=SHEET_MATERIAL_AMOUNT * 0.25) // 4 tiles per sheet
+
+/obj/item/stack/tile/rglass/get_ru_names()
+	return list(
+		NOMINATIVE = "укреплённая стеклянная плитка",
+		GENITIVE = "укреплённой стеклянной плитки",
+		DATIVE = "укреплённой стеклянной плитке",
+		ACCUSATIVE = "укреплённую стеклянную плитку",
+		INSTRUMENTAL = "укреплённой стеклянной плиткой",
+		PREPOSITIONAL = "укреплённой стеклянной плитке",
+	)
 
 /obj/item/stack/tile/rglass/sixty
 	amount = 60
@@ -1336,17 +1949,37 @@
 /obj/item/stack/tile/glass/plasma
 	name = "plasma glass floor"
 	singular_name = "plasma glass floor tile"
-	desc = "Plasma glass window floors, for when... Whatever is down there is too scary for normal glass."
+	desc = "Плазменная стеклянная плитка для случаев, когда... то, что внизу, слишком страшно для обычного стекла."
 	icon_state = "tile_pglass"
 	turf_type = /turf/open/floor/glass/plasma
 	merge_type = /obj/item/stack/tile/glass/plasma
 	mats_per_unit = list(/datum/material/alloy/plasmaglass = SHEET_MATERIAL_AMOUNT * 0.25)
 
+/obj/item/stack/tile/glass/plasma/get_ru_names()
+	return list(
+		NOMINATIVE = "плазменная стеклянная плитка",
+		GENITIVE = "плазменной стеклянной плитки",
+		DATIVE = "плазменной стеклянной плитке",
+		ACCUSATIVE = "плазменную стеклянную плитку",
+		INSTRUMENTAL = "плазменной стеклянной плиткой",
+		PREPOSITIONAL = "плазменной стеклянной плитке",
+	)
+
 /obj/item/stack/tile/rglass/plasma
 	name = "reinforced plasma glass floor"
 	singular_name = "reinforced plasma glass floor tile"
-	desc = "Reinforced plasma glass window floors, because whatever's downstairs should really stay down there."
+	desc = "Укреплённая плазменная стеклянная плитка. Потому что тому, что внизу, лучше оставаться внизу."
 	icon_state = "tile_rpglass"
 	turf_type = /turf/open/floor/glass/reinforced/plasma
 	merge_type = /obj/item/stack/tile/rglass/plasma
 	mats_per_unit = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 0.125, /datum/material/alloy/plasmaglass = SHEET_MATERIAL_AMOUNT * 0.25)
+
+/obj/item/stack/tile/rglass/plasma/get_ru_names()
+	return list(
+		NOMINATIVE = "укреплённая плазменная плитка",
+		GENITIVE = "укреплённой плазменной плитки",
+		DATIVE = "укреплённой плазменной плитке",
+		ACCUSATIVE = "укреплённую плазменную плитку",
+		INSTRUMENTAL = "укреплённой плазменной плиткой",
+		PREPOSITIONAL = "укреплённой плазменной плитке",
+	)

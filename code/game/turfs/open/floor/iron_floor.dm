@@ -1,7 +1,19 @@
+
 /turf/open/floor/iron
 	icon_state = "floor"
+	gender = MALE
 	floor_tile = /obj/item/stack/tile/iron/base
 	rust_resistance = RUST_RESISTANCE_BASIC
+
+/turf/open/floor/iron/get_ru_names()
+	return list(
+		NOMINATIVE = "железный пол",
+		GENITIVE = "железного пола",
+		DATIVE = "железному полу",
+		ACCUSATIVE = "железный пол",
+		INSTRUMENTAL = "железным полом",
+		PREPOSITIONAL = "железном поле",
+	)
 
 /turf/open/floor/iron/broken_states()
 	return list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5")
@@ -12,7 +24,7 @@
 
 /turf/open/floor/iron/examine(mob/user)
 	. = ..()
-	. += span_notice("There's a <b>small crack</b> on the edge of it.")
+	. += span_notice("На краю виднеется <b>небольшая трещина</b>.")
 
 /turf/open/floor/iron/update_icon_state()
 	if(broken || burnt)
@@ -58,6 +70,16 @@
 	base_icon_state = "textured"
 	floor_tile = /obj/item/stack/tile/iron/textured
 
+/turf/open/floor/iron/textured/get_ru_names()
+	return list(
+		NOMINATIVE = "фактурный железный пол",
+		GENITIVE = "фактурного железного пола",
+		DATIVE = "фактурному железному полу",
+		ACCUSATIVE = "фактурный железный пол",
+		INSTRUMENTAL = "фактурным железным полом",
+		PREPOSITIONAL = "фактурном железном поле",
+	)
+
 /turf/open/floor/iron/textured_edge
 	icon_state = "textured_edge"
 	base_icon_state = "textured_edge"
@@ -101,6 +123,16 @@
 	base_icon_state = "darkfull"
 	floor_tile = /obj/item/stack/tile/iron/dark
 
+/turf/open/floor/iron/dark/get_ru_names()
+	return list(
+		NOMINATIVE = "тёмный железный пол",
+		GENITIVE = "тёмного железного пола",
+		DATIVE = "тёмному железному полу",
+		ACCUSATIVE = "тёмный железный пол",
+		INSTRUMENTAL = "тёмным железным полом",
+		PREPOSITIONAL = "тёмном железном поле",
+	)
+
 /turf/open/floor/iron/dark/smooth_edge
 	icon_state = "dark_edge"
 	base_icon_state = "dark_edge"
@@ -136,10 +168,30 @@
 	base_icon_state = "checker"
 	floor_tile = /obj/item/stack/tile/iron/checker
 
+/turf/open/floor/iron/checker/get_ru_names()
+	return list(
+		NOMINATIVE = "клетчатый пол",
+		GENITIVE = "клетчатого пола",
+		DATIVE = "клетчатому полу",
+		ACCUSATIVE = "клетчатый пол",
+		INSTRUMENTAL = "клетчатым полом",
+		PREPOSITIONAL = "клетчатом поле",
+	)
+
 /turf/open/floor/iron/dark/textured
 	icon_state = "textured_dark"
 	base_icon_state = "textured_dark"
 	floor_tile = /obj/item/stack/tile/iron/dark/textured
+
+/turf/open/floor/iron/dark/textured/get_ru_names()
+	return list(
+		NOMINATIVE = "тёмный фактурный железный пол",
+		GENITIVE = "тёмного фактурного железного пола",
+		DATIVE = "тёмному фактурному железному полу",
+		ACCUSATIVE = "тёмный фактурный железный пол",
+		INSTRUMENTAL = "тёмным фактурным железным полом",
+		PREPOSITIONAL = "тёмном фактурном железном поле",
+	)
 
 /turf/open/floor/iron/dark/textured_edge
 	icon_state = "textured_dark_edge"
@@ -215,6 +267,16 @@
 	base_icon_state = "white"
 	floor_tile = /obj/item/stack/tile/iron/white
 
+/turf/open/floor/iron/white/get_ru_names()
+	return list(
+		NOMINATIVE = "белый железный пол",
+		GENITIVE = "белого железного пола",
+		DATIVE = "белому железному полу",
+		ACCUSATIVE = "белый железный пол",
+		INSTRUMENTAL = "белым железным полом",
+		PREPOSITIONAL = "белом железном поле",
+	)
+
 /turf/open/floor/iron/white/smooth_edge
 	icon_state = "white_edge"
 	base_icon_state = "white_edge"
@@ -250,10 +312,30 @@
 	base_icon_state = "cafeteria"
 	floor_tile = /obj/item/stack/tile/iron/cafeteria
 
+/turf/open/floor/iron/cafeteria/get_ru_names()
+	return list(
+		NOMINATIVE = "пол кафетерия",
+		GENITIVE = "пола кафетерия",
+		DATIVE = "полу кафетерия",
+		ACCUSATIVE = "пол кафетерия",
+		INSTRUMENTAL = "полом кафетерия",
+		PREPOSITIONAL = "полу кафетерия",
+	)
+
 /turf/open/floor/iron/white/textured
 	icon_state = "textured_white"
 	base_icon_state = "textured_white"
 	floor_tile = /obj/item/stack/tile/iron/white/textured
+
+/turf/open/floor/iron/white/textured/get_ru_names()
+	return list(
+		NOMINATIVE = "белый фактурный железный пол",
+		GENITIVE = "белого фактурного железного пола",
+		DATIVE = "белому фактурному железному полу",
+		ACCUSATIVE = "белый фактурный железный пол",
+		INSTRUMENTAL = "белым фактурным железным полом",
+		PREPOSITIONAL = "белом фактурном железном поле",
+	)
 
 /turf/open/floor/iron/white/textured_edge
 	icon_state = "textured_white_edge"
@@ -310,6 +392,16 @@
 	base_icon_state = "recharge_floor"
 	floor_tile = /obj/item/stack/tile/iron/recharge_floor
 
+/turf/open/floor/iron/recharge_floor/get_ru_names()
+	return list(
+		NOMINATIVE = "пол для подзарядки",
+		GENITIVE = "пола для подзарядки",
+		DATIVE = "полу для подзарядки",
+		ACCUSATIVE = "пол для подзарядки",
+		INSTRUMENTAL = "полом для подзарядки",
+		PREPOSITIONAL = "поле для подзарядки",
+	)
+
 /turf/open/floor/iron/recharge_floor/airless
 	initial_gas_mix = AIRLESS_ATMOS
 
@@ -321,6 +413,16 @@
 	icon_state = "smooth"
 	base_icon_state = "smooth"
 	floor_tile = /obj/item/stack/tile/iron/smooth
+
+/turf/open/floor/iron/smooth/get_ru_names()
+	return list(
+		NOMINATIVE = "гладкий железный пол",
+		GENITIVE = "гладкого железного пола",
+		DATIVE = "гладкому железному полу",
+		ACCUSATIVE = "гладкий железный пол",
+		INSTRUMENTAL = "гладким железным полом",
+		PREPOSITIONAL = "гладком железном поле",
+	)
 
 /turf/open/floor/iron/smooth/airless
 	initial_gas_mix = AIRLESS_ATMOS
@@ -362,6 +464,16 @@
 	base_icon_state = "terracotta"
 	floor_tile = /obj/item/stack/tile/iron/terracotta
 
+/turf/open/floor/iron/terracotta/get_ru_names()
+	return list(
+		NOMINATIVE = "терракотовый пол",
+		GENITIVE = "терракотового пола",
+		DATIVE = "терракотовому полу",
+		ACCUSATIVE = "терракотовый пол",
+		INSTRUMENTAL = "терракотовым полом",
+		PREPOSITIONAL = "терракотовом поле",
+	)
+
 /turf/open/floor/iron/terracotta/small
 	icon_state = "terracotta_small"
 	base_icon_state = "terracotta_small"
@@ -381,6 +493,16 @@
 	icon_state = "kitchen"
 	base_icon_state = "kitchen"
 	floor_tile = /obj/item/stack/tile/iron/kitchen
+
+/turf/open/floor/iron/kitchen/get_ru_names()
+	return list(
+		NOMINATIVE = "кухонный пол",
+		GENITIVE = "кухонного пола",
+		DATIVE = "кухонному полу",
+		ACCUSATIVE = "кухонный пол",
+		INSTRUMENTAL = "кухонным полом",
+		PREPOSITIONAL = "кухонном поле",
+	)
 
 /turf/open/floor/iron/kitchen/small
 	icon_state = "kitchen_small"
@@ -402,10 +524,30 @@
 	base_icon_state = "chapel"
 	floor_tile = /obj/item/stack/tile/iron/chapel
 
+/turf/open/floor/iron/chapel/get_ru_names()
+	return list(
+		NOMINATIVE = "пол церкви",
+		GENITIVE = "пола церкви",
+		DATIVE = "полу церкви",
+		ACCUSATIVE = "пол церкви",
+		INSTRUMENTAL = "полом церкви",
+		PREPOSITIONAL = "полу церкви",
+	)
+
 /turf/open/floor/iron/showroomfloor
 	icon_state = "showroomfloor"
 	base_icon_state = "showroomfloor"
 	floor_tile = /obj/item/stack/tile/iron/showroomfloor
+
+/turf/open/floor/iron/showroomfloor/get_ru_names()
+	return list(
+		NOMINATIVE = "пол выставочного зала",
+		GENITIVE = "пола выставочного зала",
+		DATIVE = "полу выставочного зала",
+		ACCUSATIVE = "пол выставочного зала",
+		INSTRUMENTAL = "полом выставочного зала",
+		PREPOSITIONAL = "полу выставочного зала",
+	)
 
 /turf/open/floor/iron/showroomfloor/airless
 	initial_gas_mix = AIRLESS_ATMOS
@@ -415,6 +557,16 @@
 	base_icon_state = "solarpanel"
 	floor_tile = /obj/item/stack/tile/iron/solarpanel
 
+/turf/open/floor/iron/solarpanel/get_ru_names()
+	return list(
+		NOMINATIVE = "пол из солнечных панелей",
+		GENITIVE = "пола из солнечных панелей",
+		DATIVE = "полу из солнечных панелей",
+		ACCUSATIVE = "пол из солнечных панелей",
+		INSTRUMENTAL = "полом из солнечных панелей",
+		PREPOSITIONAL = "поле из солнечных панелей",
+	)
+
 /turf/open/floor/iron/solarpanel/airless
 	initial_gas_mix = AIRLESS_ATMOS
 
@@ -423,6 +575,16 @@
 	icon_state = "freezer"
 	base_icon_state = "freezer"
 	floor_tile = /obj/item/stack/tile/iron/freezer
+
+/turf/open/floor/iron/freezer/get_ru_names()
+	return list(
+		NOMINATIVE = "пол морозильника",
+		GENITIVE = "пола морозильника",
+		DATIVE = "полу морозильника",
+		ACCUSATIVE = "пол морозильника",
+		INSTRUMENTAL = "полом морозильника",
+		PREPOSITIONAL = "поле морозильника",
+	)
 
 /turf/open/floor/iron/freezer/edge
 	icon_state = "freezer_edge"
@@ -454,6 +616,16 @@
 	name = "cold room floor"
 	initial_gas_mix = KITCHEN_COLDROOM_ATMOS
 
+/turf/open/floor/iron/kitchen_coldroom/get_ru_names()
+	return list(
+		NOMINATIVE = "пол холодильной камеры",
+		GENITIVE = "пола холодильной камеры",
+		DATIVE = "полу холодильной камеры",
+		ACCUSATIVE = "пол холодильной камеры",
+		INSTRUMENTAL = "полом холодильной камеры",
+		PREPOSITIONAL = "поле холодильной камеры",
+	)
+
 /turf/open/floor/iron/kitchen_coldroom/dark
 	icon_state = "darkfull"
 	base_icon_state = "darkfull"
@@ -475,23 +647,65 @@
 	tiled_turf = FALSE
 	floor_tile = /obj/item/stack/tile/iron/grimy
 
+/turf/open/floor/iron/grimy/get_ru_names()
+	return list(
+		NOMINATIVE = "грязный пол",
+		GENITIVE = "грязного пола",
+		DATIVE = "грязному полу",
+		ACCUSATIVE = "грязный пол",
+		INSTRUMENTAL = "грязным полом",
+		PREPOSITIONAL = "грязном поле",
+	)
+
 /turf/open/floor/iron/vaporwave
 	icon_state = "pinkblack"
 	base_icon_state = "pinkblack"
 	floor_tile = /obj/item/stack/tile/iron/vaporwave
 
+/turf/open/floor/iron/vaporwave/get_ru_names()
+	return list(
+		NOMINATIVE = "вейпорвейв пол",
+		GENITIVE = "вейпорвейв пола",
+		DATIVE = "вейпорвейв полу",
+		ACCUSATIVE = "вейпорвейв пол",
+		INSTRUMENTAL = "вейпорвейв полом",
+		PREPOSITIONAL = "вейпорвейв поле",
+	)
+
 /turf/open/floor/iron/goonplaque
 	name = "commemorative plaque"
-	desc = "\"This is a plaque in honour of our comrades on the G4407 Stations. Hopefully TG4407 model can live up to your fame and fortune.\" Scratched in beneath that is a crude image of a meteor and a spaceman. The spaceman is laughing. The meteor is exploding."
+	desc = "\"Эта табличка посвящена нашим товарищам со станций G4407. Надеемся, модель TG4407 сможет оправдать вашу славу и богатство.\" Ниже грубо выцарапано изображение метеора и космонавта. Космонавт смеётся. Метеор взрывается."
+	gender = FEMALE
 	icon_state = "plaque"
 	base_icon_state = "plaque"
 	tiled_turf = FALSE
 	floor_tile = /obj/item/stack/tile/iron/goonplaque
 
+/turf/open/floor/iron/goonplaque/get_ru_names()
+	return list(
+		NOMINATIVE = "памятная табличка",
+		GENITIVE = "памятной таблички",
+		DATIVE = "памятной табличке",
+		ACCUSATIVE = "памятную табличку",
+		INSTRUMENTAL = "памятной табличкой",
+		PREPOSITIONAL = "памятной табличке",
+	)
+
 /turf/open/floor/iron/stairs
 	icon_state = "stairs"
 	base_icon_state = "stairs"
+	gender = PLURAL
 	tiled_turf = FALSE
+
+/turf/open/floor/iron/stairs/get_ru_names()
+	return list(
+		NOMINATIVE = "ступеньки",
+		GENITIVE = "ступенек",
+		DATIVE = "ступенькам",
+		ACCUSATIVE = "ступеньки",
+		INSTRUMENTAL = "ступеньками",
+		PREPOSITIONAL = "ступеньках",
+	)
 
 /turf/open/floor/iron/stairs/airless
 	initial_gas_mix = AIRLESS_ATMOS
@@ -527,11 +741,31 @@
 /turf/open/floor/iron/bluespace
 	icon_state = "bluespace"
 	base_icon_state = "bluespace"
-	desc = "Sadly, these don't seem to make you faster..."
+	desc = "К сожалению, быстрее от них вы не станете..."
 	floor_tile = /obj/item/stack/tile/iron/bluespace
+
+/turf/open/floor/iron/bluespace/get_ru_names()
+	return list(
+		NOMINATIVE = "блюспейс пол",
+		GENITIVE = "блюспейс пола",
+		DATIVE = "блюспейс полу",
+		ACCUSATIVE = "блюспейс пол",
+		INSTRUMENTAL = "блюспейс полом",
+		PREPOSITIONAL = "блюспейс поле",
+	)
 
 /turf/open/floor/iron/sepia
 	icon_state = "sepia"
 	base_icon_state = "sepia"
-	desc = "Well, the flow of time is normal on these tiles, weird."
+	desc = "Хм, течение времени на этой плитке нормальное. Странно."
 	floor_tile = /obj/item/stack/tile/iron/sepia
+
+/turf/open/floor/iron/sepia/get_ru_names()
+	return list(
+		NOMINATIVE = "сепия пол",
+		GENITIVE = "сепия пола",
+		DATIVE = "сепия полу",
+		ACCUSATIVE = "сепия пол",
+		INSTRUMENTAL = "сепия полом",
+		PREPOSITIONAL = "сепия поле",
+	)

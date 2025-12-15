@@ -11,12 +11,22 @@
 
 /turf/open/floor/mineral
 	name = "mineral floor"
+	gender = MALE
 	icon_state = null
 	material_flags = MATERIAL_EFFECTS
 	rust_resistance = RUST_RESISTANCE_BASIC
 	var/list/icons
 	tiled_turf = FALSE
 
+/turf/open/floor/mineral/get_ru_names()
+	return list(
+		NOMINATIVE = "минеральный пол",
+		GENITIVE = "минерального пола",
+		DATIVE = "минеральному полу",
+		ACCUSATIVE = "минеральный пол",
+		INSTRUMENTAL = "минеральным полом",
+		PREPOSITIONAL = "минеральном поле",
+	)
 
 
 /turf/open/floor/mineral/Initialize(mapload)
@@ -41,6 +51,16 @@
 	custom_materials = list(/datum/material/plasma = SMALL_MATERIAL_AMOUNT*5)
 	rust_resistance = RUST_RESISTANCE_BASIC
 
+/turf/open/floor/mineral/plasma/get_ru_names()
+	return list(
+		NOMINATIVE = "плазменный пол",
+		GENITIVE = "плазменного пола",
+		DATIVE = "плазменному полу",
+		ACCUSATIVE = "плазменный пол",
+		INSTRUMENTAL = "плазменным полом",
+		PREPOSITIONAL = "плазменном поле",
+	)
+
 //Plasma floor that can't be removed, for disco inferno
 
 /turf/open/floor/mineral/plasma/disco/crowbar_act(mob/living/user, obj/item/I)
@@ -57,6 +77,16 @@
 	custom_materials = list(/datum/material/gold = SMALL_MATERIAL_AMOUNT*5)
 	rust_resistance = RUST_RESISTANCE_BASIC
 
+/turf/open/floor/mineral/gold/get_ru_names()
+	return list(
+		NOMINATIVE = "золотой пол",
+		GENITIVE = "золотого пола",
+		DATIVE = "золотому полу",
+		ACCUSATIVE = "золотой пол",
+		INSTRUMENTAL = "золотым полом",
+		PREPOSITIONAL = "золотом поле",
+	)
+
 //SILVER
 
 /turf/open/floor/mineral/silver
@@ -66,6 +96,16 @@
 	icons = list("silver","silver_dam")
 	custom_materials = list(/datum/material/silver = SMALL_MATERIAL_AMOUNT*5)
 
+/turf/open/floor/mineral/silver/get_ru_names()
+	return list(
+		NOMINATIVE = "серебряный пол",
+		GENITIVE = "серебряного пола",
+		DATIVE = "серебряному полу",
+		ACCUSATIVE = "серебряный пол",
+		INSTRUMENTAL = "серебряным полом",
+		PREPOSITIONAL = "серебряном поле",
+	)
+
 //TITANIUM (shuttle)
 
 /turf/open/floor/mineral/titanium
@@ -74,6 +114,16 @@
 	floor_tile = /obj/item/stack/tile/mineral/titanium
 	custom_materials = list(/datum/material/titanium = SMALL_MATERIAL_AMOUNT*5)
 	rust_resistance = RUST_RESISTANCE_TITANIUM
+
+/turf/open/floor/mineral/titanium/get_ru_names()
+	return list(
+		NOMINATIVE = "пол шаттла",
+		GENITIVE = "пола шаттла",
+		DATIVE = "полу шаттла",
+		ACCUSATIVE = "пол шаттла",
+		INSTRUMENTAL = "полом шаттла",
+		PREPOSITIONAL = "полу шаттла",
+	)
 
 /turf/open/floor/mineral/titanium/broken_states()
 	return list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5")
@@ -121,6 +171,16 @@
 	icon_state = "titanium_tiled"
 	floor_tile = /obj/item/stack/tile/mineral/titanium/tiled
 
+/turf/open/floor/mineral/titanium/tiled/get_ru_names()
+	return list(
+		NOMINATIVE = "титановая плитка",
+		GENITIVE = "титановой плитки",
+		DATIVE = "титановой плитке",
+		ACCUSATIVE = "титановую плитку",
+		INSTRUMENTAL = "титановой плиткой",
+		PREPOSITIONAL = "титановой плитке",
+	)
+
 /turf/open/floor/mineral/titanium/tiled/broken_states()
 	return list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5")
 
@@ -163,6 +223,16 @@
 	custom_materials = list(/datum/material/alloy/plastitanium = SMALL_MATERIAL_AMOUNT*5)
 	rust_resistance = RUST_RESISTANCE_TITANIUM
 
+/turf/open/floor/mineral/plastitanium/get_ru_names()
+	return list(
+		NOMINATIVE = "пол шаттла",
+		GENITIVE = "пола шаттла",
+		DATIVE = "полу шаттла",
+		ACCUSATIVE = "пол шаттла",
+		INSTRUMENTAL = "полом шаттла",
+		PREPOSITIONAL = "полу шаттла",
+	)
+
 /turf/open/floor/mineral/plastitanium/broken_states()
 	return list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5")
 
@@ -191,6 +261,16 @@
 	rust_resistance = RUST_RESISTANCE_BASIC
 	material_flags = NONE //The slippery comp makes it unpractical for good clown decor. The custom mat one should still slip.
 	var/sound_cooldown = 0
+
+/turf/open/floor/mineral/bananium/get_ru_names()
+	return list(
+		NOMINATIVE = "бананиумовый пол",
+		GENITIVE = "бананиумового пола",
+		DATIVE = "бананиумовому полу",
+		ACCUSATIVE = "бананиумовый пол",
+		INSTRUMENTAL = "бананиумовым полом",
+		PREPOSITIONAL = "бананиумовом поле",
+	)
 
 /turf/open/floor/mineral/bananium/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
@@ -237,6 +317,16 @@
 	custom_materials = list(/datum/material/diamond = SMALL_MATERIAL_AMOUNT*5)
 	rust_resistance = RUST_RESISTANCE_REINFORCED
 
+/turf/open/floor/mineral/diamond/get_ru_names()
+	return list(
+		NOMINATIVE = "алмазный пол",
+		GENITIVE = "алмазного пола",
+		DATIVE = "алмазному полу",
+		ACCUSATIVE = "алмазный пол",
+		INSTRUMENTAL = "алмазным полом",
+		PREPOSITIONAL = "алмазном поле",
+	)
+
 //URANIUM
 
 /turf/open/floor/mineral/uranium
@@ -249,6 +339,16 @@
 	rust_resistance = RUST_RESISTANCE_REINFORCED
 	var/last_event = 0
 	var/active = null
+
+/turf/open/floor/mineral/uranium/get_ru_names()
+	return list(
+		NOMINATIVE = "урановый пол",
+		GENITIVE = "уранового пола",
+		DATIVE = "урановому полу",
+		ACCUSATIVE = "урановый пол",
+		INSTRUMENTAL = "урановым полом",
+		PREPOSITIONAL = "урановом поле",
+	)
 
 /turf/open/floor/mineral/uranium/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
@@ -299,6 +399,16 @@
 	custom_materials = list(/datum/material/alloy/alien = SMALL_MATERIAL_AMOUNT*5)
 	rust_resistance = RUST_RESISTANCE_ORGANIC
 	damaged_dmi = null
+
+/turf/open/floor/mineral/abductor/get_ru_names()
+	return list(
+		NOMINATIVE = "инопланетный пол",
+		GENITIVE = "инопланетного пола",
+		DATIVE = "инопланетному полу",
+		ACCUSATIVE = "инопланетный пол",
+		INSTRUMENTAL = "инопланетным полом",
+		PREPOSITIONAL = "инопланетном поле",
+	)
 
 /turf/open/floor/mineral/abductor/Initialize(mapload)
 	. = ..()

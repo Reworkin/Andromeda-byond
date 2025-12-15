@@ -1,7 +1,8 @@
 /obj/item/stack/tile/light
 	name = "light tile"
 	singular_name = "light floor tile"
-	desc = "A floor tile, made out of glass. It produces light."
+	desc = "Стеклянная напольная плитка, излучающая свет."
+	gender = FEMALE
 	icon_state = "tile_e"
 	obj_flags = CONDUCTS_ELECTRICITY
 	attack_verb_continuous = list("bashes", "batters", "bludgeons", "thrashes", "smashes")
@@ -10,6 +11,16 @@
 	merge_type = /obj/item/stack/tile/light
 	mats_per_unit = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 1.05, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 1.05)
 	var/state = 0
+
+/obj/item/stack/tile/light/get_ru_names()
+	return list(
+		NOMINATIVE = "светящаяся плитка",
+		GENITIVE = "светящейся плитки",
+		DATIVE = "светящейся плитке",
+		ACCUSATIVE = "светящуюся плитку",
+		INSTRUMENTAL = "светящейся плиткой",
+		PREPOSITIONAL = "светящейся плитке",
+	)
 
 /obj/item/stack/tile/light/attackby(obj/item/O, mob/user, list/modifiers, list/attack_modifiers)
 	if(O.tool_behaviour == TOOL_CROWBAR)

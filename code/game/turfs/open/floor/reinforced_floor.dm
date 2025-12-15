@@ -1,7 +1,7 @@
-
 /turf/open/floor/engine
 	name = "reinforced floor"
-	desc = "Extremely sturdy."
+	desc = "Невероятно прочный."
+	gender = MALE
 	icon_state = "engine"
 	holodeck_compatible = TRUE
 	thermal_conductivity = 0.01
@@ -17,9 +17,19 @@
 	/// How many `floor_tile` do you get when you deconstruct the floor
 	var/floor_tile_amount = 2
 
+/turf/open/floor/engine/get_ru_names()
+	return list(
+		NOMINATIVE = "укреплённый пол",
+		GENITIVE = "укреплённого пола",
+		DATIVE = "укреплённому полу",
+		ACCUSATIVE = "укреплённый пол",
+		INSTRUMENTAL = "укреплённым полом",
+		PREPOSITIONAL = "укреплённом поле",
+	)
+
 /turf/open/floor/engine/examine(mob/user)
 	. += ..()
-	. += span_notice("The reinforcement rods are <b>wrenched</b> firmly in place.")
+	. += span_notice("Укрепляющая арматура надёжно <b>прикручена</b> на месте.")
 
 /turf/open/floor/engine/airless
 	initial_gas_mix = AIRLESS_ATMOS
@@ -43,7 +53,7 @@
 
 /turf/open/floor/engine/wrench_act(mob/living/user, obj/item/I)
 	..()
-	to_chat(user, span_notice("You begin removing rods..."))
+	to_chat(user, span_notice("Вы начинаете убирать арматуру..."))
 	if(I.use_tool(src, user, 30, volume=80))
 		if(!istype(src, /turf/open/floor/engine))
 			return TRUE
@@ -100,100 +110,329 @@
 	name = "\improper N2O floor"
 	initial_gas_mix = ATMOS_TANK_N2O
 
+/turf/open/floor/engine/n2o/get_ru_names()
+	return list(
+		NOMINATIVE = "пол N2O",
+		GENITIVE = "пола N2O",
+		DATIVE = "полу N2O",
+		ACCUSATIVE = "пол N2O",
+		INSTRUMENTAL = "полом N2O",
+		PREPOSITIONAL = "поле N2O",
+	)
+
 /turf/open/floor/engine/co2
 	name = "\improper CO2 floor"
 	initial_gas_mix = ATMOS_TANK_CO2
+
+/turf/open/floor/engine/co2/get_ru_names()
+	return list(
+		NOMINATIVE = "пол CO2",
+		GENITIVE = "пола CO2",
+		DATIVE = "полу CO2",
+		ACCUSATIVE = "пол CO2",
+		INSTRUMENTAL = "полом CO2",
+		PREPOSITIONAL = "поле CO2",
+	)
 
 /turf/open/floor/engine/plasma
 	name = "plasma floor"
 	initial_gas_mix = ATMOS_TANK_PLASMA
 
+/turf/open/floor/engine/plasma/get_ru_names()
+	return list(
+		NOMINATIVE = "пол плазмы",
+		GENITIVE = "пола плазмы",
+		DATIVE = "полу плазмы",
+		ACCUSATIVE = "пол плазмы",
+		INSTRUMENTAL = "полом плазмы",
+		PREPOSITIONAL = "поле плазмы",
+	)
+
 /turf/open/floor/engine/o2
 	name = "\improper O2 floor"
 	initial_gas_mix = ATMOS_TANK_O2
+
+/turf/open/floor/engine/o2/get_ru_names()
+	return list(
+		NOMINATIVE = "пол O2",
+		GENITIVE = "пола O2",
+		DATIVE = "полу O2",
+		ACCUSATIVE = "пол O2",
+		INSTRUMENTAL = "полом O2",
+		PREPOSITIONAL = "поле O2",
+	)
 
 /turf/open/floor/engine/n2
 	article = "an"
 	name = "\improper N2 floor"
 	initial_gas_mix = ATMOS_TANK_N2
 
+/turf/open/floor/engine/n2/get_ru_names()
+	return list(
+		NOMINATIVE = "пол N2",
+		GENITIVE = "пола N2",
+		DATIVE = "полу N2",
+		ACCUSATIVE = "пол N2",
+		INSTRUMENTAL = "полом N2",
+		PREPOSITIONAL = "поле N2",
+	)
+
 /turf/open/floor/engine/bz
 	name = "\improper BZ floor"
 	initial_gas_mix = ATMOS_TANK_BZ
+
+/turf/open/floor/engine/bz/get_ru_names()
+	return list(
+		NOMINATIVE = "пол BZ",
+		GENITIVE = "пола BZ",
+		DATIVE = "полу BZ",
+		ACCUSATIVE = "пол BZ",
+		INSTRUMENTAL = "полом BZ",
+		PREPOSITIONAL = "поле BZ",
+	)
 
 /turf/open/floor/engine/freon
 	name = "\improper Freon floor"
 	initial_gas_mix = ATMOS_TANK_FREON
 
+/turf/open/floor/engine/freon/get_ru_names()
+	return list(
+		NOMINATIVE = "пол фреона",
+		GENITIVE = "пола фреона",
+		DATIVE = "полу фреона",
+		ACCUSATIVE = "пол фреона",
+		INSTRUMENTAL = "полом фреона",
+		PREPOSITIONAL = "поле фреона",
+	)
+
 /turf/open/floor/engine/halon
 	name = "\improper Halon floor"
 	initial_gas_mix = ATMOS_TANK_HALON
 
+/turf/open/floor/engine/halon/get_ru_names()
+	return list(
+		NOMINATIVE = "пол галона",
+		GENITIVE = "пола галона",
+		DATIVE = "полу галона",
+		ACCUSATIVE = "пол галона",
+		INSTRUMENTAL = "полом галона",
+		PREPOSITIONAL = "поле галона",
+	)
+
 /turf/open/floor/engine/healium
 	name = "\improper Healium floor"
 	initial_gas_mix = ATMOS_TANK_HEALIUM
+
+/turf/open/floor/engine/healium/get_ru_names()
+	return list(
+		NOMINATIVE = "пол хилиума",
+		GENITIVE = "пола хилиума",
+		DATIVE = "полу хилиума",
+		ACCUSATIVE = "пол хилиума",
+		INSTRUMENTAL = "полом хилиума",
+		PREPOSITIONAL = "поле хилиума",
+	)
 
 /turf/open/floor/engine/h2
 	article = "an"
 	name = "\improper H2 floor"
 	initial_gas_mix = ATMOS_TANK_H2
 
+/turf/open/floor/engine/h2/get_ru_names()
+	return list(
+		NOMINATIVE = "пол H2",
+		GENITIVE = "пола H2",
+		DATIVE = "полу H2",
+		ACCUSATIVE = "пол H2",
+		INSTRUMENTAL = "полом H2",
+		PREPOSITIONAL = "поле H2",
+	)
+
 /turf/open/floor/engine/hypernoblium
 	name = "\improper Hypernoblium floor"
 	initial_gas_mix = ATMOS_TANK_HYPERNOBLIUM
+
+/turf/open/floor/engine/hypernoblium/get_ru_names()
+	return list(
+		NOMINATIVE = "пол гиперноблия",
+		GENITIVE = "пола гиперноблия",
+		DATIVE = "полу гиперноблия",
+		ACCUSATIVE = "пол гиперноблия",
+		INSTRUMENTAL = "полом гиперноблия",
+		PREPOSITIONAL = "поле гиперноблия",
+	)
 
 /turf/open/floor/engine/miasma
 	name = "\improper Miasma floor"
 	initial_gas_mix = ATMOS_TANK_MIASMA
 
+/turf/open/floor/engine/miasma/get_ru_names()
+	return list(
+		NOMINATIVE = "пол миазмов",
+		GENITIVE = "пола миазмов",
+		DATIVE = "полу миазмов",
+		ACCUSATIVE = "пол миазмов",
+		INSTRUMENTAL = "полом миазмов",
+		PREPOSITIONAL = "поле миазмов",
+	)
+
 /turf/open/floor/engine/nitrium
 	name = "\improper nitrium floor"
 	initial_gas_mix = ATMOS_TANK_NITRIUM
+
+/turf/open/floor/engine/nitrium/get_ru_names()
+	return list(
+		NOMINATIVE = "пол нитрия",
+		GENITIVE = "пола нитрия",
+		DATIVE = "полу нитрия",
+		ACCUSATIVE = "пол нитрия",
+		INSTRUMENTAL = "полом нитрия",
+		PREPOSITIONAL = "поле нитрия",
+	)
 
 /turf/open/floor/engine/pluoxium
 	name = "\improper Pluoxium floor"
 	initial_gas_mix = ATMOS_TANK_PLUOXIUM
 
+/turf/open/floor/engine/pluoxium/get_ru_names()
+	return list(
+		NOMINATIVE = "пол плюоксия",
+		GENITIVE = "пола плюоксия",
+		DATIVE = "полу плюоксия",
+		ACCUSATIVE = "пол плюоксия",
+		INSTRUMENTAL = "полом плюоксия",
+		PREPOSITIONAL = "поле плюоксия",
+	)
+
 /turf/open/floor/engine/proto_nitrate
 	name = "\improper Proto-Nitrate floor"
 	initial_gas_mix = ATMOS_TANK_PROTO_NITRATE
 
+/turf/open/floor/engine/proto_nitrate/get_ru_names()
+	return list(
+		NOMINATIVE = "пол прото-нитрата",
+		GENITIVE = "пола прото-нитрата",
+		DATIVE = "полу прото-нитрата",
+		ACCUSATIVE = "пол прото-нитрата",
+		INSTRUMENTAL = "полом прото-нитрата",
+		PREPOSITIONAL = "поле прото-нитрата",
+	)
+
 /turf/open/floor/engine/tritium
 	name = "\improper Tritium floor"
 	initial_gas_mix = ATMOS_TANK_TRITIUM
+
+/turf/open/floor/engine/tritium/get_ru_names()
+	return list(
+		NOMINATIVE = "пол трития",
+		GENITIVE = "пола трития",
+		DATIVE = "полу трития",
+		ACCUSATIVE = "пол трития",
+		INSTRUMENTAL = "полом трития",
+		PREPOSITIONAL = "поле трития",
+	)
 
 /turf/open/floor/engine/h2o
 	article = "an"
 	name = "\improper H2O floor"
 	initial_gas_mix = ATMOS_TANK_H2O
 
+/turf/open/floor/engine/h2o/get_ru_names()
+	return list(
+		NOMINATIVE = "пол H2O",
+		GENITIVE = "пола H2O",
+		DATIVE = "полу H2O",
+		ACCUSATIVE = "пол H2O",
+		INSTRUMENTAL = "полом H2O",
+		PREPOSITIONAL = "поле H2O",
+	)
+
 /turf/open/floor/engine/zauker
 	name = "\improper Zauker floor"
 	initial_gas_mix = ATMOS_TANK_ZAUKER
+
+/turf/open/floor/engine/zauker/get_ru_names()
+	return list(
+		NOMINATIVE = "пол заукера",
+		GENITIVE = "пола заукера",
+		DATIVE = "полу заукера",
+		ACCUSATIVE = "пол заукера",
+		INSTRUMENTAL = "полом заукера",
+		PREPOSITIONAL = "поле заукера",
+	)
 
 /turf/open/floor/engine/helium
 	name = "\improper Helium floor"
 	initial_gas_mix = ATMOS_TANK_HELIUM
 
+/turf/open/floor/engine/helium/get_ru_names()
+	return list(
+		NOMINATIVE = "пол гелия",
+		GENITIVE = "пола гелия",
+		DATIVE = "полу гелия",
+		ACCUSATIVE = "пол гелия",
+		INSTRUMENTAL = "полом гелия",
+		PREPOSITIONAL = "поле гелия",
+	)
+
 /turf/open/floor/engine/antinoblium
 	name = "\improper Antinoblium floor"
 	initial_gas_mix = ATMOS_TANK_ANTINOBLIUM
+
+/turf/open/floor/engine/antinoblium/get_ru_names()
+	return list(
+		NOMINATIVE = "пол антиноблия",
+		GENITIVE = "пола антиноблия",
+		DATIVE = "полу антиноблия",
+		ACCUSATIVE = "пол антиноблия",
+		INSTRUMENTAL = "полом антиноблия",
+		PREPOSITIONAL = "поле антиноблия",
+	)
 
 /turf/open/floor/engine/air
 	name = "air floor"
 	initial_gas_mix = ATMOS_TANK_AIRMIX
 
+/turf/open/floor/engine/air/get_ru_names()
+	return list(
+		NOMINATIVE = "пол воздуха",
+		GENITIVE = "пола воздуха",
+		DATIVE = "полу воздуха",
+		ACCUSATIVE = "пол воздуха",
+		INSTRUMENTAL = "полом воздуха",
+		PREPOSITIONAL = "поле воздуха",
+	)
+
 /turf/open/floor/engine/xenobio
 	name = "xenobio bz floor"
 	initial_gas_mix = XENOBIO_BZ
 
+/turf/open/floor/engine/xenobio/get_ru_names()
+	return list(
+		NOMINATIVE = "пол ксено-BZ",
+		GENITIVE = "пола ксено-BZ",
+		DATIVE = "полу ксено-BZ",
+		ACCUSATIVE = "пол ксено-BZ",
+		INSTRUMENTAL = "полом ксено-BZ",
+		PREPOSITIONAL = "поле ксено-BZ",
+	)
+
 /turf/open/floor/engine/cult
 	name = "engraved floor"
-	desc = "The air smells strange over this sinister flooring."
+	desc = "Воздух над этим зловещим полом пахнет странно."
 	icon_state = "cult"
 	floor_tile = null
 	var/obj/effect/cult_turf/realappearance
 
+/turf/open/floor/engine/cult/get_ru_names()
+	return list(
+		NOMINATIVE = "гравированный пол",
+		GENITIVE = "гравированного пола",
+		DATIVE = "гравированному полу",
+		ACCUSATIVE = "гравированный пол",
+		INSTRUMENTAL = "гравированным полом",
+		PREPOSITIONAL = "гравированном поле",
+	)
 
 /turf/open/floor/engine/cult/Initialize(mapload)
 	. = ..()
@@ -224,13 +463,33 @@
 	name = "vacuum floor"
 	initial_gas_mix = AIRLESS_ATMOS
 
+/turf/open/floor/engine/vacuum/get_ru_names()
+	return list(
+		NOMINATIVE = "вакуумный пол",
+		GENITIVE = "вакуумного пола",
+		DATIVE = "вакуумному полу",
+		ACCUSATIVE = "вакуумный пол",
+		INSTRUMENTAL = "вакуумным полом",
+		PREPOSITIONAL = "вакуумном поле",
+	)
+
 /turf/open/floor/engine/telecomms
 	initial_gas_mix = TCOMMS_ATMOS
 
 /turf/open/floor/engine/insulation
 	name = "hyper-insulated floor"
-	desc = "Sturdy and completely heat-proof."
+	desc = "Прочный и полностью термостойкий пол."
 	icon_state = "insulation"
 	thermal_conductivity = 0
 	floor_tile = /obj/item/stack/sheet/mineral/plastitanium
 	floor_tile_amount = 1 // Made with 1 sheet, deconstructs into 1 sheet
+
+/turf/open/floor/engine/insulation/get_ru_names()
+	return list(
+		NOMINATIVE = "термоизолированный пол",
+		GENITIVE = "термоизолированного пола",
+		DATIVE = "термоизолированному полу",
+		ACCUSATIVE = "термоизолированный пол",
+		INSTRUMENTAL = "термоизолированным полом",
+		PREPOSITIONAL = "термоизолированном поле",
+	)

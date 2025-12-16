@@ -230,7 +230,7 @@
 
 	var/final_force = CALCULATE_FORCE(src, attack_modifiers)
 	if(damtype != STAMINA && final_force && HAS_TRAIT(user, TRAIT_PACIFISM))
-		to_chat(user, span_warning("You don't want to harm other living beings!"))
+		to_chat(user, span_warning("Вы не хотите причинять вред другим живым существам!"))
 		return FALSE
 
 	if(!LAZYACCESS(attack_modifiers, SILENCE_HITSOUND))
@@ -301,8 +301,8 @@
 
 	var/damage = take_damage(final_force, attacking_item.damtype, MELEE, 1, get_dir(src, user))
 	//only witnesses close by and the victim see a hit message.
-	user.visible_message(span_danger("[user] hits [src] with [attacking_item][damage ? "." : ", without leaving a mark!"]"), \
-		span_danger("You hit [src] with [attacking_item][damage ? "." : ", without leaving a mark!"]"), null, COMBAT_MESSAGE_RANGE)
+	user.visible_message(span_danger("[user] бьёт [declent_ru(GENITIVE)] [attacking_item.declent_ru(INSTRUMENTAL)][damage ? "." : ", но не оставляет следов!"]"), \
+		span_danger("Вы бьёте [declent_ru(NOMINATIVE)] [attacking_item.declent_ru(INSTRUMENTAL)][damage ? "." : ", но не оставляете следов!"]"), null, COMBAT_MESSAGE_RANGE)
 	log_combat(user, src, "attacked", attacking_item)
 	return damage
 
@@ -326,8 +326,8 @@
 	var/armor_block = min(run_armor_check(
 			def_zone = targeting,
 			attack_flag = MELEE,
-			absorb_text = span_notice("Your armor has protected your [targeting_human_readable]!"),
-			soften_text = span_warning("Your armor has softened a hit to your [targeting_human_readable]!"),
+			absorb_text = span_notice("Ваша броня защитила [targeting_human_readable]!"),
+			soften_text = span_warning("Ваша броня смягчила удар в [targeting_human_readable]!"),
 			armour_penetration = attacking_item.armour_penetration,
 			weak_against_armour = attacking_item.weak_against_armour,
 		), ARMOR_MAX_BLOCK)
@@ -342,7 +342,7 @@
 
 	if(user != src)
 		// This doesn't factor in armor, or most damage modifiers (physiology). Your mileage may vary
-		if(check_block(attacking_item, final_force, "\the [attacking_item]", MELEE_ATTACK, attacking_item.armour_penetration, attacking_item.damtype))
+		if(check_block(attacking_item, final_force, "[attacking_item.declent_ru(ACCUSATIVE)]", MELEE_ATTACK, attacking_item.armour_penetration, attacking_item.damtype))
 			return ATTACK_FAILED
 
 	SEND_SIGNAL(attacking_item, COMSIG_ITEM_ATTACK_ZONE, src, user, targeting)
@@ -424,8 +424,8 @@
 					adjust_organ_loss(ORGAN_SLOT_BRAIN, 20)
 					if(stat == CONSCIOUS)
 						visible_message(
-							span_danger("[src] is knocked senseless!"),
-							span_userdanger("You're knocked senseless!"),
+							span_danger("[declent_ru(NOMINATIVE)] контужен!"),
+							span_userdanger("Вы контужены!"),
 						)
 						set_confusion_if_lower(20 SECONDS)
 						adjust_eye_blur(20 SECONDS)
@@ -447,8 +447,8 @@
 			if(stat == CONSCIOUS && !attacking_item.get_sharpness() && !HAS_TRAIT(src, TRAIT_BRAWLING_KNOCKDOWN_BLOCKED) && attacking_item.damtype == BRUTE)
 				if(prob(damage_done))
 					visible_message(
-						span_danger("[src] is knocked down!"),
-						span_userdanger("You're knocked down!"),
+						span_danger("[declent_ru(NOMINATIVE)] сбит с ног!"),
+						span_userdanger("Вас сбили с ног!"),
 					)
 					apply_effect(6 SECONDS, EFFECT_KNOCKDOWN, armor_block)
 
@@ -490,8 +490,8 @@
 	// Sanity in case one is null for some reason
 	var/picked_index = rand(max(length(weapon.attack_verb_simple), length(weapon.attack_verb_continuous)))
 
-	var/message_verb_continuous = "attacks"
-	var/message_verb_simple = "attack"
+	var/message_verb_continuous = "атакует"
+	var/message_verb_simple = "атакуете"
 	var/message_hit_area = get_hit_area_message(hit_area)
 	// Sanity in case one is... longer than the other?
 	if (picked_index && length(weapon.attack_verb_continuous) >= picked_index)
@@ -499,24 +499,24 @@
 	if (picked_index && length(weapon.attack_verb_simple) >= picked_index)
 		message_verb_simple = weapon.attack_verb_simple[picked_index]
 
-	var/attack_message_spectator = "[src] [message_verb_continuous][message_hit_area] with [weapon]!"
-	var/attack_message_victim = "Something [message_verb_continuous] you[message_hit_area] with [weapon]!"
-	var/attack_message_attacker = "You [message_verb_simple] [src][message_hit_area] with [weapon]!"
+	var/attack_message_spectator = "[declent_ru(NOMINATIVE)] [message_verb_continuous][message_hit_area] с помощью [weapon.declent_ru(GENITIVE)]!"
+	var/attack_message_victim = "Кто-то [message_verb_continuous] вас[message_hit_area] с помощью [weapon.declent_ru(GENITIVE)]!"
+	var/attack_message_attacker = "Вы [message_verb_simple] [declent_ru(NOMINATIVE)][message_hit_area] с помощью [weapon.declent_ru(GENITIVE)]!"
 	if(user in viewers(src, null))
-		attack_message_spectator = "[user] [message_verb_continuous] [src][message_hit_area] with [weapon]!"
-		attack_message_victim = "[user] [message_verb_continuous] you[message_hit_area] with [weapon]!"
+		attack_message_spectator = "[user] [message_verb_continuous] [declent_ru(NOMINATIVE)][message_hit_area] с помощью [weapon.declent_ru(GENITIVE)]!"
+		attack_message_victim = "[user] [message_verb_continuous] вас[message_hit_area] с помощью [weapon.declent_ru(GENITIVE)]!"
 	if(user == src)
-		attack_message_victim = "You [message_verb_simple] yourself[message_hit_area] with [weapon]."
+		attack_message_victim = "Вы [message_verb_simple] себя[message_hit_area] с помощью [weapon.declent_ru(GENITIVE)]."
 	visible_message(span_danger("[attack_message_spectator]"),\
 		span_userdanger("[attack_message_victim]"), null, COMBAT_MESSAGE_RANGE, user)
 	if(is_blind())
-		to_chat(src, span_danger("Someone hits you[message_hit_area]!"))
+		to_chat(src, span_danger("Кто-то бьёт вас[message_hit_area]!"))
 	to_chat(user, span_danger("[attack_message_attacker]"))
 	return 1
 
 /// Overridable proc so subtypes can have unique targetted strike zone messages, return a string.
 /mob/living/proc/get_hit_area_message(input_area)
 	if(input_area)
-		return " in the [input_area]"
+		return " в [input_area]"
 
 	return ""

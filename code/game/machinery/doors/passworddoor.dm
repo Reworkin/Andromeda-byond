@@ -1,6 +1,7 @@
 /obj/machinery/door/password
 	name = "door"
-	desc = "This door only opens when provided a password."
+	desc = "Эта дверь открывается только при вводе пароля."
+	gender = FEMALE
 	icon = 'icons/obj/doors/blastdoor.dmi'
 	icon_state = "closed"
 	explosion_block = 3
@@ -21,6 +22,16 @@
 	var/door_close = 'sound/machines/blastdoor.ogg'
 	/// Sound used upon denying.
 	var/door_deny = 'sound/machines/buzz/buzz-sigh.ogg'
+
+/obj/machinery/door/password/get_ru_names()
+	return list(
+		NOMINATIVE = "дверь с паролем",
+		GENITIVE = "двери с паролем",
+		DATIVE = "двери с паролем",
+		ACCUSATIVE = "дверь с паролем",
+		INSTRUMENTAL = "дверью с паролем",
+		PREPOSITIONAL = "двери с паролем",
+	)
 
 /obj/machinery/door/password/voice
 	voice_activated = TRUE
@@ -103,7 +114,7 @@
 			playsound(src, door_deny, 30, TRUE)
 
 /obj/machinery/door/password/proc/ask_for_pass(mob/user)
-	var/guess = tgui_input_text(user, "Enter the password", "Password", max_length = MAX_MESSAGE_LEN)
+	var/guess = tgui_input_text(user, "Введите пароль", "Пароль", max_length = MAX_MESSAGE_LEN)
 	if(guess == password)
 		return TRUE
 	return FALSE

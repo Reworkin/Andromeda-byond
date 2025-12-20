@@ -1,6 +1,7 @@
 /obj/machinery/door/window
 	name = "interior door"
-	desc = "A strong door."
+	desc = "Прочная дверь."
+	gender = FEMALE
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "left"
 	layer = ABOVE_WINDOW_LAYER
@@ -38,6 +39,16 @@
 	bomb = 10
 	fire = 70
 	acid = 100
+
+/obj/machinery/door/window/get_ru_names()
+	return list(
+		NOMINATIVE = "внутренняя дверь",
+		GENITIVE = "внутренней двери",
+		DATIVE = "внутренней двери",
+		ACCUSATIVE = "внутреннюю дверь",
+		INSTRUMENTAL = "внутренней дверью",
+		PREPOSITIONAL = "внутренней двери",
+	)
 
 /obj/machinery/door/window/Initialize(mapload, set_dir, unres_sides)
 	. = ..()
@@ -383,21 +394,21 @@
 /obj/machinery/door/window/examine(mob/user)
 	. = ..()
 	if(obj_flags & EMAGGED)
-		. += span_warning("Its access panel is smoking slightly.")
+		. += span_warning("Панель доступа слегка дымится.")
 	if(!density)
 		if(panel_open)
-			. += span_notice("The [span_boldnotice("airlock electronics")] could be [span_boldnotice("levered")] out.")
+			. += span_notice("[span_boldnotice("Электроника шлюза")] может быть [span_boldnotice("извлечена")].")
 
 
 /obj/machinery/door/window/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ..()
 	if(density || operating)
-		to_chat(user, span_warning("You need to open the door to access the maintenance panel!"))
+		to_chat(user, span_warning("Вы должны открыть дверь, чтобы получить доступ к технической панели!"))
 		return
 	add_fingerprint(user)
 	tool.play_tool_sound(src)
 	toggle_panel_open()
-	to_chat(user, span_notice("You [panel_open ? "open" : "close"] the maintenance panel."))
+	to_chat(user, span_notice("Вы [panel_open ? "открываете" : "закрываете"] техническую панель."))
 	return TRUE
 
 /obj/machinery/door/window/crowbar_act(mob/living/user, obj/item/tool)
@@ -405,8 +416,8 @@
 	if(!panel_open || density || operating)
 		return
 	add_fingerprint(user)
-	user.visible_message(span_notice("[user] removes the electronics from \the [src]."), \
-	span_notice("You start to remove electronics from \the [src]..."))
+	user.visible_message(span_notice("[user] вынимает электронику из [declent_ru(GENITIVE)]."), \
+	span_notice("Вы начинаете вынимать электронику из [declent_ru(GENITIVE)]..."))
 	if(!tool.use_tool(src, user, 40, volume=50))
 		return
 	if(!panel_open || density || operating || !loc)
@@ -429,10 +440,10 @@
 	windoor_assembly.update_appearance()
 	windoor_assembly.created_name = name
 	if(obj_flags & EMAGGED)
-		to_chat(user, span_warning("You discard the damaged electronics."))
+		to_chat(user, span_warning("Вы выбрасываете поврежденную электронику."))
 		qdel(src)
 		return
-	to_chat(user, span_notice("You remove the airlock electronics."))
+	to_chat(user, span_notice("Вы вынимаете электронику шлюза."))
 	var/obj/item/electronics/airlock/dropped_electronics
 	if(!electronics)
 		dropped_electronics = new/obj/item/electronics/airlock(drop_location())
@@ -466,7 +477,7 @@
 		var/obj/item/crowbar/power/power_tool = I
 		if(power_tool.limit_jaws_access && forced)
 			playsound(src.loc, 'sound/machines/buzz/buzz-sigh.ogg', 50, FALSE)
-			user.balloon_alert(user, "cannot pry open!")
+			user.balloon_alert(user, "невозможно вскрыть ломом!")
 			return
 
 	if(!hasPower() || forced)
@@ -475,7 +486,7 @@
 		else
 			close(BYPASS_DOOR_CHECKS)
 	else
-		to_chat(user, span_warning("The door's motors resist your efforts to force it!"))
+		to_chat(user, span_warning("Моторы двери сопротивляются вашим попыткам открыть её силой!"))
 
 /obj/machinery/door/window/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
 	switch(the_rcd.mode)
@@ -498,14 +509,44 @@
 	reinf = 1
 	explosion_block = 1
 
+/obj/machinery/door/window/brigdoor/get_ru_names()
+	return list(
+		NOMINATIVE = "защищённая дверь",
+		GENITIVE = "защищённой двери",
+		DATIVE = "защищённой двери",
+		ACCUSATIVE = "защищённую дверь",
+		INSTRUMENTAL = "защищённой дверью",
+		PREPOSITIONAL = "защищённой двери",
+	)
+
 /obj/machinery/door/window/brigdoor/security/cell
 	name = "cell door"
-	desc = "For keeping in criminal scum."
+	desc = "Чтобы держать отбросов общества взаперти."
 	req_access = list(ACCESS_BRIG)
+
+/obj/machinery/door/window/brigdoor/security/cell/get_ru_names()
+	return list(
+		NOMINATIVE = "дверь камеры",
+		GENITIVE = "двери камеры",
+		DATIVE = "двери камеры",
+		ACCUSATIVE = "дверь камеры",
+		INSTRUMENTAL = "дверью камеры",
+		PREPOSITIONAL = "двери камеры",
+	)
 
 /obj/machinery/door/window/brigdoor/security/holding
 	name = "holding cell door"
 	req_one_access = list(ACCESS_SECURITY)
+
+/obj/machinery/door/window/brigdoor/security/holding/get_ru_names()
+	return list(
+		NOMINATIVE = "дверь изолятора",
+		GENITIVE = "двери изолятора",
+		DATIVE = "двери изолятора",
+		ACCUSATIVE = "дверь изолятора",
+		INSTRUMENTAL = "дверью изолятора",
+		PREPOSITIONAL = "двери изолятора",
+	)
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/door/window/left, 0)
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/door/window/right, 0)

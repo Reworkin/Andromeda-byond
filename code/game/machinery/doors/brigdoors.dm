@@ -11,7 +11,8 @@
  */
 /obj/machinery/status_display/door_timer
 	name = "door timer"
-	desc = "A remote control for a door."
+	desc = "Панель удалённого управления дверью."
+	gender = MALE
 	current_mode = SD_MESSAGE
 	req_access = list(ACCESS_SECURITY)
 	text_color = "#F44"
@@ -33,6 +34,16 @@
 	var/list/closets = list()
 	///Channel to report prisoneer's release
 	var/broadcast_channel = RADIO_CHANNEL_SECURITY
+
+/obj/machinery/status_display/door_timer/get_ru_names()
+	return list(
+		NOMINATIVE = "таймер двери",
+		GENITIVE = "таймера двери",
+		DATIVE = "таймеру двери",
+		ACCUSATIVE = "таймер двери",
+		INSTRUMENTAL = "таймером двери",
+		PREPOSITIONAL = "таймере двери",
+	)
 
 /obj/machinery/status_display/door_timer/Initialize(mapload)
 	. = ..()
@@ -220,7 +231,7 @@
 	var/mob/user = usr
 
 	if(!allowed(usr))
-		to_chat(usr, span_warning("Access denied."))
+		to_chat(usr, span_warning("Доступ запрещён."))
 		return FALSE
 
 	switch(action)
@@ -277,12 +288,12 @@
 		timer_end(forced = TRUE)
 
 /datum/aas_config_entry/brig_cell_release_announcement
-	name = "Security Alert: Cell Timer Expired"
+	name = "Оповещение СБ: Таймер камеры истёк"
 	announcement_lines_map = list(
-		"Message" = "Timer for %CELL has expired. Releasing prisoner.",
+		"Message" = "Время заключения для %CELL истекло. Заключённый освобождён.",
 	)
 	vars_and_tooltips_map = list(
-		"CELL" = "will be replaced with the cell name.",
+		"CELL" = "будет заменено на название камеры.",
 	)
 
 #undef PRESET_SHORT

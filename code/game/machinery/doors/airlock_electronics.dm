@@ -18,9 +18,19 @@
 	/// Whether this airlock can have an integrated circuit inside of it or not
 	var/shell = FALSE
 
+/obj/item/electronics/airlock/get_ru_names()
+	return list(
+		NOMINATIVE = "плата шлюза",
+		GENITIVE = "плата шлюза",
+		DATIVE = "плате шлюза",
+		ACCUSATIVE = "плату шлюза",
+		INSTRUMENTAL = "платой шлюза",
+		PREPOSITIONAL = "плате шлюза",
+	)
+
 /obj/item/electronics/airlock/examine(mob/user)
 	. = ..()
-	. += span_notice("Has a neat <i>selection menu</i> for modifying airlock access levels.")
+	. += span_notice("Имеет удобное <i>меню выбора</i> для изменения уровней доступа к шлюзу.")
 
 /**
  * Create a copy of the electronics

@@ -1,7 +1,8 @@
 /obj/machinery/door/poddoor/shutters
 	gender = PLURAL
 	name = "shutters"
-	desc = "Heavy duty mechanical shutters with an atmospheric seal that keeps them airtight once closed."
+	desc = "Механические заслонки для тяжелых условий эксплуатации с герметичным уплотнением, которое обеспечивает их воздухонепроницаемость в закрытом состоянии."
+	gender = FEMALE
 	icon = 'icons/obj/doors/shutters.dmi'
 	layer = SHUTTER_LAYER
 	closingLayer = SHUTTER_LAYER
@@ -12,6 +13,17 @@
 	custom_materials = list(/datum/material/alloy/plasteel = SHEET_MATERIAL_AMOUNT * 5, /datum/material/iron = SMALL_MATERIAL_AMOUNT, /datum/material/glass = SMALL_MATERIAL_AMOUNT)
 	animation_sound = 'sound/machines/shutter.ogg'
 	show_nav_computer_icon = FALSE
+
+/obj/machinery/door/poddoor/shutters/get_ru_names()
+	return list(
+		NOMINATIVE = "заслонки",
+		GENITIVE = "заслонок",
+		DATIVE = "заслонкам",
+		ACCUSATIVE = "заслонки",
+		INSTRUMENTAL = "заслонками",
+		PREPOSITIONAL = "заслонках",
+	)
+
 
 /obj/machinery/door/poddoor/shutters/animation_length(animation)
 	switch(animation)
@@ -51,10 +63,21 @@
 
 /obj/machinery/door/poddoor/shutters/radiation
 	name = "radiation shutters"
+	gender = FEMALE
 	desc = "Lead-lined shutters with a radiation hazard symbol. Whilst this won't stop you getting irradiated, especially by a supermatter crystal, it will stop radiation travelling as far."
 	icon = 'icons/obj/doors/shutters_radiation.dmi'
 	icon_state = "closed"
 	rad_insulation = RAD_EXTREME_INSULATION
+
+/obj/machinery/door/poddoor/shutters/radiation/get_ru_names()
+	return list(
+		NOMINATIVE = "радиационные заслонки",
+		GENITIVE = "радиационных заслонок",
+		DATIVE = "радиационным заслонкам",
+		ACCUSATIVE = "радиационные заслонки",
+		INSTRUMENTAL = "радиационными заслонками",
+		PREPOSITIONAL = "радиационных заслонках",
+	)
 
 /obj/machinery/door/poddoor/shutters/radiation/preopen
 	icon_state = "open"
@@ -81,11 +104,23 @@
 
 /obj/machinery/door/poddoor/shutters/window
 	name = "windowed shutters"
-	desc = "A shutter with a thick see-through polycarbonate window."
+	desc = "Заслонка с толстым прозрачным окном из поликарбоната."
+	gender = FEMALE
 	icon = 'icons/obj/doors/shutters_window.dmi'
 	icon_state = "closed"
 	opacity = FALSE
 	glass = TRUE
+
+/obj/machinery/door/poddoor/shutters/window/get_ru_names()
+	return list(
+		NOMINATIVE = "заслонка с окном",
+		GENITIVE = "заслонки с окном",
+		DATIVE = "заслонке с окном",
+		ACCUSATIVE = "заслонку с окном",
+		INSTRUMENTAL = "заслонкой с окном",
+		PREPOSITIONAL = "заслонке с окном",
+	)
+
 
 /obj/machinery/door/poddoor/shutters/window/preopen
 	icon_state = "open"

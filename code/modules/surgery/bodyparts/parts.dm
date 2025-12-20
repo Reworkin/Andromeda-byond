@@ -1,7 +1,7 @@
 
 /obj/item/bodypart/chest
 	name = BODY_ZONE_CHEST
-	desc = "It's impolite to stare at a person's chest."
+	desc = "Невежливо пялиться на чью-то грудь."
 	icon_state = "default_human_chest"
 	max_damage = LIMB_MAX_HP_CORE
 	body_zone = BODY_ZONE_CHEST
@@ -37,6 +37,26 @@
 	/// Which functional (i.e. flightpotion) wing types (if any) does this bodypart support? If count is >1 a radial menu is used to choose between all icons in list
 	var/list/wing_types = list(/obj/item/organ/wings/functional/angel)
 
+/obj/item/bodypart/chest/get_ru_names()
+	return list(
+		NOMINATIVE = "грудь",
+		GENITIVE = "груди",
+		DATIVE = "груди",
+		ACCUSATIVE = "грудь",
+		INSTRUMENTAL = "грудью",
+		PREPOSITIONAL = "груди",
+	)
+
+/obj/item/bodypart/chest/get_ru_plaintext_names()
+	return list(
+		NOMINATIVE = "грудь",
+		GENITIVE = "груди",
+		DATIVE = "груди",
+		ACCUSATIVE = "грудь",
+		INSTRUMENTAL = "грудью",
+		PREPOSITIONAL = "груди",
+	)
+
 /obj/item/bodypart/chest/forced_removal(dismembered, special, move_to_floor)
 	var/mob/living/carbon/old_owner = owner
 	..(special = TRUE) //special because we're self destructing
@@ -44,7 +64,7 @@
 	//If someones chest is teleported away, they die pretty hard
 	if(!old_owner)
 		return
-	message_admins("[ADMIN_LOOKUPFLW(old_owner)] was gibbed after their chest teleported to [ADMIN_VERBOSEJMP(loc)].")
+	message_admins("[ADMIN_LOOKUPFLW(old_owner)] был разорван на куски после того, как его грудь телепортировалась в [ADMIN_VERBOSEJMP(loc)].")
 	old_owner.gib(DROP_ALL_REMAINS)
 
 /obj/item/bodypart/chest/can_dismember(obj/item/item)
@@ -134,7 +154,7 @@
 /// Parent Type for arms, should not appear in game.
 /obj/item/bodypart/arm
 	name = "arm"
-	desc = "Hey buddy give me a HAND and report this to the github because you shouldn't be seeing this."
+	desc = "Эй, приятель, сделай мне 'одолжение' и зарепорть это на гитхаб, потому что ты не должен этого видеть."
 	abstract_type = /obj/item/bodypart/arm
 	attack_verb_continuous = list("slaps", "punches")
 	attack_verb_simple = list("slap", "punch")
@@ -155,9 +175,29 @@
 	/// Datum describing how to offset things held in the hands of this arm, the x offset IS functional here
 	var/datum/worn_feature_offset/held_hand_offset
 	/// The noun to use when referring to this arm's appendage, e.g. "hand" or "paw"
-	var/appendage_noun = "hand"
+	var/appendage_noun = "кисть"
 
 	biological_state = BIO_STANDARD_JOINTED
+
+/obj/item/bodypart/arm/get_ru_names()
+	return list(
+		NOMINATIVE = "рука",
+		GENITIVE = "руки",
+		DATIVE = "руке",
+		ACCUSATIVE = "руку",
+		INSTRUMENTAL = "рукой",
+		PREPOSITIONAL = "руке",
+	)
+
+/obj/item/bodypart/arm/get_ru_plaintext_names()
+	return list(
+		NOMINATIVE = "рука",
+		GENITIVE = "руки",
+		DATIVE = "руке",
+		ACCUSATIVE = "руку",
+		INSTRUMENTAL = "рукой",
+		PREPOSITIONAL = "руке",
+	)
 
 /obj/item/bodypart/arm/Destroy()
 	QDEL_NULL(worn_glove_offset)
@@ -200,10 +240,7 @@
 
 /obj/item/bodypart/arm/left
 	name = "left arm"
-	desc = "Did you know that the word 'sinister' stems originally from the \
-		Latin 'sinestra' (left hand), because the left hand was supposed to \
-		be possessed by the devil? This arm appears to be possessed by no \
-		one though."
+	desc = "Опорно-двигательного аппарата, который состоит из плечевого пояса и свободной верхней конечности."
 	icon_state = "default_human_l_arm"
 	body_zone = BODY_ZONE_L_ARM
 	body_part = ARM_LEFT
@@ -213,6 +250,26 @@
 	px_x = -6
 	px_y = 0
 	bodypart_trait_source = LEFT_ARM_TRAIT
+
+/obj/item/bodypart/arm/left/get_ru_names()
+	return list(
+		NOMINATIVE = "левая рука",
+		GENITIVE = "левой руки",
+		DATIVE = "левой руке",
+		ACCUSATIVE = "левую руку",
+		INSTRUMENTAL = "левой рукой",
+		PREPOSITIONAL = "левой руке",
+	)
+
+/obj/item/bodypart/arm/left/get_ru_plaintext_names()
+	return list(
+		NOMINATIVE = "левая рука",
+		GENITIVE = "левой руки",
+		DATIVE = "левой руке",
+		ACCUSATIVE = "левую руку",
+		INSTRUMENTAL = "левой рукой",
+		PREPOSITIONAL = "левой руке",
+	)
 
 /obj/item/bodypart/arm/left/apply_ownership(mob/living/carbon/new_owner)
 	if(HAS_TRAIT(new_owner, TRAIT_PARALYSIS_L_ARM))
@@ -254,7 +311,7 @@
 		if(bodypart_disabled)
 			owner.set_usable_hands(owner.usable_hands - 1)
 			if(owner.stat < UNCONSCIOUS)
-				to_chat(owner, span_userdanger("You lose control of your [plaintext_zone]!"))
+				to_chat(owner, span_userdanger("Вы теряете контроль над своей [declent_plaintext_ru(INSTRUMENTAL)]!"))
 			if(held_index)
 				owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	else if(!bodypart_disabled)
@@ -280,7 +337,7 @@
 	unarmed_damage_low = 3
 	unarmed_damage_high = 8
 	unarmed_effectiveness = 5
-	appendage_noun = "paw"
+	appendage_noun = "лапа"
 
 /obj/item/bodypart/arm/left/alien
 	icon = 'icons/mob/human/species/alien/bodyparts.dmi'
@@ -296,12 +353,11 @@
 	max_damage = LIMB_MAX_HP_ALIEN_LIMBS
 	burn_modifier = LIMB_ALIEN_BURN_DAMAGE_MULTIPLIER
 	should_draw_greyscale = FALSE
-	appendage_noun = "scythe-like hand"
+	appendage_noun = "серповидная кисть"
 
 /obj/item/bodypart/arm/right
 	name = "right arm"
-	desc = "Over 87% of humans are right handed. That figure is much lower \
-		among humans missing their right arm."
+	desc = "Опорно-двигательного аппарата, который состоит из плечевого пояса и свободной верхней конечности."
 	body_zone = BODY_ZONE_R_ARM
 	body_part = ARM_RIGHT
 	icon_state = "default_human_r_arm"
@@ -312,6 +368,26 @@
 	px_x = 6
 	px_y = 0
 	bodypart_trait_source = RIGHT_ARM_TRAIT
+
+/obj/item/bodypart/arm/right/get_ru_names()
+	return list(
+		NOMINATIVE = "правая рука",
+		GENITIVE = "правой руки",
+		DATIVE = "правой руке",
+		ACCUSATIVE = "правую руку",
+		INSTRUMENTAL = "правой рукой",
+		PREPOSITIONAL = "правой руке",
+	)
+
+/obj/item/bodypart/arm/right/get_ru_plaintext_names()
+	return list(
+		NOMINATIVE = "правая рука",
+		GENITIVE = "правой руки",
+		DATIVE = "правой руке",
+		ACCUSATIVE = "правую руку",
+		INSTRUMENTAL = "правой рукой",
+		PREPOSITIONAL = "правой руке",
+	)
 
 /obj/item/bodypart/arm/right/apply_ownership(mob/living/carbon/new_owner)
 	if(HAS_TRAIT(new_owner, TRAIT_PARALYSIS_R_ARM))
@@ -353,7 +429,7 @@
 		if(bodypart_disabled)
 			owner.set_usable_hands(owner.usable_hands - 1)
 			if(owner.stat < UNCONSCIOUS)
-				to_chat(owner, span_userdanger("You lose control of your [plaintext_zone]!"))
+				to_chat(owner, span_userdanger("Вы теряете контроль над своей [declent_plaintext_ru(INSTRUMENTAL)]!"))
 			if(held_index)
 				owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	else if(!bodypart_disabled)
@@ -379,7 +455,7 @@
 	unarmed_damage_low = 3
 	unarmed_damage_high = 8
 	unarmed_effectiveness = 0
-	appendage_noun = "paw"
+	appendage_noun = "лапа"
 
 /obj/item/bodypart/arm/right/alien
 	icon = 'icons/mob/human/species/alien/bodyparts.dmi'
@@ -395,12 +471,12 @@
 	max_damage = LIMB_MAX_HP_ALIEN_LIMBS
 	burn_modifier = LIMB_ALIEN_BURN_DAMAGE_MULTIPLIER
 	should_draw_greyscale = FALSE
-	appendage_noun = "scythe-like hand"
+	appendage_noun = "серповидная кисть"
 
 /// Parent Type for legs, should not appear in game.
 /obj/item/bodypart/leg
 	name = "leg"
-	desc = "This item shouldn't exist. Talk about breaking a leg. Badum-Tss!"
+	desc = "Эй, приятель, сделай мне 'одолжение' и зарепорть это на гитхаб, потому что ты не должен этого видеть."
 	abstract_type = /obj/item/bodypart/leg
 	attack_verb_continuous = list("kicks", "stomps")
 	attack_verb_simple = list("kick", "stomp")
@@ -425,6 +501,26 @@
 	/// Requires special formatting: list(list(sounds, go, here), volume, range modifier)
 	var/list/special_footstep_sounds
 
+/obj/item/bodypart/leg/get_ru_names()
+	return list(
+		NOMINATIVE = "нога",
+		GENITIVE = "ноги",
+		DATIVE = "ноге",
+		ACCUSATIVE = "ногу",
+		INSTRUMENTAL = "ногой",
+		PREPOSITIONAL = "ноге",
+	)
+
+/obj/item/bodypart/leg/get_ru_plaintext_names()
+	return list(
+		NOMINATIVE = "нога",
+		GENITIVE = "ноги",
+		DATIVE = "ноге",
+		ACCUSATIVE = "ногу",
+		INSTRUMENTAL = "ногой",
+		PREPOSITIONAL = "ноге",
+	)
+
 /obj/item/bodypart/leg/Initialize(mapload)
 	. = ..()
 	if(PERFORM_ALL_TESTS(focus_only/humanstep_validity))
@@ -446,8 +542,7 @@
 
 /obj/item/bodypart/leg/left
 	name = "left leg"
-	desc = "Some athletes prefer to tie their left shoelaces first for good \
-		luck. In this instance, it probably would not have helped."
+	desc = "Парный орган опоры и движения."
 	icon_state = "default_human_l_leg"
 	body_zone = BODY_ZONE_L_LEG
 	body_part = LEG_LEFT
@@ -456,6 +551,26 @@
 	px_y = 12
 	can_be_disabled = TRUE
 	bodypart_trait_source = LEFT_LEG_TRAIT
+
+/obj/item/bodypart/leg/left/get_ru_names()
+	return list(
+		NOMINATIVE = "левая нога",
+		GENITIVE = "левой ноги",
+		DATIVE = "левой ноге",
+		ACCUSATIVE = "левую ногу",
+		INSTRUMENTAL = "левой ногой",
+		PREPOSITIONAL = "левой ноге",
+	)
+
+/obj/item/bodypart/leg/left/get_ru_plaintext_names()
+	return list(
+		NOMINATIVE = "левая нога",
+		GENITIVE = "левой ноги",
+		DATIVE = "левой ноге",
+		ACCUSATIVE = "левую ногу",
+		INSTRUMENTAL = "левой ногой",
+		PREPOSITIONAL = "левой ноге",
+	)
 
 /obj/item/bodypart/leg/left/apply_ownership(mob/living/carbon/new_owner)
 	if(HAS_TRAIT(new_owner, TRAIT_PARALYSIS_L_LEG))
@@ -497,7 +612,7 @@
 		if(bodypart_disabled)
 			owner.set_usable_legs(owner.usable_legs - 1)
 			if(owner.stat < UNCONSCIOUS)
-				to_chat(owner, span_userdanger("You lose control of your [plaintext_zone]!"))
+				to_chat(owner, span_userdanger("Вы теряете контроль над своей [declent_plaintext_ru(INSTRUMENTAL)]!"))
 	else if(!bodypart_disabled)
 		owner.set_usable_legs(owner.usable_legs + 1)
 
@@ -535,9 +650,7 @@
 
 /obj/item/bodypart/leg/right
 	name = "right leg"
-	desc = "You put your right leg in, your right leg out. In, out, in, out, \
-		shake it all about. And apparently then it detaches.\n\
-		The hokey pokey has certainly changed a lot since space colonisation."
+	desc = "Парный орган опоры и движения."
 	// alternative spellings of 'pokey' are available
 	icon_state = "default_human_r_leg"
 	body_zone = BODY_ZONE_R_LEG
@@ -546,6 +659,26 @@
 	px_x = 2
 	px_y = 12
 	bodypart_trait_source = RIGHT_LEG_TRAIT
+
+/obj/item/bodypart/leg/right/get_ru_names()
+	return list(
+		NOMINATIVE = "правая нога",
+		GENITIVE = "правой ноги",
+		DATIVE = "правой ноге",
+		ACCUSATIVE = "правую ногу",
+		INSTRUMENTAL = "правой ногой",
+		PREPOSITIONAL = "правой ноге",
+	)
+
+/obj/item/bodypart/leg/right/get_ru_plaintext_names()
+	return list(
+		NOMINATIVE = "правая нога",
+		GENITIVE = "правой ноги",
+		DATIVE = "правой ноге",
+		ACCUSATIVE = "правую ногу",
+		INSTRUMENTAL = "правой ногой",
+		PREPOSITIONAL = "правой ноге",
+	)
 
 /obj/item/bodypart/leg/right/apply_ownership(mob/living/carbon/new_owner)
 	if(HAS_TRAIT(new_owner, TRAIT_PARALYSIS_R_LEG))
@@ -588,7 +721,7 @@
 		if(bodypart_disabled)
 			owner.set_usable_legs(owner.usable_legs - 1)
 			if(owner.stat < UNCONSCIOUS)
-				to_chat(owner, span_userdanger("You lose control of your [plaintext_zone]!"))
+				to_chat(owner, span_userdanger("Вы теряете контроль над своей [declent_plaintext_ru(INSTRUMENTAL)]!"))
 	else if(!bodypart_disabled)
 		owner.set_usable_legs(owner.usable_legs + 1)
 

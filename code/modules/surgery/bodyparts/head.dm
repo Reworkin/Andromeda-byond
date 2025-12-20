@@ -1,6 +1,6 @@
 /obj/item/bodypart/head
 	name = BODY_ZONE_HEAD
-	desc = "Didn't make sense not to live for fun, your brain gets smart but your head gets dumb."
+	desc = "Было бы бессмысленно не жить ради удовольствия, твой мозг становится умным, но голова - глупой."
 	icon = 'icons/mob/human/bodyparts.dmi'
 	icon_state = "default_human_head"
 	max_damage = LIMB_MAX_HP_CORE
@@ -97,6 +97,26 @@
 		/// Can this head be dismembered normally?
 		can_dismember = FALSE
 
+/obj/item/bodypart/head/get_ru_names()
+	return list(
+		NOMINATIVE = "голова",
+		GENITIVE = "головы",
+		DATIVE = "голове",
+		ACCUSATIVE = "голову",
+		INSTRUMENTAL = "головой",
+		PREPOSITIONAL = "голове",
+	)
+
+/obj/item/bodypart/head/get_ru_plaintext_names()
+	return list(
+		NOMINATIVE = "голова",
+		GENITIVE = "головы",
+		DATIVE = "голове",
+		ACCUSATIVE = "голову",
+		INSTRUMENTAL = "головой",
+		PREPOSITIONAL = "голове",
+	)
+
 /obj/item/bodypart/head/Destroy()
 	QDEL_NULL(worn_ears_offset)
 	QDEL_NULL(worn_glasses_offset)
@@ -110,29 +130,29 @@
 	if(show_organs_on_examine && IS_ORGANIC_LIMB(src))
 		var/obj/item/organ/brain/brain = locate(/obj/item/organ/brain) in src
 		if(!brain)
-			. += span_info("The brain has been removed from [src].")
+			. += span_info("Мозг был извлечён из [declent_ru(GENITIVE)].")
 		else if(brain.suicided || (brain.brainmob && HAS_TRAIT(brain.brainmob, TRAIT_SUICIDED)))
-			. += span_info("There's a miserable expression on [real_name]'s face; they must have really hated life. There's no hope of recovery.")
+			. += span_info("На лице [real_name] застыло страдальческое выражение; должно быть, они действительно ненавидели жизнь. Надежды на восстановление нет.")
 		else if(brain.brainmob)
 			if(brain.brainmob?.health <= HEALTH_THRESHOLD_DEAD)
-				. += span_info("It's leaking some kind of... clear fluid? The brain inside must be in pretty bad shape.")
+				. += span_info("Из неё сочится какая-то... прозрачная жидкость? Мозг внутри, должно быть, в довольно плохом состоянии.")
 			if(brain.brainmob.key || brain.brainmob.get_ghost(FALSE, TRUE))
-				. += span_info("Its muscles are twitching slightly... It seems to have some life still in it.")
+				. += span_info("Её мышцы слегка подёргиваются... Кажется, в ней ещё теплится жизнь.")
 			else
-				. += span_info("It's completely lifeless. Perhaps there'll be a chance for them later.")
+				. += span_info("Она совершенно безжизненна. Возможно, у них будет шанс позже.")
 		else if(brain?.decoy_override)
-			. += span_info("It's completely lifeless. Perhaps there'll be a chance for them later.")
+			. += span_info("Она совершенно безжизненна. Возможно, у них будет шанс позже.")
 		else
-			. += span_info("It's completely lifeless.")
+			. += span_info("Она совершенно безжизненна.")
 
 		if(!(locate(/obj/item/organ/eyes) in src))
-			. += span_info("[real_name]'s eyes have been removed.")
+			. += span_info("Глаза [real_name] были удалены.")
 
 		if(!(locate(/obj/item/organ/ears) in src))
-			. += span_info("[real_name]'s ears have been removed.")
+			. += span_info("Уши [real_name] были удалены.")
 
 		if(!(locate(/obj/item/organ/tongue) in src))
-			. += span_info("[real_name]'s tongue has been removed.")
+			. += span_info("Язык [real_name] был удалён.")
 
 /obj/item/bodypart/head/can_dismember(obj/item/item)
 	if (!can_dismember)
@@ -145,10 +165,10 @@
 
 /obj/item/bodypart/head/drop_organs(mob/user, violent_removal)
 	if(user)
-		user.visible_message(span_warning("[user] saws [src] open and pulls out a brain!"), span_notice("You saw [src] open and pull out a brain."))
+		user.visible_message(span_warning("[user] распиливает [declent_ru(ACCUSATIVE)] и извлекает мозг!"), span_notice("Вы распиливаете [declent_ru(ACCUSATIVE)] и извлекаете мозг."))
 	var/obj/item/organ/brain/brain = locate(/obj/item/organ/brain) in src
-	if(brain && violent_removal && prob(90)) //ghetto surgery can damage the brain.
-		to_chat(user, span_warning("[brain] was damaged in the process!"))
+	if(brain && violent_removal && prob(90)) //кустарная хирургия может повредить мозг.
+		to_chat(user, span_warning("[brain.declent_ru(NOMINATIVE)] был повреждён в процессе!"))
 		brain.set_organ_damage(brain.maxHealth)
 
 	update_limb()
@@ -158,7 +178,7 @@
 	. = ..()
 	if(!isnull(owner))
 		if(HAS_TRAIT(owner, TRAIT_HUSK))
-			real_name = "Unknown"
+			real_name = "Неизвестный"
 		else
 			real_name = owner.real_name
 	update_hair_and_lips(dropping_limb, is_creating)
@@ -213,7 +233,7 @@
 	AddElement(/datum/element/toy_talk)
 
 /obj/item/bodypart/head/get_voice(add_id_name)
-	return "The head of [real_name]"
+	return "Голова [real_name]"
 
 /obj/item/bodypart/head/update_bodypart_damage_state()
 	if (head_flags & HEAD_NO_DISFIGURE)

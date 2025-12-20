@@ -47,9 +47,10 @@
 		return names
 	return
 
-
 /**
  * #MARK: МАТЕРИАЛ
+ * Отличие от системы перевода Атомов в том, что изменён родитель с /atom на /datum
+ * По этому используется тот же лист var/list/list_to_use = ru_names
  */
 
 /datum/material/proc/declent_ru(case_id)
@@ -68,5 +69,38 @@
 	names = get_ru_names()
 	if(names)
 		GLOB.cached_ru_names[type] = names
+		return names
+	return
+
+/**
+ * #MARK: Части тела
+ * Части тела, а именно зоны (plaintext_zone), не получится перевести как атомы, по этому отдельно.
+ */
+
+/**
+ * Возвращает русское название plaintext_zone, склоненное для указанного падежа.
+ */
+/obj/item/bodypart/proc/declent_plaintext_ru(case_id)
+	var/list/list_to_use = ru_plaintext_names || get_ru_plaintext_names_cached()
+	if(length(list_to_use))
+		return list_to_use[case_id] || plaintext_zone
+	return plaintext_zone
+
+/**
+ * Получить варианты русского plaintext_zone в грамматических падежах.
+ */
+/obj/item/bodypart/proc/get_ru_plaintext_names()
+	return
+
+/**
+ * Получить кешированные русские plaintext_zone для данного типа bodypart.
+ */
+/obj/item/bodypart/proc/get_ru_plaintext_names_cached()
+	var/list/names = GLOB.cached_ru_plaintext_names[type]
+	if(names)
+		return names
+	names = get_ru_plaintext_names()
+	if(names)
+		GLOB.cached_ru_plaintext_names[type] = names
 		return names
 	return

@@ -553,9 +553,9 @@
 		return
 	var/list/combined_msg = list()
 
-	visible_message(span_notice("[src] examines [p_them()]self."))
+	visible_message(span_notice("[src] осматрива[PLUR_ET_YUT(src)] себя."))
 
-	combined_msg += span_notice("<b>You check yourself for injuries.</b>")
+	combined_msg += span_notice("<b>Вы проверяете себя на наличие травм.</b>")
 
 	var/list/missing = get_all_limbs()
 

@@ -55,7 +55,7 @@
 	if(!empty && !charge)
 		charge = maxcharge
 	if(ratingdesc)
-		desc += " This one has a rating of [display_energy(maxcharge)][prob(10) ? ", and you should not swallow it" : ""]." //joke works better if it's not on every cell
+		desc += " Имеет ёмкость [display_energy(maxcharge)]."
 	update_appearance()
 
 	RegisterSignal(src, COMSIG_ITEM_MAGICALLY_CHARGED, PROC_REF(on_magic_charge))
@@ -200,9 +200,9 @@
 /obj/item/stock_parts/power_store/examine(mob/user)
 	. = ..()
 	if(rigged)
-		. += span_danger("This [name] seems to be faulty!")
+		. += span_danger("Эта [declent_ru(NOMINATIVE)] кажется неисправной!")
 	else if(!isnull(charge_light_type))
-		. += "The charge meter reads [CEILING(percent(), 0.1)]%." //so it doesn't say 0% charge when the overlay indicates it still has charge
+		. += "Индикатор заряда показывает [CEILING(percent(), 0.1)]%." //чтобы не говорило 0% заряда, когда оверлей показывает что заряд ещё есть
 
 /obj/item/stock_parts/power_store/proc/on_reagent_change(datum/reagents/holder)
 	SIGNAL_HANDLER

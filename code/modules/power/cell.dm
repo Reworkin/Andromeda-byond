@@ -1,12 +1,12 @@
 
 /**
- * # Power cell
+ * # Элемент питания
  *
- * Power cells, used primarily for handheld and portable things. Holds a reasonable amount of power.
+ * Элементы питания, используемые в основном для портативных и переносных устройств. Содержит разумное количество энергии.
  */
 /obj/item/stock_parts/power_store/cell
 	name = "power cell"
-	desc = "A rechargeable electrochemical power cell."
+	desc = "Перезаряжаемый электрохимический элемент питания."
 	icon = 'icons/obj/machines/cell_charger.dmi'
 	icon_state = "cell"
 	inhand_icon_state = "cell"
@@ -20,6 +20,16 @@
 	w_class = WEIGHT_CLASS_SMALL
 	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT*7, /datum/material/glass=SMALL_MATERIAL_AMOUNT*0.5)
 	grind_results = list(/datum/reagent/lithium = 15, /datum/reagent/iron = 5, /datum/reagent/silicon = 5)
+
+/obj/item/stock_parts/power_store/cell/get_ru_names()
+	return list(
+		NOMINATIVE = "батарея",
+		GENITIVE = "батареи",
+		DATIVE = "батарее",
+		ACCUSATIVE = "батарею",
+		INSTRUMENTAL = "батареей",
+		PREPOSITIONAL = "батарее",
+	)
 
 /obj/item/stock_parts/power_store/cell/Initialize(mapload)
 	. = ..()
@@ -36,11 +46,21 @@
 	empty = TRUE
 
 /obj/item/stock_parts/power_store/cell/crap
-	name = "\improper Nanotrasen brand rechargeable AA cell"
-	desc = "You can't top the plasma top." //TOTALLY TRADEMARK INFRINGEMENT
+	name = "brand AA cell"
+	desc = "Лучшая батарейка от корпорации Нанотрейзен." //TOTALLY TRADEMARK INFRINGEMENT
 	icon_state = "aa_cell"
 	maxcharge = STANDARD_CELL_CHARGE * 0.5
 	custom_materials = list(/datum/material/glass=SMALL_MATERIAL_AMOUNT*0.4)
+
+/obj/item/stock_parts/power_store/cell/crap/get_ru_names()
+	return list(
+		NOMINATIVE = "пальчиковая батарейка",
+		GENITIVE = "пальчиковой батарейки",
+		DATIVE = "пальчиковой батарейке",
+		ACCUSATIVE = "пальчиковую батарейку",
+		INSTRUMENTAL = "пальчиковой батарейкой",
+		PREPOSITIONAL = "пальчиковой батарейке",
+	)
 
 /obj/item/stock_parts/power_store/cell/crap/Initialize(mapload)
 	AddElement(/datum/element/update_icon_blocker)
@@ -51,12 +71,21 @@
 
 /obj/item/stock_parts/power_store/cell/upgraded
 	name = "upgraded power cell"
-	desc = "A power cell with a slightly higher capacity than normal!"
+	desc = "Элемент питания с немного большей емкостью, чем обычно!"
 	icon_state = "9v_cell"
 	maxcharge = STANDARD_CELL_CHARGE * 2.5
-
 	custom_materials = list(/datum/material/glass=SMALL_MATERIAL_AMOUNT*0.5)
 	chargerate = STANDARD_CELL_RATE * 0.5
+
+/obj/item/stock_parts/power_store/cell/upgraded/get_ru_names()
+	return list(
+		NOMINATIVE = "батарейка крона",
+		GENITIVE = "батарейки крона",
+		DATIVE = "батарейке крона",
+		ACCUSATIVE = "батарейку крона",
+		INSTRUMENTAL = "батарейкой крона",
+		PREPOSITIONAL = "батарейке крона",
+	)
 
 /obj/item/stock_parts/power_store/cell/upgraded/Initialize(mapload)
 	AddElement(/datum/element/update_icon_blocker)
@@ -64,13 +93,33 @@
 
 /obj/item/stock_parts/power_store/cell/upgraded/plus
 	name = "upgraded power cell+"
-	desc = "A power cell with an even higher capacity than the base model!"
+	desc = "Элемент питания с еще большей емкостью, чем у базовой модели!"
 	maxcharge = STANDARD_CELL_CHARGE * 5
+
+/obj/item/stock_parts/power_store/cell/upgraded/plus/get_ru_names()
+	return list(
+		NOMINATIVE = "улучшенная батарейка крона",
+		GENITIVE = "улучшенной батарейки крона",
+		DATIVE = "улучшенной батарейке крона",
+		ACCUSATIVE = "улучшенную батарейку крона",
+		INSTRUMENTAL = "улучшенной батарейкой крона",
+		PREPOSITIONAL = "улучшенной батарейке крона",
+	)
 
 /obj/item/stock_parts/power_store/cell/secborg
 	name = "security borg rechargeable D cell"
 	maxcharge = STANDARD_CELL_CHARGE * 0.6
 	custom_materials = list(/datum/material/glass=SMALL_MATERIAL_AMOUNT*0.4)
+
+/obj/item/stock_parts/power_store/cell/secborg/get_ru_names()
+	return list(
+		NOMINATIVE = "батарея борга охраны",
+		GENITIVE = "батареи борга охраны",
+		DATIVE = "батарее борга охраны",
+		ACCUSATIVE = "батарею борга охраны",
+		INSTRUMENTAL = "батареей борга охраны",
+		PREPOSITIONAL = "батарее борга охраны",
+	)
 
 /obj/item/stock_parts/power_store/cell/secborg/empty
 	empty = TRUE
@@ -79,9 +128,29 @@
 	name = "miniature energy gun power cell"
 	maxcharge = STANDARD_CELL_CHARGE * 0.6
 
+/obj/item/stock_parts/power_store/cell/mini_egun/get_ru_names()
+	return list(
+		NOMINATIVE = "миниатюрная батарея пистолета",
+		GENITIVE = "миниатюрной батареи пистолета",
+		DATIVE = "миниатюрной батарее пистолета",
+		ACCUSATIVE = "миниатюрную батарею пистолета",
+		INSTRUMENTAL = "миниатюрной батареей пистолета",
+		PREPOSITIONAL = "миниатюрной батарее пистолета",
+	)
+
 /obj/item/stock_parts/power_store/cell/hos_gun
 	name = "X-01 multiphase energy gun power cell"
 	maxcharge = STANDARD_CELL_CHARGE * 1.2
+
+/obj/item/stock_parts/power_store/cell/hos_gun/get_ru_names()
+	return list(
+		NOMINATIVE = "многофазная батарея X-01",
+		GENITIVE = "многофазной батареи X-01",
+		DATIVE = "многофазной батарее X-01",
+		ACCUSATIVE = "многофазную батарею X-01",
+		INSTRUMENTAL = "многофазной батареей X-01",
+		PREPOSITIONAL = "многофазной батарее X-01",
+	)
 
 /obj/item/stock_parts/power_store/cell/pulse //200 pulse shots
 	name = "pulse rifle power cell"
@@ -89,17 +158,57 @@
 	maxcharge = STANDARD_CELL_CHARGE * 40
 	chargerate = STANDARD_CELL_RATE * 0.75
 
+/obj/item/stock_parts/power_store/cell/pulse/get_ru_names()
+	return list(
+		NOMINATIVE = "батарея импульсной винтовки",
+		GENITIVE = "батареи импульсной винтовки",
+		DATIVE = "батарее импульсной винтовки",
+		ACCUSATIVE = "батарею импульсной винтовки",
+		INSTRUMENTAL = "батареей импульсной винтовки",
+		PREPOSITIONAL = "батарее импульсной винтовки",
+	)
+
 /obj/item/stock_parts/power_store/cell/pulse/carbine //25 pulse shots
 	name = "pulse carbine power cell"
 	maxcharge = STANDARD_CELL_CHARGE * 5
+
+/obj/item/stock_parts/power_store/cell/pulse/carbine/get_ru_names()
+	return list(
+		NOMINATIVE = "батарея импульсного карабина",
+		GENITIVE = "батареи импульсного карабина",
+		DATIVE = "батарее импульсного карабина",
+		ACCUSATIVE = "батарею импульсного карабина",
+		INSTRUMENTAL = "батареей импульсного карабина",
+		PREPOSITIONAL = "батарее импульсного карабина",
+	)
 
 /obj/item/stock_parts/power_store/cell/pulse/pistol //10 pulse shots
 	name = "pulse pistol power cell"
 	maxcharge = STANDARD_CELL_CHARGE * 2
 
+/obj/item/stock_parts/power_store/cell/pulse/pistol/get_ru_names()
+	return list(
+		NOMINATIVE = "батарея импульсного пистолета",
+		GENITIVE = "батареи импульсного пистолета",
+		DATIVE = "батарее импульсного пистолета",
+		ACCUSATIVE = "батарею импульсного пистолета",
+		INSTRUMENTAL = "батареей импульсного пистолета",
+		PREPOSITIONAL = "батарее импульсного пистолета",
+	)
+
 /obj/item/stock_parts/power_store/cell/laser_pistol
 	name = "laser pistol power cell"
 	chargerate = STANDARD_CELL_RATE * 3
+
+/obj/item/stock_parts/power_store/cell/laser_pistol/get_ru_names()
+	return list(
+		NOMINATIVE = "батарея лазерного пистолета",
+		GENITIVE = "батареи лазерного пистолета",
+		DATIVE = "батарее лазерного пистолета",
+		ACCUSATIVE = "батарею лазерного пистолета",
+		INSTRUMENTAL = "батареей лазерного пистолета",
+		PREPOSITIONAL = "батарее лазерного пистолета",
+	)
 
 /obj/item/stock_parts/power_store/cell/ninja
 	name = "black power cell"
@@ -109,6 +218,16 @@
 	custom_materials = list(/datum/material/glass=SMALL_MATERIAL_AMOUNT*0.6)
 	chargerate = STANDARD_CELL_RATE
 
+/obj/item/stock_parts/power_store/cell/ninja/get_ru_names()
+	return list(
+		NOMINATIVE = "чёрная батарея",
+		GENITIVE = "чёрной батареи",
+		DATIVE = "чёрной батарее",
+		ACCUSATIVE = "чёрную батарею",
+		INSTRUMENTAL = "чёрной батареей",
+		PREPOSITIONAL = "чёрной батарее",
+	)
+
 /obj/item/stock_parts/power_store/cell/high
 	name = "high-capacity power cell"
 	icon_state = "hcell"
@@ -117,9 +236,18 @@
 	custom_materials = list(/datum/material/glass=SMALL_MATERIAL_AMOUNT*0.6)
 	chargerate = STANDARD_CELL_RATE * 0.75
 
-
 /obj/item/stock_parts/power_store/cell/high/empty
 	empty = TRUE
+
+/obj/item/stock_parts/power_store/cell/high/get_ru_names()
+	return list(
+		NOMINATIVE = "батарея повышенной ёмкости",
+		GENITIVE = "батареи повышенной ёмкости",
+		DATIVE = "батарее повышенной ёмкости",
+		ACCUSATIVE = "батарею повышенной ёмкости",
+		INSTRUMENTAL = "батареей повышенной ёмкости",
+		PREPOSITIONAL = "батарее повышенной ёмкости",
+	)
 
 /obj/item/stock_parts/power_store/cell/super
 	name = "super-capacity power cell"
@@ -132,6 +260,16 @@
 /obj/item/stock_parts/power_store/cell/super/empty
 	empty = TRUE
 
+/obj/item/stock_parts/power_store/cell/high/get_ru_names()
+	return list(
+		NOMINATIVE = "суперёмкая батарея",
+		GENITIVE = "суперёмкой батареи",
+		DATIVE = "суперёмкой батарее",
+		ACCUSATIVE = "суперёмкую батарею",
+		INSTRUMENTAL = "суперёмкой батареей",
+		PREPOSITIONAL = "суперёмкой батарее",
+	)
+
 /obj/item/stock_parts/power_store/cell/hyper
 	name = "hyper-capacity power cell"
 	icon_state = "hpcell"
@@ -143,9 +281,19 @@
 /obj/item/stock_parts/power_store/cell/hyper/empty
 	empty = TRUE
 
+/obj/item/stock_parts/power_store/cell/hyper/get_ru_names()
+	return list(
+		NOMINATIVE = "гиперёмкая батарея",
+		GENITIVE = "гиперёмкой батареи",
+		DATIVE = "гиперёмкой батарее",
+		ACCUSATIVE = "гиперёмкую батарею",
+		INSTRUMENTAL = "гиперёмкой батареей",
+		PREPOSITIONAL = "гиперёмкой батарее",
+	)
+
 /obj/item/stock_parts/power_store/cell/bluespace
 	name = "bluespace power cell"
-	desc = "A rechargeable transdimensional power cell."
+	desc = "Перезаряжаемый межпространственный элемент питания."
 	icon_state = "bscell"
 	emp_damage_modifier = 5
 	maxcharge = STANDARD_CELL_CHARGE * 40
@@ -154,6 +302,16 @@
 
 /obj/item/stock_parts/power_store/cell/bluespace/empty
 	empty = TRUE
+
+/obj/item/stock_parts/power_store/cell/bluespace/get_ru_names()
+	return list(
+		NOMINATIVE = "блюспейс батарея",
+		GENITIVE = "блюспейс батареи",
+		DATIVE = "блюспейс батарее",
+		ACCUSATIVE = "блюспейс батарею",
+		INSTRUMENTAL = "блюспейс батареей",
+		PREPOSITIONAL = "блюспейс батарее",
+	)
 
 /obj/item/stock_parts/power_store/cell/infinite
 	name = "infinite-capacity power cell"
@@ -167,13 +325,33 @@
 /obj/item/stock_parts/power_store/cell/infinite/use(used, force = FALSE)
 	return used
 
+/obj/item/stock_parts/power_store/cell/infinite/get_ru_names()
+	return list(
+		NOMINATIVE = "батарея бесконечной ёмкости",
+		GENITIVE = "батареи бесконечной ёмкости",
+		DATIVE = "батарее бесконечной ёмкости",
+		ACCUSATIVE = "батарею бесконечной ёмкости",
+		INSTRUMENTAL = "батареей бесконечной ёмкости",
+		PREPOSITIONAL = "батарее бесконечной ёмкости",
+	)
+
 /obj/item/stock_parts/power_store/cell/infinite/abductor
 	name = "void core"
-	desc = "An alien power cell that produces energy seemingly out of nowhere."
+	desc = "Инопланетный источник питания, который производит энергию, казалось бы, из ниоткуда."
 	icon = 'icons/obj/antags/abductor.dmi'
 	icon_state = "cell"
 	maxcharge = STANDARD_CELL_CHARGE * 50
 	ratingdesc = FALSE
+
+/obj/item/stock_parts/power_store/cell/infinite/abductor/get_ru_names()
+	return list(
+		NOMINATIVE = "ядро пустоты",
+		GENITIVE = "ядра пустоты",
+		DATIVE = "ядру пустоты",
+		ACCUSATIVE = "ядро пустоты",
+		INSTRUMENTAL = "ядром пустоты",
+		PREPOSITIONAL = "ядре пустоты",
+	)
 
 /obj/item/stock_parts/power_store/cell/infinite/abductor/Initialize(mapload)
 	AddElement(/datum/element/update_icon_blocker)
@@ -181,7 +359,7 @@
 
 /obj/item/stock_parts/power_store/cell/potato
 	name = "potato battery"
-	desc = "A rechargeable starch based power cell."
+	desc = "Перезаряжаемый элемент питания на основе крахмала."
 	icon = 'icons/obj/service/hydroponics/harvest.dmi'
 	icon_state = "potato"
 	maxcharge = STANDARD_CELL_CHARGE * 0.3
@@ -196,11 +374,31 @@
 	charge = maxcharge * 0.3
 	. = ..()
 
+/obj/item/stock_parts/power_store/cell/potato/get_ru_names()
+	return list(
+		NOMINATIVE = "картофельная батарейка",
+		GENITIVE = "картофельной батарейки",
+		DATIVE = "картофельной батарейке",
+		ACCUSATIVE = "картофельную батарейку",
+		INSTRUMENTAL = "картофельной батарейкой",
+		PREPOSITIONAL = "картофельной батарейке",
+	)
+
 /obj/item/stock_parts/power_store/cell/emproof
-	name = "\improper EMP-proof cell"
-	desc = "An EMP-proof cell."
+	name = "EMP-proof cell"
+	desc = "Защищенная от ЭМИ ячейка."
 	emp_damage_modifier = 0
 	maxcharge = STANDARD_CELL_CHARGE * 0.5
+
+/obj/item/stock_parts/power_store/cell/emproof/get_ru_names()
+	return list(
+		NOMINATIVE = "анти-ЭМИ батарея",
+		GENITIVE = "анти-ЭМИ батареи",
+		DATIVE = "анти-ЭМИ батарее",
+		ACCUSATIVE = "анти-ЭМИ батарею",
+		INSTRUMENTAL = "анти-ЭМИ батареей",
+		PREPOSITIONAL = "анти-ЭМИ батарее",
+	)
 
 /obj/item/stock_parts/power_store/cell/emproof/Initialize(mapload)
 	AddElement(/datum/element/empprotection, EMP_PROTECT_SELF)
@@ -214,7 +412,7 @@
 
 /obj/item/stock_parts/power_store/cell/emproof/slime
 	name = "EMP-proof slime core"
-	desc = "A yellow slime core infused with plasma. Its organic nature makes it immune to EMPs."
+	desc = "Желтая слизистая сердцевина, пропитанная плазмой. Органическая природа делает ее невосприимчивой к ЭМИ."
 	icon = 'icons/mob/simple/slimes.dmi'
 	icon_state = "yellow-core"
 	custom_materials = null
@@ -222,12 +420,32 @@
 	charge_light_type = null
 	connector_type = "slimecore"
 
+/obj/item/stock_parts/power_store/cell/emproof/slime/get_ru_names()
+	return list(
+		NOMINATIVE = "слаймовая анти-ЭМИ батарея",
+		GENITIVE = "слаймовой анти-ЭМИ батареи",
+		DATIVE = "слаймовой анти-ЭМИ батарее",
+		ACCUSATIVE = "слаймовую анти-ЭМИ батарею",
+		INSTRUMENTAL = "слаймовой анти-ЭМИ батареей",
+		PREPOSITIONAL = "слаймовой анти-ЭМИ батарее",
+	)
+
 /obj/item/stock_parts/power_store/cell/emergency_light
 	name = "miniature power cell"
-	desc = "A tiny power cell with a very low power capacity. Used in light fixtures to power them in the event of an outage."
+	desc = "Миниатюрный элемент питания с очень низкой мощностью. Используется в светильниках для подачи питания в случае отключения."
 	maxcharge = STANDARD_CELL_CHARGE * 0.12 //Emergency lights use 0.2 W per tick, meaning ~10 minutes of emergency power from a cell
 	custom_materials = list(/datum/material/glass = SMALL_MATERIAL_AMOUNT*0.2)
 	w_class = WEIGHT_CLASS_TINY
+
+/obj/item/stock_parts/power_store/cell/emergency_light/get_ru_names()
+	return list(
+		NOMINATIVE = "миниатюрная батарея",
+		GENITIVE = "миниатюрной батареи",
+		DATIVE = "миниатюрной батарее",
+		ACCUSATIVE = "миниатюрную батарею",
+		INSTRUMENTAL = "миниатюрной батареей",
+		PREPOSITIONAL = "миниатюрной батарее",
+	)
 
 /obj/item/stock_parts/power_store/cell/emergency_light/Initialize(mapload)
 	. = ..()
@@ -238,7 +456,7 @@
 
 /obj/item/stock_parts/power_store/cell/crystal_cell
 	name = "crystal power cell"
-	desc = "A very high power cell made from crystallized plasma"
+	desc = "Элемент питания очень высокой мощности, изготовленный из кристаллизованной плазмы."
 	icon_state = "crystal_cell"
 	maxcharge = STANDARD_CELL_CHARGE * 50
 	chargerate = 0
@@ -246,6 +464,16 @@
 	connector_type = "crystal"
 	custom_materials = null
 	grind_results = null
+
+/obj/item/stock_parts/power_store/cell/crystal_cell/get_ru_names()
+	return list(
+		NOMINATIVE = "кристаллическая батарея",
+		GENITIVE = "кристаллической батареи",
+		DATIVE = "кристаллической батарее",
+		ACCUSATIVE = "кристаллическую батарею",
+		INSTRUMENTAL = "кристаллической батареей",
+		PREPOSITIONAL = "кристаллической батарее",
+	)
 
 /obj/item/stock_parts/power_store/cell/ethereal
 	name = "ahelp it"

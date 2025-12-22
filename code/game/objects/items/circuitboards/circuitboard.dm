@@ -174,12 +174,12 @@ micro-manipulator, console screen, beaker, Microlaser, matter bin, power cells.
 		var/component_name
 		var/component_amount = req_components[component_path]
 
-		//e.g. "glass sheet" vs. "glass"
+		//например, "лист стекла" против "стекло"
 		if(ispath(component_path, /obj/item/stack))
 			var/obj/item/stack/stack_path = component_path
 			component_name = initial(stack_path.singular_name)
 
-		//stock parts in datum or obj form
+		//стандартные детали в форме датума или объекта
 		else if(ispath(component_path, /obj/item/stock_parts) || ispath(component_path, /datum/stock_part))
 			var/obj/item/stock_parts/stock_part
 			if(ispath(component_path, /obj/item/stock_parts))
@@ -193,14 +193,51 @@ micro-manipulator, console screen, beaker, Microlaser, matter bin, power cells.
 			if(!component_name)
 				component_name = initial(stock_part.name)
 
-		//beakers, any non conventional part
+		//мензурки, любые нестандартные детали
 		else if(ispath(component_path, /atom))
 			var/atom/stock_part = component_path
 			component_name = initial(stock_part.name)
 
-		//append decoded name to final result
+		//добавляем декодированное имя в конечный результат
 		if (isnull(component_name))
-			stack_trace("[component_path] was an invalid component")
-		nice_list += list("[component_amount] [component_name]")
+			stack_trace("[component_path] был недопустимым компонентом")
+
+		// Определяем физический путь для перевода
+		var/physical_path = component_path
+		if(ispath(component_path, /datum/stock_part))
+			var/datum/stock_part/stock_datum = GLOB.stock_part_datums[component_path]
+			if(stock_datum)
+				physical_path = stock_datum.physical_object_type
+			else
+				physical_path = /obj/item/stock_parts
+
+		// Получаем переведённое название с правильным падежом
+		var/translated_name = get_translated_component_name(physical_path, component_amount)
+		nice_list += list("[component_amount] [translated_name]")
 
 	. += span_info("Требуется: [english_list(nice_list)].")
+
+/**
+ * Возвращает переведённое название компонента в правильном падеже
+ *
+ * Аргументы:
+ * * component_path - путь к типу компонента
+ * * amount - количество (определяет падеж: 1 - именительный, >1 - родительный)
+ */
+/proc/get_translated_component_name(component_path, amount = 1)
+	if(!ispath(component_path, /atom))
+		return "говнокодерский компонент"
+
+	// Создаём временный объект для получения перевода
+	var/atom/temp_component = new component_path()
+	var/translated_name
+
+	if(amount == 1)
+		// Единственное число - именительный падеж
+		translated_name = temp_component.declent_ru(NOMINATIVE) || initial(temp_component.name)
+	else
+		// Множественное число - родительный падеж
+		translated_name = temp_component.declent_ru(GENITIVE) || initial(temp_component.name)
+
+	qdel(temp_component)
+	return translated_name

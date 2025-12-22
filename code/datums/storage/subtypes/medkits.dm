@@ -69,7 +69,6 @@
 		/obj/item/sensor_device,
 		/obj/item/radio,
 		/obj/item/bikehorn/rubberducky,
-		/obj/item/shears,
 		/obj/item/geiger_counter,
 		/obj/item/flashlight/pen,
 		/obj/item/extinguisher/mini,

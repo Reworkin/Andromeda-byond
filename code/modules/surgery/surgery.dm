@@ -1,44 +1,44 @@
 /datum/surgery
-	///The name of the surgery operation
-	var/name = "surgery"
-	///The description of the surgery, what it does.
+	///Название хирургической операции
+	var/name = "хирургия"
+	///Описание хирургии, что она делает.
 	var/desc
 
-	///Bitfield for flags that determine different behaviors and requirement for the surgery. See __DEFINES/surgery.dm
+	///Битовое поле для флагов, определяющих различное поведение и требования для операции. Смотри __DEFINES/surgery.dm
 	var/surgery_flags = SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB
-	///The surgery step we're currently on, increases each time we do a step.
+	///Текущий шаг операции, увеличивается каждый раз при выполнении шага.
 	var/status = 1
-	///All steps the surgery has to do to complete.
+	///Все шаги, которые нужно выполнить для завершения операции.
 	var/list/steps = list()
-	///Boolean on whether a surgery step is currently being done, to prevent multi-surgery.
+	///Флаг, указывающий выполняется ли в данный момент шаг операции, чтобы предотвратить множественные операции.
 	var/step_in_progress = FALSE
 
-	///The bodypart this specific surgery is being performed on.
+	///Часть тела, на которой проводится эта конкретная операция.
 	var/location = BODY_ZONE_CHEST
-	///The possible bodyparts that the surgery can be started on.
+	///Возможные части тела, на которых можно начать операцию.
 	var/list/possible_locs = list()
-	///Mobs that are valid to have surgery performed on them.
+	///Типы мобов, на которых допустимо проводить операцию.
 	var/list/target_mobtypes = list(/mob/living/carbon/human)
 
-	///The person the surgery is being performed on. Funnily enough, it isn't always a carbon.
+	///Пациент, на котором проводится операция. Как ни странно, это не всегда карбон.
 	VAR_FINAL/mob/living/carbon/target
-	///The specific bodypart being operated on.
+	///Конкретная часть тела, над которой проводится операция.
 	VAR_FINAL/obj/item/bodypart/operated_bodypart
-	///The wound datum that is being operated on.
+	///Датум раны, над которой проводится операция.
 	VAR_FINAL/datum/wound/operated_wound
 
-	///Types of wounds this surgery can target.
+	///Типы ран, на которые нацелена эта операция.
 	var/targetable_wound
-	///The types of bodyparts that this surgery can have performed on it. Used for augmented surgeries.
+	///Типы частей тела, на которых можно проводить эту операцию. Используется для операций на протезах.
 	var/requires_bodypart_type = BODYTYPE_ORGANIC
 
-	///The speed modifier given to the surgery through external means.
+	///Модификатор скорости операции, заданный внешними средствами.
 	var/speed_modifier = 1
-	///Whether the surgery requires research to do. You need to add a design if using this!
+	///Требует ли операция исследований для выполнения. Если используешь это, нужно добавить дизайн!
 	var/requires_tech = FALSE
-	///typepath of a surgery that will, once researched, replace this surgery in the operating menu.
+	///Тип операции, которая после исследования заменит эту операцию в меню операций.
 	var/replaced_by
-	/// Organ being directly manipulated, used for checking if the organ is still in the body after surgery has begun
+	///Орган, которым непосредственно манипулируют, используется для проверки, остался ли орган в теле после начала операции.
 	var/organ_to_manipulate
 
 /datum/surgery/New(atom/surgery_target, surgery_location, surgery_bodypart)
@@ -71,16 +71,16 @@
 	return ..()
 
 
-/datum/surgery/proc/can_start(mob/user, mob/living/patient) //FALSE to not show in list
+/datum/surgery/proc/can_start(mob/user, mob/living/patient) //FALSE чтобы не показывать в списке
 	SHOULD_CALL_PARENT(TRUE)
 
 	. = TRUE
 	if(replaced_by == /datum/surgery)
 		return FALSE
 
-	// True surgeons (like abductor scientists) need no instructions
+	// Истинные хирурги (например, учёные похитителей) не нуждаются в инструкциях
 	if(HAS_MIND_TRAIT(user, TRAIT_SURGEON))
-		if(replaced_by) // only show top-level surgeries
+		if(replaced_by) // показывать только операции высшего уровня
 			return FALSE
 		else
 			return TRUE
@@ -99,7 +99,7 @@
 
 	var/turf/patient_turf = get_turf(patient)
 
-	//Get the relevant operating computer
+	//Получаем соответствующий операционный компьютер
 	var/obj/machinery/computer/operating/opcomputer = locate_operating_computer(patient_turf)
 	if (isnull(opcomputer))
 		return .
@@ -131,9 +131,9 @@
 		return TRUE
 	if(!tool)
 		return FALSE
-	//Just because you used the wrong tool it doesn't mean you meant to whack the patient with it
+	//То, что ты использовал неправильный инструмент, ещё не значит, что ты собирался ударить им пациента
 	if((surgery_flags & SURGERY_CHECK_TOOL_BEHAVIOUR) ? tool.tool_behaviour : (tool.item_flags & SURGICAL_TOOL))
-		to_chat(user, span_warning("This step requires a different tool!"))
+		to_chat(user, span_warning("Для этого шага требуется другой инструмент!"))
 		return TRUE
 
 	return FALSE
@@ -149,7 +149,7 @@
 	surgeon.add_mob_memory(/datum/memory/surgery, deuteragonist = surgeon, surgery_type = name)
 	qdel(src)
 
-/// Returns a nearby operating computer linked to an operating table
+/// Возвращает ближайший операционный компьютер, связанный с операционным столом
 /datum/surgery/proc/locate_operating_computer(turf/patient_turf)
 	if (isnull(patient_turf))
 		return null
@@ -166,21 +166,41 @@
 	return operating_computer
 
 /datum/surgery/advanced
-	name = "advanced surgery"
+	name = "продвинутая хирургия"
 	requires_tech = TRUE
 
 /obj/item/disk/surgery
 	name = "Surgery Procedure Disk"
-	desc = "A disk that contains advanced surgery procedures, must be loaded into an Operating Console."
+	desc = "Диск, содержащий продвинутые хирургические процедуры, должен быть загружен в операционную консоль."
 	icon_state = "datadisk1"
 	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT * 3, /datum/material/glass=SMALL_MATERIAL_AMOUNT)
 	var/list/surgeries
 
+/obj/item/disk/surgery/get_ru_names()
+	return list(
+		NOMINATIVE = "диск продвинутой хирургии",
+		GENITIVE = "диска продвинутой хирургии",
+		DATIVE = "диску продвинутой хирургии",
+		ACCUSATIVE = "диск продвинутой хирургии",
+		INSTRUMENTAL = "диском продвинутой хирургии",
+		PREPOSITIONAL = "диске продвинутой хирургии",
+	)
+
 /obj/item/disk/surgery/debug
 	name = "Debug Surgery Disk"
-	desc = "A disk that contains all existing surgery procedures."
+	desc = "Диск, содержащий все существующие хирургические процедуры. Если ВЫ игрок и ВЫ нашли это, сообщите администрации или кодерам."
 	icon_state = "datadisk1"
 	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT * 3, /datum/material/glass=SMALL_MATERIAL_AMOUNT)
+
+/obj/item/disk/surgery/debug/get_ru_names()
+	return list(
+		NOMINATIVE = "диск хирургии",
+		GENITIVE = "диска хирургии",
+		DATIVE = "диску хирургии",
+		ACCUSATIVE = "диск хирургии",
+		INSTRUMENTAL = "диском хирургии",
+		PREPOSITIONAL = "диске хирургии",
+	)
 
 /obj/item/disk/surgery/debug/Initialize(mapload)
 	. = ..()
@@ -190,23 +210,23 @@
 		if(initial(beep.requires_tech))
 			surgeries += beep
 
-//INFO
-//Check /mob/living/carbon/attackby for how surgery progresses, and also /mob/living/carbon/attack_hand.
-//As of Feb 21 2013 they are in code/modules/mob/living/carbon/carbon.dm, lines 459 and 51 respectively.
-//Other important variables are var/list/surgeries (/mob/living) and var/list/organs (/mob/living/carbon)
-// var/list/bodyparts (/mob/living/carbon/human) is the LIMBS of a Mob.
-//Surgical procedures are initiated by attempt_initiate_surgery(), which is called by surgical drapes and bedsheets.
+//ИНФОРМАЦИЯ
+//Проверьте /mob/living/carbon/attackby, чтобы увидеть, как проходит операция, а также /mob/living/carbon/attack_hand.
+//Начиная с 21 февраля 2013 года они находятся в code/modules/mob/living/carbon/carbon.dm, строки 459 и 51 соответственно.
+//Другие важные переменные: var/list/surgeries (/mob/living) и var/list/organs (/mob/living/carbon)
+// var/list/bodyparts (/mob/living/carbon/human) это КОНЕЧНОСТИ моба.
+//Хирургические процедуры инициируются attempt_initiate_surgery(), который вызывается хирургическими простынями и простынями кровати.
 
 
 //TODO
-//specific steps for some surgeries (fluff text)
-//more interesting failure options
-//randomised complications
-//more surgeries!
-//add a probability modifier for the state of the surgeon- health, twitching, etc. blindness, god forbid.
-//helper for converting a zone_sel.selecting to body part (for damage)
+//конкретные шаги для некоторых операций (описательный текст)
+//более интересные варианты неудач
+//случайные осложнения
+//больше операций!
+//добавить модификатор вероятности в зависимости от состояния хирурга - здоровье, подёргивания и т.д. слепота, не дай бог.
+//помощник для преобразования zone_sel.selecting в часть тела (для урона)
 
 
-//RESOLVED ISSUES //"Todo" jobs that have been completed
-//combine hands/feet into the arms - Hands/feet were removed - RR
-//surgeries (not steps) that can be initiated on any body part (corresponding with damage locations) - Call this one done, see possible_locs var - c0
+//РЕШЕННЫЕ ПРОБЛЕМЫ //Задачи "Todo", которые были выполнены
+//объединить кисти/стопы с руками - Кисти/стопы были удалены - RR
+//операции (не шаги), которые можно инициировать на любой части тела (соответствующей местам повреждения) - Считаем это выполненным, см. переменную possible_locs - c0

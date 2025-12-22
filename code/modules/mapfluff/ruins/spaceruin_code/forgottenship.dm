@@ -51,7 +51,6 @@ GLOBAL_VAR_INIT(fscpassword, generate_password())
 		/obj/item/wallframe/defib_mount = 1,
 		/obj/item/sensor_device = 2,
 		/obj/item/pinpointer/crew = 2,
-		/obj/item/shears = 1,
 	)
 
 /////////// forgottenship lore

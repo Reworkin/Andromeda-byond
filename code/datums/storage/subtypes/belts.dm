@@ -59,7 +59,6 @@
 		/obj/item/reagent_containers/syringe,
 		/obj/item/retractor,
 		/obj/item/scalpel,
-		/obj/item/shears,
 		/obj/item/stack/medical,
 		/obj/item/stack/sticky_tape, //surgical tape
 		/obj/item/stamp,

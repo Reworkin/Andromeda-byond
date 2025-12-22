@@ -42,7 +42,6 @@
 /datum/surgery_step/sever_limb
 	name = "sever limb (circular saw)"
 	implements = list(
-		/obj/item/shears = 300,
 		TOOL_SCALPEL = 100,
 		TOOL_SAW = 100,
 		/obj/item/shovel/serrated = 75,

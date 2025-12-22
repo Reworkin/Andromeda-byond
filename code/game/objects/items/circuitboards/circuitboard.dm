@@ -5,6 +5,8 @@
 
 /obj/item/circuitboard
 	name = "circuit board"
+	desc = "Микросхема для сложного устройства."
+	gender = FEMALE
 	/// extension that is applied after the initial name AKA (Computer/Machine Board)
 	var/name_extension = null
 	icon = 'icons/obj/devices/circuitry_n_data.dmi'
@@ -22,6 +24,16 @@
 	var/all_products_free = FALSE
 	///determines if the board requires specific levels of parts. (ie specifically a femto menipulator vs generic manipulator)
 	var/specific_parts = FALSE
+
+/obj/item/circuitboard/get_ru_names()
+	return list(
+		NOMINATIVE = "микросхема",
+		GENITIVE = "микросхемы",
+		DATIVE = "микросхеме",
+		ACCUSATIVE = "микросхему",
+		INSTRUMENTAL = "микросхемой",
+		PREPOSITIONAL = "микросхеме",
+	)
 
 /obj/item/circuitboard/Initialize(mapload)
 	if(name_extension)
@@ -69,7 +81,7 @@ micro-manipulator, console screen, beaker, Microlaser, matter bin, power cells.
 
 /obj/item/circuitboard/machine
 	abstract_type = /obj/item/circuitboard/machine
-	name_extension = "(Machine Board)"
+	name_extension = "(плата)"
 	/// Whether this machine must be anchored to be constructed.
 	var/needs_anchored = TRUE
 	/// Components required by the machine.
@@ -151,7 +163,7 @@ micro-manipulator, console screen, beaker, Microlaser, matter bin, power cells.
 /obj/item/circuitboard/machine/examine(mob/user)
 	. = ..()
 	if(!LAZYLEN(req_components))
-		. += span_info("It requires no components.")
+		. += span_info("Ей не требуются компоненты.")
 		return
 
 	var/list/nice_list = list()
@@ -189,6 +201,6 @@ micro-manipulator, console screen, beaker, Microlaser, matter bin, power cells.
 		//append decoded name to final result
 		if (isnull(component_name))
 			stack_trace("[component_path] was an invalid component")
-		nice_list += list("[component_amount] [component_name]\s")
+		nice_list += list("[component_amount] [component_name]")
 
-	. += span_info("It requires [english_list(nice_list)].")
+	. += span_info("Требуется: [english_list(nice_list)].")

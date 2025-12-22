@@ -2,6 +2,7 @@
 	icon = 'icons/obj/machines/wallmounts.dmi'
 	custom_materials = list(/datum/material/iron= SHEET_MATERIAL_AMOUNT * 2)
 	obj_flags = CONDUCTS_ELECTRICITY
+	gender = MALE
 	inhand_icon_state = "syringe_kit"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
@@ -12,6 +13,16 @@
 	var/wall_external = FALSE
 	//The amount of pixels to shift when mounted
 	var/pixel_shift
+
+/obj/item/wallframe/get_ru_names()
+	return list(
+		NOMINATIVE = "настенный каркас",
+		GENITIVE = "настенного каркаса",
+		DATIVE = "настенному каркасу",
+		ACCUSATIVE = "настенный каркас",
+		INSTRUMENTAL = "настенным каркасом",
+		PREPOSITIONAL = "настенном каркасе",
+	)
 
 /**
  * Returns an structure to mount on from the atom passed
@@ -32,9 +43,9 @@
 		return ITEM_INTERACT_FAILURE
 
 	playsound(loc, 'sound/machines/click.ogg', 75, TRUE)
-	user.visible_message(span_notice("[user.name] attaches [src] to the wall."),
-		span_notice("You attach [src] to the wall."),
-		span_hear("You hear clicking."))
+	user.visible_message(span_notice("[user.name] прикрепляет [declent_ru(ACCUSATIVE)] к стене."),
+		span_notice("Вы прикрепляете [declent_ru(ACCUSATIVE)] к стене."),
+		span_hear("Вы слышите щелчки."))
 
 	var/floor_to_support = get_dir(user, support_structure)
 	var/obj/hanging_object = new result_path(get_turf(user))
@@ -50,7 +61,7 @@
 			if(WEST)
 				hanging_object.pixel_x = -pixel_shift
 	if(!hanging_object.find_and_mount_on_atom())
-		to_chat(user, span_warning("[src] Could not find all to mount on!."))
+		to_chat(user, span_warning("[declent_ru(NOMINATIVE)] не может найти опору для крепления!"))
 		return
 	after_attach(hanging_object)
 	qdel(src)
@@ -66,18 +77,18 @@
 */
 /obj/item/wallframe/proc/try_build(atom/support, mob/user)
 	if(get_dist(support, user) > 1)
-		balloon_alert(user, "you are too far!")
+		balloon_alert(user, "слишком далеко!")
 		return FALSE
 	var/floor_to_support = get_dir(user, support)
 	if(!(floor_to_support in GLOB.cardinals))
-		balloon_alert(user, "stand in line with wall!")
+		balloon_alert(user, "встаньте прямо у стены!")
 		return FALSE
 	var/turf/T = get_turf(user)
 	if(!isfloorturf(T))
-		balloon_alert(user, "cannot place here!")
+		balloon_alert(user, "нельзя разместить здесь!")
 		return FALSE
 	if(check_wall_item(T, floor_to_support, wall_external))
-		balloon_alert(user, "already something here!")
+		balloon_alert(user, "здесь уже что-то есть!")
 		return FALSE
 
 	return TRUE
@@ -100,7 +111,7 @@
 
 	if(!metal_amt && !glass_amt)
 		return FALSE
-	to_chat(user, span_notice("You dismantle [src]."))
+	to_chat(user, span_notice("Вы разбираете [declent_ru(ACCUSATIVE)]."))
 	tool.play_tool_sound(src)
 	if(metal_amt)
 		new /obj/item/stack/sheet/iron(get_turf(src), metal_amt)
@@ -110,7 +121,8 @@
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/electronics
-	desc = "Looks like a circuit. Probably is."
+	desc = "Выглядит как микросхема. Вероятно, так и есть."
+	gender = FEMALE
 	icon = 'icons/obj/devices/circuitry_n_data.dmi'
 	icon_state = "door_electronics"
 	inhand_icon_state = "electronic"
@@ -124,3 +136,13 @@
 	sound_vary = TRUE
 	pickup_sound = SFX_GENERIC_DEVICE_PICKUP
 	drop_sound = SFX_GENERIC_DEVICE_DROP
+
+/obj/item/electronics/get_ru_names()
+	return list(
+		NOMINATIVE = "микросхема",
+		GENITIVE = "микросхемы",
+		DATIVE = "микросхеме",
+		ACCUSATIVE = "микросхему",
+		INSTRUMENTAL = "микросхемой",
+		PREPOSITIONAL = "микросхеме",
+	)

@@ -21,6 +21,15 @@ $include map_vote.txt
 ## Server name: This appears at the top of the screen in-game and in the BYOND hub. Uncomment and replace 'tgstation' with the name of your choice.
 SERVERNAME Andromeda-13
 
+## set a hosted by name for unix platforms
+HOSTEDBY Rewokin
+
+## Слоган сервера: Будет отображаться прямо под названием сервера.
+SERVERTAGLINE CEPBEP PYCCKOGO HAPODA
+
+## Ссылка на Discord: Это ссылка на Discord сервер Andromeda-13
+DISCORD_LINK_HUB https://discord.gg/NxTZeUPtRf
+
 ## Server SQL name: This is the name used to identify the server to the SQL DB, distinct from SERVERNAME as it must be at most 32 characters.
 # SERVERSQLNAME tgstation
 
@@ -145,9 +154,6 @@ ALLOW_RESPAWN 1
 
 ## Respawn delay (deciseconds), which doesn't allow to return to lobby
 RESPAWN_DELAY 0
-
-## set a hosted by name for unix platforms
-HOSTEDBY Yournamehere
 
 ## Uncomment this to stop people connecting to your server without a registered ckey. (i.e. guest-* are all blocked from connecting).
 ## You probably want this enabled for a production server.

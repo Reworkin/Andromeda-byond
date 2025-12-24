@@ -33,6 +33,12 @@
 /// server name (the name of the game window)
 /datum/config_entry/string/servername
 
+/datum/config_entry/string/servertagline
+	config_entry_value = "We forgot to set the server's tagline in config.txt"
+
+/datum/config_entry/string/discord_link_hub
+	config_entry_value = "We forgot to set the server's discord link in config.txt"
+
 /// short form server name used for the DB
 /datum/config_entry/string/serversqlname
 

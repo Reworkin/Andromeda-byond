@@ -2063,12 +2063,12 @@
 
 /obj/machinery/door/airlock/mining/get_ru_names()
 	return list(
-		NOMINATIVE = "шахтёрский шлюз",
-		GENITIVE = "шахтёрского шлюза",
-		DATIVE = "шахтёрскому шлюзу",
-		ACCUSATIVE = "шахтёрский шлюз",
-		INSTRUMENTAL = "шахтёрским шлюзом",
-		PREPOSITIONAL = "шахтёрском шлюзе",
+		NOMINATIVE = "шлюз карго",
+		GENITIVE = "шлюза карго",
+		DATIVE = "шлюзу карго",
+		ACCUSATIVE = "шлюз карго",
+		INSTRUMENTAL = "шлюзом карго",
+		PREPOSITIONAL = "шлюзе карго",
 	)
 
 /obj/machinery/door/airlock/atmos

@@ -22,7 +22,8 @@ Space Station 13 — это адский симулятор космическо
 
 - Для локализации на Русский язык, ознакомьтесь с [документацией](.github/guides/LOCALIZATION.md).
 - Чтобы познать древние руны, нужна волшебная [книга](https://secure.byond.com/docs/ref/#/DM).
-  ![Cвятой свободный BYOND](.github/images/kartinochki/made-in-byond.gif)
+
+![Святой и свободный BYOND](.github/images/kartinochki/made-in-byond.gif)
 
 ## Контрибьют (Помощь в разработке)
 
